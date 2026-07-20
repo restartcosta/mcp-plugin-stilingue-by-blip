@@ -1,0 +1,68 @@
+# Stilingue Social Listening — Plugin para Claude
+
+Plugin oficial da **Stilingue by Blip** que conecta o Claude à maior plataforma de social listening do Brasil. Com ele, o Claude consulta dados reais de redes sociais — buzz, sentimento, tendências, influenciadores e atendimento (SAC) — direto das APIs da Stilingue, com a metodologia de análise que nossos especialistas usam no dia a dia.
+
+## O que é a Stilingue
+
+A Stilingue é a plataforma de social listening e SAC 2.0 da Blip. Ela monitora publicações públicas em Instagram, X/Twitter, Facebook, YouTube, TikTok, LinkedIn, portais de notícias e blogs, e organiza tudo em três produtos que este plugin cobre:
+
+| Produto | O que é | Ferramenta MCP |
+| --- | --- | --- |
+| **Radar** (Mar Aberto) | Busca em tempo real em toda a base pública da Stilingue (~5,8 bi de posts desde 2018). Não precisa de painel configurado. | `radar` |
+| **Warroom** (Listening proprietário) | Painéis dedicados do cliente, com coleta customizada, Grupos, Temas, Tags e 22 visões analíticas (sentimento, influenciadores, séries temporais, imprensa etc.). | `warroom_query` |
+| **Setup de painel** | A configuração do painel em si: canais coletados, Grupos, Temas, Tags, regras de automação e limites de uso — com leitura crítica de consultoria. | `setup` |
+| **Smartcare** (SAC 2.0) | Métricas de atendimento: status de conversas, SLAs (TMR/TMT), voz do cliente. Acessado via `warroom_query` com parâmetros de SAC. | `warroom_query` (`sac_type`, `status`) |
+
+## O que vem no plugin
+
+- **Conector MCP remoto** — servidor hospedado pela Stilingue que expõe as ferramentas `radar`, `warroom_query` e `setup` (todas somente leitura: o plugin não publica, não responde e não altera nada nos seus painéis).
+- **Skill `perguntar-a-stilingue`** — ensina o Claude a escolher a fonte certa (Radar vs Warroom), usar a terminologia correta, não confundir as convenções de sentimento das duas APIs e seguir os playbooks de análise (panorama de marca, comparação com concorrente, trending). Inclui referências detalhadas de todos os parâmetros, filtros e os 22 `paths` do Warroom.
+- **Skill `setup-conexao`** — guia o usuário na primeira conexão e na resolução de erros de autenticação.
+
+## Como conectar
+
+### Pré-requisito
+
+Ser cliente Stilingue by Blip com credenciais ativas na plataforma (as mesmas de `app.stilingue.com.br`). Não é cliente? Fale com o time comercial da Blip.
+
+### Instalação
+
+1. Instale o plugin pelo diretório de plugins do Claude (Cowork / Claude Code) ou adicione o conector Stilingue pelo diretório de conectores no Claude.ai.
+2. Na primeira ativação, o Claude abre a **página de login da Stilingue** no seu navegador.
+3. Entre com seu **usuário e senha da Stilingue**. Pronto — o Radar já funciona.
+4. Para consultar um **painel** (Warroom/Setup/Smartcare), tenha em mãos a **apikey do painel** (ID numérico, disponível no Warroom em Configurações → Integrações → API). Basta informá-la ao Claude na conversa, ou pedir que ele pergunte.
+
+### Como funciona a autenticação (e por que é segura)
+
+O conector implementa **OAuth 2.1 com Authorization Code + PKCE**:
+
+1. O Claude direciona você para a página de autorização hospedada pela Stilingue (`/oauth/authorize`).
+2. Você faz login numa página web comum — **sua senha nunca passa pelo chat, nunca é vista pelo modelo e nunca é armazenada pelo conector**.
+3. O servidor da Stilingue valida suas credenciais diretamente com a plataforma (server-to-server) e emite um código de autorização de uso único (validade de 5 minutos).
+4. O Claude troca esse código por um token de acesso opaco com validade de **24 horas**, renovado automaticamente via refresh token por até 30 dias — nunca além da validade da sua sessão real na Stilingue.
+5. Toda chamada às ferramentas exige esse token (`Authorization: Bearer`). Sessão expirada = o Claude reabre o fluxo de login sozinho.
+
+Tokens podem ser revogados a qualquer momento pela Stilingue, e o acesso respeita exatamente as permissões da sua conta na plataforma.
+
+## Exemplos de uso
+
+- "O que estão falando da minha marca essa semana?" → panorama com volume, sentimento, evolução, exemplos de posts e principais vozes.
+- "Compara o buzz da campanha X com o da concorrente Y em junho" → comparação lado a lado com mesma janela de tempo e mesma métrica.
+- "Meu painel está bem configurado?" (com a apikey) → auditoria do setup: grupos com baixa cobertura, automações pausadas, saúde dos limites de coleta.
+- "Como está o SLA do meu SAC este mês?" → status de conversas, TMR/TMT, gargalos.
+
+## Privacidade e dados
+
+- O conector acessa **apenas dados que sua conta Stilingue já pode ver** na plataforma.
+- Todas as ferramentas são **somente leitura**.
+- Credenciais nunca transitam pelo chat; apenas tokens opacos de curta duração.
+- Política de privacidade: [Plataforma](https://stilingue.com.br/politica-de-privacidade-plataforma/) · [Site](https://stilingue.com.br/politica-de-privacidade-site/)
+
+## Suporte
+
+- Documentação da API Stilingue: https://docs-stilingue.blip.ai
+- Suporte a clientes: suporte.sti@blip.ai
+
+## Licença
+
+MIT <!-- TODO: confirmar a licença com o jurídico e incluir o arquivo LICENSE — o repositório precisa ser público para submissão ao diretório de plugins -->
