@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "stilingue": {
+      "type": "http",
+      "url": "https://feat-sti-mcp-server-auth-dot-mcp-sti-dot-stilingueapi.appspot.com/mcp"
+    }
+  }
+}
