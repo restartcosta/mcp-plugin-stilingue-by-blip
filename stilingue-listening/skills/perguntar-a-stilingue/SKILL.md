@@ -1,16 +1,16 @@
 ---
 name: perguntar-a-stilingue
-description: Consultar a Stilingue para qualquer pergunta sobre redes sociais, social listening, monitoramento de marca, buzz, sentimento público, tendências, configuração/auditoria de painel, ou dados de atendimento/SAC. Use esta skill SEMPRE que o usuário perguntar o que estão falando de uma marca/produto/pessoa/assunto nas redes sociais, pedir análise de sentimento, comparação com concorrentes, tendências, auditoria de painel, ou mencionar um painel/apikey/account_id/universe_id da Stilingue — mesmo que ele não diga "Stilingue" explicitamente. Cobre quatro frentes: Radar (base pública, sem apikey), Warroom (painel dedicado do cliente, com apikey), Setup (configuração/auditoria do painel) e Smartcare (SAC/atendimento).
+description: Consultar a Stilingue para qualquer pergunta sobre redes sociais, social listening, monitoramento de marca, buzz, sentimento público, tendências, configuração/auditoria de painel, ou dados de atendimento/SAC. Use esta skill SEMPRE que o usuário perguntar o que estão falando de uma marca/produto/pessoa/assunto nas redes sociais, pedir análise de sentimento, comparação com concorrentes, tendências, auditoria de painel, ou mencionar um painel/apikey/account_id/universe_id da Stilingue — mesmo que ele não diga "Stilingue" explicitamente. Cobre quatro frentes: Radar (base pública, sem apikey), Warroom (painel dedicado do cliente, com apikey), Setup (configuração/auditoria do painel, com descoberta automática de painéis) e Smartcare (SAC/atendimento).
 ---
 
 # Perguntar à Stilingue
 
-Você tem três ferramentas MCP disponíveis: **`radar`** (base pública, sem `apikey`), **`warroom_query`** (dados do painel dedicado do cliente, requer `apikey`) e **`setup`** (configuração do painel, requer `account_id`+`universe_id`). Nunca responda de memória sobre redes sociais/buzz/sentimento/configuração de painel — sempre consulte uma dessas três.
+Você tem quatro ferramentas MCP disponíveis: **`radar`** (base pública, sem `apikey`), **`warroom_query`** (dados do painel dedicado do cliente, requer `apikey`), **`setup`** (configuração do painel, requer `account_id`+`universe_id`) e **`list_panels`** (descobre sozinha quais contas/painéis o usuário logado tem acesso, sem parâmetros obrigatórios). Nunca responda de memória sobre redes sociais/buzz/sentimento/configuração de painel — sempre consulte uma dessas quatro.
 
 ## Passo 1: decida a fonte
 
 - Usuário perguntou sobre **dados coletados** (o que estão falando, sentimento, posts, estatísticas) e mencionou `apikey`, painel, "minha marca", "nosso cliente", ou pediu algo de atendimento/SAC/tickets → **Warroom** (`warroom_query`). Leia `references/warroom.md` (e também `references/smartcare.md` se for especificamente sobre atendimento).
-- Usuário perguntou sobre a **configuração/estrutura** do painel (quais grupos/temas/tags existem, quais canais são coletados, auditoria de setup) → **Setup** (`setup`). Leia `references/setup.md`.
+- Usuário perguntou sobre a **configuração/estrutura** do painel (quais grupos/temas/tags existem, quais canais são coletados, auditoria de setup) → **Setup** (`setup`). Leia `references/setup.md`. **Se você ainda não sabe o `account_id`/`universe_id`, chame `list_panels` primeiro** — nunca peça esses IDs pro usuário digitar.
 - Qualquer outro caso (exploração livre, sem painel configurado, pesquisa pontual) → **Radar** (`radar`). Leia `references/radar.md`.
 - Em caso de dúvida sobre um campo, métrica, ou estrutura de painel (Grupo/Tema/Tag, Alcance Potencial, particularidades por rede) → consulte `references/glossario.md`.
 
@@ -37,7 +37,7 @@ Nenhuma das duas ferramentas aceita busca sem tema/`query`. Busque candidatos na
 
 - `references/radar.md` — parâmetros, `data_type`, playbooks (panorama de marca, comparação com concorrente, trending sem tema), sintaxe de busca.
 - `references/warroom.md` — parâmetros, filtros de segmentação, os 22 tipos de `path` disponíveis.
-- `references/setup.md` — parâmetros, o que a resposta traz, definições de Grupo/Tema/Tag, e o modo "auditoria de painel" (como sinalizar problemas de configuração em vez de só listar dados).
+- `references/setup.md` — parâmetros de `setup` e `list_panels`, o que a resposta traz, definições de Grupo/Tema/Tag, a regra de que `apikey` não funciona pra Setup, e o modo "auditoria de painel" (como sinalizar problemas de configuração em vez de só listar dados).
 - `references/smartcare.md` — SAC/atendimento via `warroom_query` com `sac_type`/`status`.
 - `references/glossario.md` — particularidades por rede social, definição de métricas, estrutura de painel, sintaxe Radar vs Setup.
 
