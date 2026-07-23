@@ -1,20 +1,25 @@
 
 # Glossário Operacional Stilingue
 
-Referência para evitar erros de execução e interpretação ao usar as ferramentas `radar` e `warroom_query`.
+Referência para evitar erros de execução e interpretação ao usar as ferramentas `radar`, `warroom_query`, `setup` e `list_panels`.
 
-## Os Dois Mundos
+## Os Mundos
 
-| | Radar (Mar Aberto) | Warroom (Painel) |
-|---|---|---|
-| **Ferramenta MCP** | `radar` | `warroom_query` |
-| **Requer `apikey`?** | Não | Sim (ID do painel) |
-| **Dados** | Base pública amostral (~5,8bi posts desde 2018). Imutáveis — não edita sentimento, não tem temas/tags | Coleta dedicada e customizada. Editável, classificável |
-| **Usar quando** | Exploração de assunto sem painel, validação de termos, pesquisa rápida | Análise de marca/cliente com painel configurado |
-| **Não tem** | Inbox/DMs, retweets, TikTok, posts proprietários, comentários Instagram (pós-2019) | — |
-| **Janela máxima** | 360 dias por busca | Depende do contrato |
+| | Radar (Mar Aberto) | Warroom (Painel) | Setup (Configuração) |
+|---|---|---|---|
+| **Ferramenta MCP** | `radar` | `warroom_query` | `setup` |
+| **Autentica com** | Nada (backend interno) | `apikey` (ID do painel) | Sessão de login + `account_id`/`universe_id` |
+| **`apikey` funciona?** | N/A | Sim | **Não** — mesmo com apikey em mãos, `setup` exige que a sessão logada tenha acesso liberado à conta |
+| **Dados** | Base pública amostral (~5,8bi posts desde 2018). Imutáveis — não edita sentimento, não tem temas/tags | Coleta dedicada e customizada. Editável, classificável | Estrutura/configuração do painel, não os posts em si |
+| **Usar quando** | Exploração de assunto sem painel, validação de termos, pesquisa rápida | Análise de marca/cliente com painel configurado | Auditoria/entendimento de como o painel está montado |
+| **Não tem** | Inbox/DMs, retweets, TikTok, posts proprietários, comentários Instagram (pós-2019) | — | — |
+| **Janela máxima** | 360 dias por busca | Depende do contrato | N/A |
 
-**Regra de decisão:** Se o usuário mencionou `apikey`, painel, "minha marca" ou "nosso cliente" → Warroom. Caso contrário → Radar.
+**Regra de decisão:** Se o usuário mencionou `apikey`, painel, "minha marca" ou "nosso cliente" e quer **dados/posts** → Warroom. Se quer **configuração/estrutura** do painel → Setup. Caso contrário → Radar.
+
+## Descoberta de `account_id`/`universe_id`: nunca peça pro usuário digitar
+
+O `setup` (e no futuro outras ferramentas de escrita) usa `account_id`/`universe_id`, não `apikey`. Em vez de pedir esses IDs pro usuário, use a tool `list_panels` (sem parâmetros obrigatórios) — ela consulta a sessão de login e devolve as contas/painéis que a pessoa tem acesso, com nome de cada um. Só peça esses IDs "na mão" se `list_panels` não retornar o painel esperado (nesse caso, o problema é de permissão na plataforma, não de o usuário não saber o ID).
 
 ## Convenções de Sentimento — NÃO CONFUNDIR
 
