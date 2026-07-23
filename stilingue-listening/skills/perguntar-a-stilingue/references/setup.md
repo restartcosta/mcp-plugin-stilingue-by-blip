@@ -3,9 +3,21 @@
 
 A tool `setup` consulta a **configuração** de um painel Warroom — não são os dados/posts coletados (isso é `warroom_query`), é a estrutura do painel em si: o que está sendo coletado, como está sendo classificado, e a saúde geral do setup. **Sempre chame isso de "configuração do painel" ou "setup" na resposta ao usuário, nunca use nomes técnicos de campo da API.**
 
+## Descobrindo `account_id`/`universe_id`: NUNCA peça pro usuário digitar
+
+Diferente do `warroom_query` (que usa `apikey`), o `setup` precisa de `account_id`+`universe_id`. **Não peça esses IDs pro usuário** — use a tool `list_panels` primeiro, sem nenhum parâmetro obrigatório, ela usa a sessão de login pra descobrir sozinha quais contas/painéis a pessoa tem acesso, já com o nome de cada um:
+
+- Usuário tem só 1 painel → usa direto, sem perguntar nada.
+- Usuário tem vários → mostra os **nomes** (nunca os IDs crus) e pergunta qual ele quer antes de chamar `setup`.
+- `list_panels` devolve mais de 25 painéis sem `account_id` informado → os nomes não vêm automaticamente (só os IDs); se o usuário já souber de qual conta é, chame `list_panels` de novo passando `account_id` pra ver os nomes daquela conta específica.
+
+### Importante: `apikey` NÃO funciona pra `setup`, só pra `warroom_query`
+
+Isso é uma regra de negócio deliberada, não uma limitação técnica à toa: `warroom_query` aceita `apikey` porque ler posts/estatísticas é uma operação mais aberta (útil, por exemplo, pro time de relatoria da Stilingue rodar relatório pra um cliente que só passou a apikey). `setup` é mais sensível (expõe estrutura de configuração, regras de automação) e **exige acesso de verdade** — a conta/painel só aparece em `list_panels` se a sessão logada tiver permissão liberada nela. Se alguém pedir setup de um painel que não é dele e não aparece na lista, a resposta certa é explicar que precisa pedir a esse cliente pra liberar acesso à conta dentro da plataforma — não existe atalho via apikey aqui.
+
 ## Ferramenta MCP: `setup`
 
-Requer `account_id` e `universe_id` (os dois juntos identificam um painel — não confundir com o `apikey` usado no `warroom_query`, embora normalmente venham do mesmo lugar: Configurações → Integrações do painel).
+Requer `account_id` e `universe_id` (os dois juntos identificam um painel).
 
 ### Parâmetros
 
@@ -58,10 +70,22 @@ Esta tool existe para **ajudar o cliente a melhorar o setup**, não só devolver
 
 Feche a resposta com um resumo curto tipo **"pontos fortes" + "pontos de atenção"**, não uma lista solta dos dados retornados. Se nada de anormal for encontrado, diga isso explicitamente em vez de forçar um problema pra parecer útil.
 
-## `setup` vs `warroom_query` — não confundir
+## Ferramenta MCP: `list_panels`
+
+Sem parâmetros obrigatórios — usa a sessão de login pra descobrir contas/painéis.
+
+| Parâmetro | Tipo | Obrigatório | Descrição |
+| --- | --- | --- | --- |
+| `account_id` | string | Não | Filtra pra uma conta específica (e força buscar nome mesmo acima do teto de 25 painéis). |
+| `include_names` | bool | Não | Padrão `true`. Se `false`, pula a busca de nome (mais rápido, só devolve os IDs). |
+
+**Resposta**: lista de contas, cada uma com `account_id`, `account_name`, `is_master`, `permissions` (`can_annotate_post`, `can_annotate_post_sac`, `can_edit_universe`) e `panels` (lista de `{universe_id, name, status}`). Se a conta aparecer duplicada com roles diferentes na origem, a lógica já resolve isso sozinha (prioriza a permissão não-master quando há divergência) — não precisa se preocupar com isso na resposta ao usuário.
+
+## `setup` vs `warroom_query` vs `list_panels` — não confundir
 
 | Pergunta do usuário | Tool certa |
 | --- | --- |
 | "Como esse painel está configurado?" / "Quais grupos/temas/tags existem?" / "Quais canais estão sendo monitorados?" | `setup` |
 | "O que estão falando da minha marca?" / "Qual o sentimento essa semana?" / qualquer busca de posts/estatísticas | `warroom_query` |
 | "Meu painel está bem configurado?" (auditoria) | `setup`, seguindo o modo auditoria acima |
+| Usuário não sabe/não informou `account_id`/`universe_id`, ou tem mais de um painel | `list_panels` primeiro, depois `setup` com o painel escolhido |
