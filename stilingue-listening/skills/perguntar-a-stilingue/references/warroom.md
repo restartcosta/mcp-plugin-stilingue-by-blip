@@ -39,6 +39,7 @@ Requer obrigatoriamente `apikey` (ID do painel do cliente).
 | `removed` | bool | `true` = só spam/apagadas. Padrão `false`. |
 | `fanpages` | string | ID(s) de páginas proprietárias conectadas. |
 | `filters` | string | Código de filtro pré-configurado copiado da URL do Warroom. |
+| `projection` | string | Só se aplica a `path=publicacoes`. Lista de campos (separados por vírgula) que o backend deve devolver por post — reduz payload na origem. Tem um default automático já cobrindo texto, autor, data, engajamento, ids e links (ver "Campos disponíveis" abaixo); só especifique se precisar de algo diferente do default. |
 
 **Contexto SAC/Conversas** (só quando o pedido for sobre atendimento, não listening puro):
 
@@ -87,3 +88,4 @@ Requer obrigatoriamente `apikey` (ID do painel do cliente).
 4. **Sentimento**: o campo se chama `sentiment` (`1`/`-1`/`0`) — diferente do Radar, que usa `polarity` (`1`/`2`/`3`). Não confundir.
 5. **Combine filtros numa chamada só**: "o que homens estão falando de negativo sobre a marca no Twitter essa semana" vira uma única consulta com `path=publicacoes`, `channels=Twitter`, `genders=Homem`, `sentiment=-1`, `date_range=7d` — não várias chamadas filtrando manualmente depois.
 6. Nunca exponha nomes de campo cru da API na resposta — traduza para linguagem simples em PT-BR. Ao mostrar posts de exemplo, sempre inclua a data de publicação.
+7. **Campos disponíveis nos posts (`path=publicacoes`)**: além de `text`/`author`/`date`/`hot`/`sentiment`, também vêm `pid` (id do post), `uid` (id do autor), `post_url` (link direto pro post), `image_url` (imagem, se houver) e engajamento (`likes`, `shares`, `comments`) — já inclusos no `projection` default, não precisa pedir de propósito.
