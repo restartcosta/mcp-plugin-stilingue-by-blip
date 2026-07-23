@@ -82,5 +82,7 @@ Booleana formal, limite de 21 termos, acentuação ignorada:
 - **`hot`**: índice de engajamento proprietário da Stilingue. Relativo ao contexto — compare sempre dentro da mesma query, não entre queries diferentes.
 - **`polarity`**: sentimento do post. `1` = positivo, `2` = negativo, `3` = neutro. **Atenção**: no Warroom (skill `warroom-stilingue`) o campo equivalente se chama `sentiment` e usa outra escala (`1`/`-1`/`0`) — não confundir os dois.
 - Se houver volume alto de `polarity: 2` com `hot` elevado, isso é sinal de possível crise de imagem — vale alertar o usuário proativamente.
+- **Campos de identificação/mídia disponíveis em `data_type=posts`**: `pid` (id do post), `uid` (id do autor), `post_url` (link direto pro post original), `image_url` (imagem do post, se houver — útil pra análise visual/de criativo). Use `post_url` sempre que o usuário quiser conferir a publicação original, não invente link.
+- **Engajamento**: `likes`, `shares`, `comments` — quando o usuário pedir "os posts com mais engajamento" (diferente de "mais relevantes/`hot`"), esses três campos são a métrica certa, não o `hot`.
 - **Nunca exponha nomes de campo cru da API na resposta** (ex: `AAA_score`, `net_promoter_score_variation`) — traduza para linguagem simples em PT-BR.
 - Ao mostrar posts de exemplo, sempre inclua a data de publicação.
