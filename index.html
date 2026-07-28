@@ -220,7 +220,7 @@
   .plans-note{ font-size:12.5px; color:var(--rooftop); margin-top:1.25rem; line-height:1.6; }
 
   /* ---------- trust ---------- */
-  .trust-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:2rem; }
+  .trust-row{ display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:2rem; }
   .trust-card{ background:var(--onix-2); border-radius:14px; padding:1.25rem; border-left:3px solid var(--blip-light); transition:transform 0.25s ease; }
   .trust-card:hover{ transform:translateY(-3px); }
   .trust-card h4{ font-size:14px; margin-bottom:4px; }
@@ -303,6 +303,7 @@
 
   <div class="prompt-row" style="max-width:640px; margin-left:auto; margin-right:auto;">
     <div class="prompt-chip">🔎&nbsp; "Quero saber o que estão falando sobre [marca] nas redes agora."</div>
+    <div class="prompt-chip">🔎&nbsp; "Quais painéis eu tenho acesso?" — sem precisar saber ID nem token de nada.</div>
     <div class="prompt-chip">🔎&nbsp; "Como está o sentimento do meu painel essa semana?"</div>
     <div class="prompt-chip">🔎&nbsp; "Compara minha marca com [concorrente] no mesmo período."</div>
     <div class="prompt-chip">🔎&nbsp; "Analisa a configuração do meu painel — tem algo pra melhorar?"</div>
@@ -352,7 +353,7 @@
           <div style="flex:1;">
             <p>Preencha os campos obrigatórios:</p>
             <div class="code-block">
-              <code>Nome: Stilingue<br>URL: https://mcp-sti-dot-stilingueapi.appspot.com/mcp</code>
+              <code>Nome: Stilingue<br>URL: https://mcp.stilingue.com.br/mcp</code>
               <span class="copy-icon">copiar</span>
             </div>
           </div>
@@ -380,6 +381,7 @@
     <div class="trust-card"><h4>Sua senha não vai pro chat</h4><p>O login acontece numa tela separada, direto com a Stilingue — a IA nunca vê usuário/senha.</p></div>
     <div class="trust-card"><h4>Acesso pode ser revogado</h4><p>Se sua conta for desativada, o acesso via IA cai junto — sem depender de trocar link ou chave.</p></div>
     <div class="trust-card"><h4>Cada pessoa usa a própria conta</h4><p>Sem compartilhar token entre times — cada login é individual e rastreável.</p></div>
+    <div class="trust-card"><h4>Sem decorar ID nem apikey</h4><p>O Claude já sabe quais painéis são seus a partir do login — você só escolhe pelo nome.</p></div>
   </div>
 </section>
 
