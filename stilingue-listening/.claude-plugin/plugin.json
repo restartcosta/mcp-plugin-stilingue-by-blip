@@ -1,13 +1,13 @@
 {
   "name": "stilingue-listening",
   "displayName": "Stilingue Social Listening",
-  "version": "1.0.0",
-  "description": "Social listening e SAC da Stilingue by Blip dentro do Claude: buzz e sentimento em toda a base pública (Radar), análise profunda do painel do cliente (Warroom), auditoria de configuração de painel (Setup) e métricas de atendimento (Smartcare).",
+  "version": "1.2.0",
+  "description": "Social listening e SAC da Stilingue by Blip dentro do Claude: buzz e sentimento em toda a base pública (Radar), análise profunda do painel do cliente (Warroom), auditoria de configuração de painel (Setup) e métricas de atendimento (Smartcare) — com identidade visual da Blip (ou tema personalizado do cliente) e geração de relatórios executivos em uma página.",
   "author": {
     "name": "Stilingue by Blip",
     "url": "https://www.blip.ai/en/stilingue/"
   },
-  "homepage": "https://restartcosta.github.io/mcp-plugin-stilingue-by-blip/",
+  "homepage": "https://mcp.stilingue.com.br/home",
   "repository": "https://github.com/restartcosta/mcp-plugin-stilingue-by-blip",
   "license": "MIT",
   "keywords": [
@@ -18,7 +18,9 @@
     "sentimento",
     "sac",
     "marketing",
-    "redes-sociais"
+    "redes-sociais",
+    "design-system",
+    "relatorio-executivo"
   ],
   "mcpServers": "./.mcp.json"
 }
