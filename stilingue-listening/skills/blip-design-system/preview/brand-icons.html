@@ -1,0 +1,149 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin { animation: spin 1s linear infinite; }
+
+.hdr {
+  display:flex; flex-direction:column; gap:4px;
+  padding-bottom:14px; border-bottom:1px solid var(--color-border-2);
+}
+.hdr__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.hdr__sub { font-size:11px; color:var(--color-content-ghost); }
+
+.loader-row {
+  display:flex; gap:18px; align-items:center;
+  padding:16px 18px;
+  background: var(--color-surface-1);
+  border-radius: 10px;
+  border: 1px solid var(--color-border-2);
+}
+.loader-cell { display:flex; flex-direction:column; align-items:center; gap:6px; min-width: 52px; }
+.loader-cell__label { font-size:10px; color:var(--color-content-ghost); font-family: ui-monospace, monospace; }
+.loader-cell__dim { font-size:9px; color:var(--color-content-disable); font-family: ui-monospace, monospace; }
+.loader-note {
+  flex:1; font-size:11px; color:var(--color-content-ghost); line-height:1.55;
+  padding-left: 16px; border-left: 1px solid var(--color-border-2);
+}
+
+.icon-grid {
+  display:grid; grid-template-columns: repeat(8, 1fr); gap:2px;
+  border: 1px solid var(--color-border-2);
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--color-border-2);
+}
+.icon-cell {
+  background: var(--color-surface-0);
+  aspect-ratio: 1 / 1;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:6px;
+  padding: 10px 6px;
+  transition: background 120ms ease;
+}
+.icon-cell:hover { background: var(--color-surface-1); }
+.icon-cell__glyph {
+  width: 22px; height: 22px;
+  display:flex; align-items:center; justify-content:center;
+  color: var(--color-content-default);
+}
+.icon-cell__glyph img { max-width:22px; max-height:22px; width:auto; height:auto; }
+.icon-cell__label {
+  font-size: 9px; color: var(--color-content-ghost);
+  font-family: ui-monospace, monospace;
+  line-height:1; letter-spacing: -0.01em;
+  text-align:center;
+  white-space:nowrap; overflow:hidden; text-overflow:ellipsis; max-width: 100%;
+}
+
+.legend {
+  display:flex; justify-content:space-between; gap:10px;
+  padding-top: 10px;
+  font-size:10px; color:var(--color-content-ghost);
+}
+.legend code {
+  font-family: ui-monospace, monospace;
+  background: var(--color-surface-2);
+  padding: 1px 6px; border-radius: 4px;
+  color: var(--color-content-default);
+}
+</style></head>
+<body>
+<div class="card" style="gap:20px; padding:28px;">
+
+  <div class="hdr">
+    <div class="hdr__title">Iconography</div>
+    <div class="hdr__sub">Outline, monoline, 24 × 24 base — stroked paths use <code style="font-family:ui-monospace,monospace; background:var(--color-surface-2); padding:0 4px; border-radius:3px;">currentColor</code> so one SVG inherits from text color.</div>
+  </div>
+
+  <!-- Loaders -->
+  <div>
+    <div style="font-size:11px; font-weight:600; color:var(--color-content-default); margin-bottom:8px; letter-spacing:0.02em; text-transform:uppercase;">Loading spinners</div>
+    <div class="loader-row">
+      <div class="loader-cell">
+        <img src="../assets/icons/load-extra-small.svg" class="spin" style="width:16px; height:16px;">
+        <div class="loader-cell__label">xs</div>
+        <div class="loader-cell__dim">16 px</div>
+      </div>
+      <div class="loader-cell">
+        <img src="../assets/icons/load-small.svg" class="spin" style="width:24px; height:24px;">
+        <div class="loader-cell__label">sm</div>
+        <div class="loader-cell__dim">24 px</div>
+      </div>
+      <div class="loader-cell">
+        <img src="../assets/icons/load-standard.svg" class="spin" style="width:40px; height:40px;">
+        <div class="loader-cell__label">std</div>
+        <div class="loader-cell__dim">40 px</div>
+      </div>
+      <div class="loader-note">
+        Três tamanhos oficiais. Animação <code>1 s linear infinite</code> spin — mantém ritmo da plataforma Blip em botões, skeletons e estados de carregamento de seção.
+      </div>
+    </div>
+  </div>
+
+  <!-- Outline icon set -->
+  <div>
+    <div style="display:flex; justify-content:space-between; align-items:baseline; margin-bottom:8px;">
+      <div style="font-size:11px; font-weight:600; color:var(--color-content-default); letter-spacing:0.02em; text-transform:uppercase;">Outline set · 22 icons</div>
+      <div style="font-size:10px; color:var(--color-content-ghost); font-family: ui-monospace, monospace;">assets/icons/outline/</div>
+    </div>
+
+    <div class="icon-grid">
+      <!-- Nav / arrows -->
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/arrow-up.svg"></div><div class="icon-cell__label">arrow-up</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/arrow-right.svg"></div><div class="icon-cell__label">arrow-right</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/arrow-down.svg"></div><div class="icon-cell__label">arrow-down</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/arrow-left.svg"></div><div class="icon-cell__label">arrow-left</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/refresh.svg"></div><div class="icon-cell__label">refresh</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/close.svg"></div><div class="icon-cell__label">close</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/plus.svg"></div><div class="icon-cell__label">plus</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/filter.svg"></div><div class="icon-cell__label">filter</div></div>
+
+      <!-- Home / system -->
+      <div class="icon-cell"><div class="icon-cell__glyph" style="display:flex; position:relative; width:22px; height:22px;">
+        <img src="../assets/icons/outline/home-roof.svg" style="position:absolute; left:1.5px; top:1px; width:17px; height:8px;">
+        <img src="../assets/icons/outline/home-body.svg" style="position:absolute; left:2.5px; top:10px; width:15px; height:9px;">
+      </div><div class="icon-cell__label">home</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/search-actions.svg"></div><div class="icon-cell__label">search</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/bell.svg"></div><div class="icon-cell__label">bell</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/eye-closed.svg"></div><div class="icon-cell__label">eye-closed</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/delete.svg"></div><div class="icon-cell__label">delete</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/favorite.svg"></div><div class="icon-cell__label">favorite</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/like.svg"></div><div class="icon-cell__label">like</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/sparkle-ai.svg"></div><div class="icon-cell__label">sparkle-ai</div></div>
+
+      <!-- Messaging -->
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/send.svg"></div><div class="icon-cell__label">send</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/paperplane.svg"></div><div class="icon-cell__label">paperplane</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/email.svg"></div><div class="icon-cell__label">email</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph"><img src="../assets/icons/outline/mail.svg"></div><div class="icon-cell__label">mail</div></div>
+      <div class="icon-cell"><div class="icon-cell__glyph" style="color: #25D366;"><img src="../assets/icons/outline/whatsapp.svg"></div><div class="icon-cell__label">whatsapp</div></div>
+      <div class="icon-cell" style="background: repeating-linear-gradient(45deg, var(--color-surface-1), var(--color-surface-1) 4px, var(--color-surface-0) 4px, var(--color-surface-0) 8px);"><div class="icon-cell__label" style="color:var(--color-content-disable);">+ mais</div></div>
+    </div>
+
+    <div class="legend">
+      <span>Outline · stroke variável via <code>color</code></span>
+      <span>Base <code>24 × 24</code> · tamanhos oficiais <code>16 / 20 / 24 / 32 / 40</code></span>
+    </div>
+  </div>
+
+</div>
+</body></html>

@@ -1,0 +1,122 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 10px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 14px; font-family: ui-monospace, monospace; }
+
+.grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 40px 24px; padding: 40px 24px; background: var(--color-surface-1); border-radius: 8px; border: 1px solid var(--color-border-2); justify-items: center; }
+
+.tt-anchor {
+  position: relative;
+  width: 40px; height: 40px;
+  display:inline-flex; align-items:center; justify-content:center;
+  background: #fff; border: 1px solid var(--color-border-3); border-radius: 8px;
+  color: rgb(30,107,241);
+}
+
+.tt {
+  position: absolute;
+  background: rgb(32,44,68);
+  color: #fff;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 12px; font-weight: 400; line-height: 16px;
+  padding: 6px 10px;
+  border-radius: 4px;
+  white-space: nowrap;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.18);
+}
+.tt::after { content:''; position: absolute; width: 8px; height: 8px; background: rgb(32,44,68); transform: rotate(45deg); }
+
+.tt--top { bottom: calc(100% + 10px); left: 50%; transform: translateX(-50%); }
+.tt--top::after { bottom: -4px; left: 50%; transform: translateX(-50%) rotate(45deg); }
+.tt--bottom { top: calc(100% + 10px); left: 50%; transform: translateX(-50%); }
+.tt--bottom::after { top: -4px; left: 50%; transform: translateX(-50%) rotate(45deg); }
+.tt--left { right: calc(100% + 10px); top: 50%; transform: translateY(-50%); }
+.tt--left::after { right: -4px; top: 50%; transform: translateY(-50%) rotate(45deg); }
+.tt--right { left: calc(100% + 10px); top: 50%; transform: translateY(-50%); }
+.tt--right::after { left: -4px; top: 50%; transform: translateY(-50%) rotate(45deg); }
+
+.tt-label { position: absolute; top: calc(100% + 4px); left: 50%; transform: translateX(-50%); font-size: 9px; font-family: ui-monospace, monospace; color: var(--color-content-ghost); }
+
+/* Rich tooltip */
+.tt-rich {
+  background: rgb(32,44,68);
+  color: #fff;
+  font-family: 'Nunito Sans', sans-serif;
+  border-radius: 6px;
+  padding: 10px 12px;
+  max-width: 240px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.24);
+}
+.tt-rich__t { font-size: 13px; font-weight: 700; line-height: 18px; margin-bottom: 2px; }
+.tt-rich__d { font-size: 12px; line-height: 16px; opacity: 0.85; }
+.tt-rich__kb { display:inline-block; margin-top: 8px; padding: 2px 6px; background: rgba(255,255,255,0.15); border-radius: 3px; font-family: ui-monospace, monospace; font-size: 11px; }
+
+.rich-row { display:flex; gap: 40px; padding: 24px; background: var(--color-surface-1); border-radius: 8px; border: 1px solid var(--color-border-2); }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+  <div class="header">
+    <div class="header__title">Tooltip</div>
+    <div class="header__sub">Descrição curta em hover/focus. Fundo content-default inverso (#202C44) · texto branco 12/16 · seta 8×8 · delay 300ms.</div>
+  </div>
+
+  <div>
+    <div class="section-title">Posições · top · right · bottom · left</div>
+    <div class="section-sub">Escolha a posição conforme proximidade da borda · delay-show 300ms · delay-hide 100ms</div>
+    <div class="grid">
+      <span class="tt-anchor">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span class="tt tt--top">Tooltip no topo</span>
+        <span class="tt-label">top</span>
+      </span>
+      <span class="tt-anchor">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span class="tt tt--right">Tooltip à direita</span>
+        <span class="tt-label">right</span>
+      </span>
+      <span class="tt-anchor">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span class="tt tt--bottom">Tooltip abaixo</span>
+        <span class="tt-label">bottom</span>
+      </span>
+      <span class="tt-anchor">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+        <span class="tt tt--left">Tooltip à esquerda</span>
+        <span class="tt-label">left</span>
+      </span>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-title">Rich tooltip · com título, descrição e atalho</div>
+    <div class="section-sub">Usar quando o texto simples não é suficiente · máx. 240 px · 1 ação opcional</div>
+    <div class="rich-row">
+      <div class="tt-rich">
+        <div class="tt-rich__t">Transferir conversa</div>
+        <div class="tt-rich__d">Encaminhar esta conversa para outro agente ou equipe sem perder o histórico.</div>
+        <span class="tt-rich__kb">⌘ + T</span>
+      </div>
+      <div class="tt-rich" style="max-width: 200px;">
+        <div class="tt-rich__t">Métrica TMR</div>
+        <div class="tt-rich__d">Tempo Médio de Resposta nas últimas 24h.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Background</span><span class="spec__v">#202C44 (content-default)</span></div>
+    <div class="spec"><span class="spec__k">Texto</span><span class="spec__v">Nunito 400 · 12/16 · #FFF</span></div>
+    <div class="spec"><span class="spec__k">Padding</span><span class="spec__v">6 × 10 · radius 4</span></div>
+    <div class="spec"><span class="spec__k">Seta</span><span class="spec__v">8 × 8 · 45°</span></div>
+    <div class="spec"><span class="spec__k">Delay</span><span class="spec__v">show 300 ms · hide 100 ms</span></div>
+    <div class="spec"><span class="spec__k">Rich max-width</span><span class="spec__v">240 px</span></div>
+  </div>
+</div>
+</body></html>

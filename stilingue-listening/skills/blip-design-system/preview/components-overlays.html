@@ -1,0 +1,203 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 8px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 14px; font-family: ui-monospace, monospace; }
+
+/* ── Modal ── radius 8 · pad 32 · shadow-3 · Title 700 20/28 #454545 · Body 400 14/22 #454545 */
+.modal-shell {
+  background: rgba(10,15,26,0.40);
+  border-radius: 12px;
+  padding: 28px;
+  display:flex; justify-content:center;
+}
+.modal {
+  width: 560px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 32px;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.24);
+  display:flex; flex-direction:row; gap: 24px;
+  position: relative;
+}
+.modal__close {
+  position: absolute; right: 16px; top: 16px;
+  width: 24px; height: 24px; cursor: pointer;
+  background: rgb(99,99,99);
+  mask: url('../assets/icons/outline/close.svg') center/contain no-repeat;
+  -webkit-mask: url('../assets/icons/outline/close.svg') center/contain no-repeat;
+}
+.modal__icon {
+  width: 96px; height: 96px; flex-shrink: 0;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #FFF6A8 0%, #FBCF23 100%);
+  display:flex; align-items:center; justify-content:center;
+  font-size: 44px;
+}
+.modal__body { flex: 1; display:flex; flex-direction:column; gap: 16px; font-family: 'Nunito Sans', sans-serif; }
+.modal__chips { display:flex; gap: 8px; }
+.modal__title { font-weight: 700; font-size: 20px; line-height: 28px; color: rgb(69,69,69); }
+.modal__text  { font-size: 14px; line-height: 22px; color: rgb(69,69,69); }
+.modal__text--sub { color: rgb(99,99,99); }
+.modal__actions { display:flex; gap: 12px; justify-content:flex-end; margin-top: 8px; }
+
+.btn { font-family: 'Nunito Sans', sans-serif; font-weight:700; border:1px solid transparent; border-radius: 8px; cursor: pointer; height: 40px; padding: 0 16px; font-size: 14px; line-height: 22px; }
+.btn--solid { background: rgb(30,107,241); color:#fff; border-color: rgb(30,107,241); }
+.btn--outline { background: transparent; color: rgb(30,107,241); border-color: rgb(30,107,241); }
+.btn--danger { background: rgb(230,15,15); color:#fff; border-color: rgb(230,15,15); }
+
+.mini-chip {
+  display:inline-flex; align-items:center;
+  height: 20px; padding: 0 6px;
+  border-radius: 4px;
+  font-size: 10px; font-weight: 700; line-height: 12px;
+  background: rgba(30,107,241,0.12); color: rgb(18,90,213);
+}
+.mini-chip--warn { background: rgb(253,233,155); color: rgb(117,85,16); }
+.mini-chip--ok   { background: rgb(214,243,225); color: rgb(0,122,66); }
+
+/* ── Danger modal (confirmação destrutiva) ── */
+.modal--danger .modal__icon {
+  background: linear-gradient(135deg, #F99F9F 0%, #E60F0F 100%);
+  color: #fff;
+}
+
+/* ── Toast ── 492×~80 · radius 8 · pad 8 16 · shadow drop · bg por tipo ── */
+.toast {
+  width: 100%; max-width: 520px;
+  border-radius: 8px;
+  padding: 12px 16px;
+  display:flex; align-items:flex-start; gap: 16px;
+  box-shadow: 0 8px 16px rgba(32,44,68,0.24);
+  font-family: 'Nunito Sans', sans-serif;
+}
+.toast__ico { width: 24px; height: 24px; flex-shrink: 0; margin-top: 10px; background: currentColor; mask: var(--u) center/contain no-repeat; -webkit-mask: var(--u) center/contain no-repeat; }
+.toast__body { flex: 1; display:flex; flex-direction: column; padding: 8px 0; }
+.toast__title { font-weight: 700; font-size: 14px; line-height: 22px; }
+.toast__desc  { font-size: 14px; line-height: 22px; opacity: 0.85; }
+.toast__cta   { height: 40px; padding: 0 16px; border-radius: 8px; background: transparent; border: 1px solid currentColor; font-family:inherit; font-weight:700; font-size:13px; cursor:pointer; white-space: nowrap; align-self: center; }
+.toast__x { width: 18px; height: 18px; cursor: pointer; opacity: 0.7; background: currentColor; mask: url('../assets/icons/outline/close.svg') center/contain no-repeat; -webkit-mask: url('../assets/icons/outline/close.svg') center/contain no-repeat; margin-top: 14px; }
+
+.toast--success { background: rgb(144,230,188); color: rgb(32,44,68); }
+.toast--warning { background: rgb(253,233,155); color: rgb(32,44,68); }
+.toast--error   { background: rgb(249,159,159); color: rgb(32,44,68); }
+.toast--system  { background: rgb(178,223,253); color: rgb(32,44,68); }
+.toast--info    { background: rgb(128,227,235); color: rgb(32,44,68); }
+
+.toasts-stack { display:flex; flex-direction: column; gap: 12px; padding: 18px; background: var(--color-surface-1); border-radius: 10px; border: 1px solid var(--color-border-2); }
+
+/* Specs */
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 6px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+
+  <div class="header">
+    <div class="header__title">Overlays · Modal & Toast</div>
+    <div class="header__sub">Modal para reconhecimento ou confirmação · Toast para feedback transiente. Cores extraídas dos tokens feedback do DS.</div>
+  </div>
+
+  <!-- Modal Info -->
+  <div>
+    <div class="section-title">Modal · Type = Info</div>
+    <div class="section-sub">560 × auto · pad 32 · ícone 200×200 no Figma · title 700 20/28 · body 400 14/22</div>
+    <div class="modal-shell">
+      <div class="modal">
+        <span class="modal__close"></span>
+        <div class="modal__icon">💡</div>
+        <div class="modal__body">
+          <div class="modal__chips">
+            <span class="mini-chip">Novidade</span>
+            <span class="mini-chip mini-chip--ok">Beta</span>
+          </div>
+          <div class="modal__title">Agora você pode responder por WhatsApp</div>
+          <div class="modal__text">Integração do canal WhatsApp Business API está ativa para sua conta. Mensagens recebidas aparecerão automaticamente na sua caixa de atendimento.</div>
+          <div class="modal__text modal__text--sub">Saiba mais no Help Center ou entre em contato com o Customer Success para ajustes finos.</div>
+          <div class="modal__actions">
+            <button class="btn btn--outline">Ver documentação</button>
+            <button class="btn btn--solid">Entendi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal Danger -->
+  <div>
+    <div class="section-title">Modal · Type = Danger (confirmação destrutiva)</div>
+    <div class="section-sub">Reservado para ações irreversíveis · Botão primário em vermelho · Cancelar sempre à esquerda</div>
+    <div class="modal-shell" style="background: rgba(138,0,0,0.18);">
+      <div class="modal modal--danger">
+        <span class="modal__close"></span>
+        <div class="modal__icon">⚠️</div>
+        <div class="modal__body">
+          <div class="modal__title">Excluir chatbot "Atendimento Vendas"?</div>
+          <div class="modal__text">Esta ação é permanente. Todas as conversas, fluxos configurados e integrações deste chatbot serão removidos.</div>
+          <div class="modal__text modal__text--sub">Se precisar reativar no futuro, será necessário recriar do zero.</div>
+          <div class="modal__actions">
+            <button class="btn btn--outline">Cancelar</button>
+            <button class="btn btn--danger">Sim, excluir</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toasts -->
+  <div>
+    <div class="section-title">Toast · stack de feedback transiente</div>
+    <div class="section-sub">radius 8 · shadow 0 8 16 rgba(32,44,68,0.24) · texto 700 14/22 + 400 14/22 · cor de fundo por tipo</div>
+    <div class="toasts-stack">
+      <div class="toast toast--success">
+        <span class="toast__ico" style="--u: url('../assets/icons/outline/like.svg');"></span>
+        <div class="toast__body">
+          <div class="toast__title">Template publicado</div>
+          <div class="toast__desc">A mensagem já está disponível para envio no canal WhatsApp.</div>
+        </div>
+        <span class="toast__x"></span>
+      </div>
+      <div class="toast toast--system">
+        <span class="toast__ico" style="--u: url('../assets/icons/outline/refresh.svg');"></span>
+        <div class="toast__body">
+          <div class="toast__title">Nova versão disponível</div>
+          <div class="toast__desc">Recarregue a página para aplicar as melhorias.</div>
+        </div>
+        <button class="toast__cta">Recarregar</button>
+        <span class="toast__x"></span>
+      </div>
+      <div class="toast toast--warning">
+        <span class="toast__ico" style="--u: url('../assets/icons/outline/bell.svg');"></span>
+        <div class="toast__body">
+          <div class="toast__title">Fila alta</div>
+          <div class="toast__desc">52 conversas aguardando há mais de 10 min. Considere aumentar a capacidade.</div>
+        </div>
+        <span class="toast__x"></span>
+      </div>
+      <div class="toast toast--error">
+        <span class="toast__ico" style="--u: url('../assets/icons/outline/close.svg');"></span>
+        <div class="toast__body">
+          <div class="toast__title">Falha ao enviar template</div>
+          <div class="toast__desc">O WhatsApp rejeitou o conteúdo: variáveis dinâmicas inválidas.</div>
+        </div>
+        <button class="toast__cta">Tentar novamente</button>
+        <span class="toast__x"></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Specs -->
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Modal width</span><span class="spec__v">560 px (std) · 784 knowledge</span></div>
+    <div class="spec"><span class="spec__k">Modal padding</span><span class="spec__v">32 px · gap 16–24</span></div>
+    <div class="spec"><span class="spec__k">Modal title</span><span class="spec__v">700 · 20/28 · #454545</span></div>
+    <div class="spec"><span class="spec__k">Toast size</span><span class="spec__v">~492 × 80 · radius 8</span></div>
+    <div class="spec"><span class="spec__k">Toast shadow</span><span class="spec__v">0 8 16 rgba(32,44,68,.24)</span></div>
+    <div class="spec"><span class="spec__k">Toast bg</span><span class="spec__v">success #90E6BC · error #F99F9F</span></div>
+  </div>
+
+</div>
+</body></html>

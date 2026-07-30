@@ -1,0 +1,119 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.wrap { display:grid; grid-template-columns: 1fr 1fr; gap:2px; background: var(--color-border-2); border-radius: 12px; overflow:hidden; border: 1px solid var(--color-border-2); }
+.pane { padding: 22px 20px; }
+.pane.light { background: rgb(255,255,255); color: rgb(40,40,40); }
+.pane.dark  { background: rgb(66,66,66);  color: rgb(255,255,255); }
+.pane__hdr { display:flex; justify-content:space-between; align-items:baseline; margin-bottom:16px; padding-bottom:10px; border-bottom:1px solid currentColor; border-color: rgba(128,128,128,0.2); }
+.pane__title { font-size:12px; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; }
+.pane__sub { font-size:10px; font-family:ui-monospace,monospace; opacity:0.6; }
+.surfaces { display:grid; grid-template-columns: repeat(5, 1fr); gap:6px; margin-bottom:14px; }
+.surf { display:flex; flex-direction:column; gap:4px; }
+.surf__chip { height:40px; border-radius:6px; border:1px solid rgba(128,128,128,0.3); }
+.surf__name { font-size:9px; font-family:ui-monospace,monospace; opacity:0.7; line-height:1; }
+.content-row { display:flex; flex-direction:column; gap:6px; margin-bottom:12px; }
+.content-row > div { display:flex; justify-content:space-between; align-items:center; padding:6px 10px; border-radius:4px; font-size:11px; font-family:ui-monospace,monospace; }
+.content-row > div span:last-child { opacity:0.5; font-size:9px; }
+.demo { margin-top: 14px; padding: 14px 14px 12px; border-radius: 8px; border: 1px solid rgba(128,128,128,0.2); display:flex; flex-direction:column; gap:10px; }
+.demo__title { font-size:12px; font-weight:700; }
+.demo__body { font-size:11px; opacity:0.7; line-height:1.5; }
+.demo__actions { display:flex; gap:8px; }
+.demo__btn { font-family: 'Nunito Sans', sans-serif; font-weight:700; font-size:13px; padding:0 14px; height:36px; border-radius:8px; border:none; cursor:pointer; }
+.demo__btn--primary { background: rgb(30,107,241); color:white; }
+.demo__btn--ghost { background: transparent; border:1px solid currentColor; }
+.pane.dark .demo__btn--primary { background: rgb(12,80,197); }
+
+.header {
+  display:flex; flex-direction:column; gap:4px;
+  padding-bottom:14px; border-bottom:1px solid var(--color-border-2);
+}
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.header__sub code { font-family: ui-monospace, monospace; background: var(--color-surface-2); padding: 1px 6px; border-radius: 4px; color: var(--color-content-default); font-size: 10px;}
+</style></head>
+<body>
+<div class="card" style="gap:20px; padding:28px;">
+
+  <div class="header">
+    <div class="header__title">Temas — Light & Dark</div>
+    <div class="header__sub">Tokens paralelos. Ative com <code>[data-theme='dark']</code> no root. Preserve <code>$surface-1</code> como fundo preferencial em ambos — é o que oferece maior contraste com os demais componentes.</div>
+  </div>
+
+  <div class="wrap">
+
+    <!-- LIGHT -->
+    <div class="pane light">
+      <div class="pane__hdr">
+        <div class="pane__title">☀ Light</div>
+        <div class="pane__sub">:root</div>
+      </div>
+
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; opacity:0.6; margin-bottom:6px;">Surfaces</div>
+      <div class="surfaces">
+        <div class="surf"><div class="surf__chip" style="background:rgb(255,255,255);"></div><div class="surf__name">0</div></div>
+        <div class="surf"><div class="surf__chip" style="background:rgb(246,246,246);"></div><div class="surf__name">1</div></div>
+        <div class="surf"><div class="surf__chip" style="background:rgb(237,237,237);"></div><div class="surf__name">2</div></div>
+        <div class="surf"><div class="surf__chip" style="background:rgb(227,227,227);"></div><div class="surf__name">3</div></div>
+        <div class="surf"><div class="surf__chip" style="background:rgb(20,20,20);"></div><div class="surf__name">4</div></div>
+      </div>
+
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; opacity:0.6; margin:8px 0 6px;">Content</div>
+      <div class="content-row">
+        <div style="background:rgba(0,0,0,0.04);"><span style="color:rgb(40,40,40);">content-default</span><span>#282828</span></div>
+        <div style="background:rgba(0,0,0,0.04);"><span style="color:rgb(89,89,89);">content-disable</span><span>#595959</span></div>
+        <div style="background:rgba(0,0,0,0.04);"><span style="color:rgb(140,140,140);">content-ghost</span><span>#8C8C8C</span></div>
+      </div>
+
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; opacity:0.6; margin-bottom:6px;">Surface-1 demo</div>
+      <div class="demo" style="background: rgb(246,246,246);">
+        <div class="demo__title" style="color:rgb(40,40,40);">Sessão ativa</div>
+        <div class="demo__body" style="color:rgb(89,89,89);">Interaja via chat ou acompanhe em tempo real. Surface-1 é o fundo preferencial em telas com múltiplos cards.</div>
+        <div class="demo__actions">
+          <button class="demo__btn demo__btn--primary">Continuar</button>
+          <button class="demo__btn demo__btn--ghost" style="color:rgb(40,40,40); border-color:rgba(0,0,0,0.2);">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DARK -->
+    <div class="pane dark">
+      <div class="pane__hdr">
+        <div class="pane__title">☾ Dark</div>
+        <div class="pane__sub">[data-theme=dark]</div>
+      </div>
+
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; opacity:0.6; margin-bottom:6px;">Surfaces</div>
+      <div class="surfaces">
+        <div class="surf"><div class="surf__chip" style="background:rgb(66,66,66);"></div><div class="surf__name">0</div></div>
+        <div class="surf"><div class="surf__chip" style="background:rgb(57,57,57);"></div><div class="surf__name">1</div></div>
+        <div class="surf"><div class="surf__chip" style="background:rgb(31,31,31);"></div><div class="surf__name">2</div></div>
+        <div class="surf"><div class="surf__chip" style="background:rgb(20,20,20);"></div><div class="surf__name">3</div></div>
+        <div class="surf"><div class="surf__chip" style="background:rgb(10,10,10);"></div><div class="surf__name">4</div></div>
+      </div>
+
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; opacity:0.6; margin:8px 0 6px;">Content</div>
+      <div class="content-row">
+        <div style="background:rgba(255,255,255,0.06);"><span style="color:rgb(255,255,255);">content-default</span><span>#FFFFFF</span></div>
+        <div style="background:rgba(255,255,255,0.06);"><span style="color:rgb(148,148,148);">content-disable</span><span>#949494</span></div>
+        <div style="background:rgba(255,255,255,0.06);"><span style="color:rgb(102,102,102);">content-ghost</span><span>#666666</span></div>
+      </div>
+
+      <div style="font-size:10px; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; opacity:0.6; margin-bottom:6px;">Surface-1 demo</div>
+      <div class="demo" style="background: rgb(57,57,57); border-color:rgba(255,255,255,0.12);">
+        <div class="demo__title" style="color:rgb(255,255,255);">Sessão ativa</div>
+        <div class="demo__body" style="color:rgb(200,200,200);">Interaja via chat ou acompanhe em tempo real. Surface-1 é o fundo preferencial em telas com múltiplos cards.</div>
+        <div class="demo__actions">
+          <button class="demo__btn demo__btn--primary">Continuar</button>
+          <button class="demo__btn demo__btn--ghost" style="color:rgb(255,255,255); border-color:rgba(255,255,255,0.3);">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="display:flex; justify-content:space-between; font-size:10px; color:var(--color-content-ghost); font-family:ui-monospace,monospace;">
+    <span>Trocar via <code style="background:var(--color-surface-2); padding:1px 5px; border-radius:3px; color:var(--color-content-default);">document.documentElement.dataset.theme = 'dark'</code></span>
+    <span>Feedback colors também invertem — positive/negative mais claros no dark.</span>
+  </div>
+
+</div>
+</body></html>

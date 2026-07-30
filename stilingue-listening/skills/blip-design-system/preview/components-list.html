@@ -1,0 +1,177 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.grid { display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 10px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 12px; font-family: ui-monospace, monospace; }
+
+.demo { padding: 18px; background: var(--color-surface-1); border-radius: 8px; border: 1px solid var(--color-border-2); }
+
+.list {
+  background: #fff; border-radius: 8px; border: 1px solid var(--color-border-2);
+  overflow: hidden;
+  font-family: 'Nunito Sans', sans-serif;
+}
+.list__item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-border-2);
+  cursor: pointer;
+}
+.list__item:last-child { border-bottom: none; }
+.list__item:hover { background: var(--color-surface-1); }
+.list__item.is-selected { background: rgba(30,107,241,0.08); }
+
+.avatar { width: 40px; height: 40px; border-radius: 50%; background: rgb(178,223,253); color: rgb(18,90,213); display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;flex-shrink:0; position: relative; }
+.avatar--green { background: rgb(200,241,197); color: rgb(0,125,20); }
+.avatar--amber { background: rgb(255,225,167); color: rgb(164,80,13); }
+.avatar--pink { background: rgb(255,208,222); color: rgb(170,36,82); }
+.avatar__status { position: absolute; bottom: -2px; right: -2px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #fff; }
+.avatar__status--online { background: rgb(0,180,36); }
+.avatar__status--away { background: rgb(255,173,0); }
+
+.list__body { flex: 1; min-width: 0; }
+.list__title { font-size: 14px; font-weight: 700; color: var(--color-content-default); line-height: 20px; display:flex; align-items:center; gap: 6px; }
+.list__sub { font-size: 13px; color: var(--color-content-ghost); line-height: 20px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.list__meta { text-align: right; font-size: 11px; color: var(--color-content-ghost); flex-shrink: 0; display:flex; flex-direction: column; align-items: flex-end; gap: 4px; }
+.list__badge { background: rgb(30,107,241); color: #fff; font-size: 11px; font-weight: 700; padding: 1px 7px; border-radius: 10px; min-width: 20px; height: 18px; display:inline-flex; align-items:center;justify-content:center;}
+
+.dot-green { width: 8px; height: 8px; border-radius: 50%; background: rgb(0,180,36); display:inline-block; }
+
+/* Compact single-line list */
+.list-compact .list__item { padding: 10px 14px; gap: 10px; }
+.list-compact .list__icon { width: 18px; height: 18px; color: var(--color-content-ghost); flex-shrink: 0; }
+.list-compact .list__title { font-size: 13px; }
+.list-compact .list__meta { font-size: 11px; }
+
+/* Action list */
+.list-action .list__item { justify-content: space-between; padding: 12px 16px; }
+.list__arrow { color: var(--color-content-ghost); }
+
+/* Divider list */
+.list-simple { padding: 4px 0; }
+.list-simple .list__item { padding: 10px 16px; border-bottom: none; font-size: 13px; color: var(--color-content-default); }
+.list-simple .list__item:hover { background: var(--color-surface-1); }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+  <div class="header">
+    <div class="header__title">List · Listagens</div>
+    <div class="header__sub">Conversas (avatar + título + preview + meta) · Compact (ícone + label) · Action (chevron).</div>
+  </div>
+
+  <div class="grid">
+    <div>
+      <div class="section-title">List — conversas</div>
+      <div class="section-sub">Avatar 40 · status 12 · unread badge · última msg truncada</div>
+      <div class="demo">
+        <div class="list">
+          <div class="list__item is-selected">
+            <span class="avatar">AH<span class="avatar__status avatar__status--online"></span></span>
+            <div class="list__body">
+              <div class="list__title">Ana Helena <span class="dot-green"></span></div>
+              <div class="list__sub">Perfeito! Confirmo o envio para amanhã 👍</div>
+            </div>
+            <div class="list__meta"><span>14:32</span><span class="list__badge">3</span></div>
+          </div>
+          <div class="list__item">
+            <span class="avatar avatar--green">CM<span class="avatar__status avatar__status--online"></span></span>
+            <div class="list__body">
+              <div class="list__title">Carlos Mendes</div>
+              <div class="list__sub">Obrigado pelo atendimento rápido</div>
+            </div>
+            <div class="list__meta"><span>12:18</span></div>
+          </div>
+          <div class="list__item">
+            <span class="avatar avatar--amber">MR<span class="avatar__status avatar__status--away"></span></span>
+            <div class="list__body">
+              <div class="list__title">Maria Rodrigues</div>
+              <div class="list__sub">Você: Vou verificar com o time e te retorno</div>
+            </div>
+            <div class="list__meta"><span>11:05</span></div>
+          </div>
+          <div class="list__item">
+            <span class="avatar avatar--pink">JS</span>
+            <div class="list__body">
+              <div class="list__title">João Silva</div>
+              <div class="list__sub">Gostaria de saber sobre o plano enterprise</div>
+            </div>
+            <div class="list__meta"><span>Ontem</span><span class="list__badge">1</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title">List — compact</div>
+      <div class="section-sub">Ícone 18 + label · usado em menus de configuração e picklists densas</div>
+      <div class="demo">
+        <div class="list list-compact">
+          <div class="list__item">
+            <svg class="list__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <div class="list__body"><div class="list__title">Adicionar contato</div></div>
+          </div>
+          <div class="list__item">
+            <svg class="list__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+            <div class="list__body"><div class="list__title">Grupos</div></div>
+            <div class="list__meta">12</div>
+          </div>
+          <div class="list__item">
+            <svg class="list__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+            <div class="list__body"><div class="list__title">Importar CSV</div></div>
+          </div>
+          <div class="list__item">
+            <svg class="list__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6"/></svg>
+            <div class="list__body"><div class="list__title">Configurações</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div style="height: 12px;"></div>
+
+      <div class="section-title">List — action (chevron)</div>
+      <div class="section-sub">Item com descrição + indicador de navegação</div>
+      <div class="demo">
+        <div class="list list-action">
+          <div class="list__item">
+            <div class="list__body">
+              <div class="list__title">Perfil da conta</div>
+              <div class="list__sub">Nome, e-mail e foto</div>
+            </div>
+            <svg class="list__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <div class="list__item">
+            <div class="list__body">
+              <div class="list__title">Notificações</div>
+              <div class="list__sub">Push, email e in-app</div>
+            </div>
+            <svg class="list__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+          <div class="list__item">
+            <div class="list__body">
+              <div class="list__title">Privacidade e segurança</div>
+              <div class="list__sub">Senha, 2FA e sessões ativas</div>
+            </div>
+            <svg class="list__arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Item default</span><span class="spec__v">pad 14 16 · border-bottom 1 ghost</span></div>
+    <div class="spec"><span class="spec__k">Item compact</span><span class="spec__v">pad 10 14 · gap 10</span></div>
+    <div class="spec"><span class="spec__k">Avatar</span><span class="spec__v">40 px · status 12 border 2</span></div>
+    <div class="spec"><span class="spec__k">Title / Sub</span><span class="spec__v">14/700 / 13/400 ghost · nowrap</span></div>
+    <div class="spec"><span class="spec__k">Selected</span><span class="spec__v">primary @ 8%</span></div>
+    <div class="spec"><span class="spec__k">Badge</span><span class="spec__v">h18 · radius 10 · primary</span></div>
+  </div>
+</div>
+</body></html>

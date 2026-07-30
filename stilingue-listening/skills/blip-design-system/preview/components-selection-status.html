@@ -1,0 +1,226 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+/* Header */
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 10px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 14px; font-family: ui-monospace, monospace; }
+
+/* ─── Chip ─── Tag: 24h, pad 0 8, radius 4, font Nunito Sans 600 12/16 ── */
+.chip {
+  display:inline-flex; align-items:center; gap: 4px;
+  height: 24px; padding: 0 8px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 12px; font-weight: 600; line-height: 16px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+.chip--default { background: rgba(0,0,0,0.08); color: rgb(40,40,40); }
+.chip--info    { background: rgb(232,242,255); color: rgb(18,90,213); }
+.chip--success { background: rgb(214,243,225); color: rgb(0,122,66); }
+.chip--warning { background: rgb(253,233,155); color: rgb(117,112,16); }
+.chip--danger  { background: rgb(249,159,159); color: rgb(138,0,0); }
+.chip--outline { background: transparent; color: rgb(40,40,40); border-color: rgb(201,201,201); }
+.chip--disabled{ background: rgb(237,237,237); color: rgb(163,163,163); }
+.chip__x { width: 12px; height: 12px; background: currentColor; mask: url('../assets/icons/outline/close.svg') center/contain no-repeat; -webkit-mask: url('../assets/icons/outline/close.svg') center/contain no-repeat; opacity: 0.7; cursor: pointer; }
+.chip--clickable { background: rgba(30,107,241,0.12); color: rgb(18,90,213); cursor: pointer; }
+.chip--selected  { background: rgb(30,107,241); color: #fff; cursor: pointer; }
+
+/* ─── Badge (numeric) — 16–20h circle ── */
+.badge {
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width: 18px; height: 18px; padding: 0 5px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 10px; font-weight: 800; line-height: 1;
+  border-radius: 999px;
+  font-variant-numeric: tabular-nums;
+}
+.badge--primary  { background: rgb(30,107,241); color: #fff; }
+.badge--positive { background: rgb(0,122,66);   color: #fff; }
+.badge--delete   { background: rgb(230,15,15);  color: #fff; }
+.badge--warning  { background: rgb(251,207,35); color: rgb(40,40,40); }
+.badge--neutral  { background: rgb(99,99,99);   color: #fff; }
+.badge--dot      { width: 8px; height: 8px; min-width: 0; padding: 0; border-radius: 999px; }
+
+/* ─── Checkbox ── 16×16, radius 4, border 1.5 ── */
+.cb { display:inline-flex; align-items:center; gap: 8px; cursor: pointer; font-family: 'Nunito Sans', sans-serif; font-size: 14px; color: rgb(40,40,40); }
+.cb__box {
+  width: 16px; height: 16px; border-radius: 4px;
+  border: 1.5px solid rgb(99,99,99);
+  background: #fff;
+  display:inline-flex; align-items:center; justify-content:center;
+  flex-shrink: 0;
+}
+.cb.is-checked .cb__box { background: rgb(30,107,241); border-color: rgb(30,107,241); }
+.cb.is-checked .cb__box::after {
+  content: ""; width: 9px; height: 5px;
+  border-left: 1.5px solid #fff; border-bottom: 1.5px solid #fff;
+  transform: rotate(-45deg) translate(1px,-1px);
+}
+.cb.is-indeterminate .cb__box { background: rgb(30,107,241); border-color: rgb(30,107,241); }
+.cb.is-indeterminate .cb__box::after { content: ""; width: 8px; height: 1.5px; background: #fff; }
+.cb.is-disabled { cursor: not-allowed; color: rgb(163,163,163); }
+.cb.is-disabled .cb__box { border-color: rgb(201,201,201); background: rgb(237,237,237); }
+.cb.is-error .cb__box { border-color: rgb(230,15,15); }
+
+/* ─── Radio ── 16×16 ── */
+.rad { display:inline-flex; align-items:center; gap: 8px; cursor: pointer; font-family: 'Nunito Sans', sans-serif; font-size: 14px; color: rgb(40,40,40); }
+.rad__box {
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 1.5px solid rgb(99,99,99);
+  background: #fff;
+  display:inline-flex; align-items:center; justify-content:center;
+  flex-shrink: 0;
+}
+.rad.is-checked .rad__box { border-color: rgb(30,107,241); }
+.rad.is-checked .rad__box::after { content:""; width: 8px; height: 8px; border-radius: 50%; background: rgb(30,107,241); }
+.rad.is-disabled { cursor: not-allowed; color: rgb(163,163,163); }
+.rad.is-disabled .rad__box { border-color: rgb(201,201,201); background: rgb(237,237,237); }
+
+/* ─── Switch ── short 32×16, standard 40×20 ── */
+.sw {
+  position: relative; display:inline-block; flex-shrink: 0;
+  width: 32px; height: 16px; border-radius: 16px;
+  background: rgb(140,140,140);
+  transition: background-color 160ms;
+  cursor: pointer;
+}
+.sw.is-on { background: rgb(30,107,241); }
+.sw::after {
+  content:""; position:absolute; left: 2px; top: 2px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #fff; transition: left 160ms;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.24);
+}
+.sw.is-on::after { left: 18px; }
+.sw.is-disabled { background: rgb(201,201,201); cursor: not-allowed; }
+.sw--standard { width: 40px; height: 20px; border-radius: 20px; }
+.sw--standard::after { width: 16px; height: 16px; left: 2px; top: 2px; }
+.sw--standard.is-on::after { left: 22px; }
+
+.sw-row { display:inline-flex; align-items:center; gap: 10px; font-family: 'Nunito Sans', sans-serif; font-size: 14px; color: rgb(40,40,40); }
+.sw-row.is-disabled { color: rgb(163,163,163); }
+
+/* Grid layouts */
+.grid { display:grid; grid-template-columns: repeat(4, 1fr); gap: 10px; align-items:center; }
+.grid-2 { display:grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; align-items: center; }
+
+.board {
+  padding: 18px 20px;
+  background: var(--color-surface-1);
+  border-radius: 10px;
+  border: 1px solid var(--color-border-2);
+  display: flex; flex-direction: column; gap: 16px;
+}
+
+.flow { display:flex; flex-wrap:wrap; gap: 8px; align-items:center; }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 6px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+
+  <div class="header">
+    <div class="header__title">Selection & Status · Chip · Badge · Checkbox · Radio · Switch</div>
+    <div class="header__sub">Primary <code style="font-family:ui-monospace,monospace; background:var(--color-surface-2); padding:1px 5px; border-radius:3px;">#1E6BF1</code> · fonte Nunito Sans · valores extraídos do DS Figma.</div>
+  </div>
+
+  <!-- Chip -->
+  <div>
+    <div class="section-title">Chip — Tag (status + categorização)</div>
+    <div class="section-sub">h 24 · pad 0 8 · raio 4 · texto 600 12/16 · pair com x-close para removíveis</div>
+    <div class="board">
+      <div class="flow">
+        <span class="chip chip--default">Default</span>
+        <span class="chip chip--info">Info</span>
+        <span class="chip chip--success">Success</span>
+        <span class="chip chip--warning">Warning</span>
+        <span class="chip chip--danger">Danger</span>
+        <span class="chip chip--outline">Outline</span>
+        <span class="chip chip--disabled">Disabled</span>
+      </div>
+      <div class="flow">
+        <span class="chip chip--clickable">Ativo <span class="chip__x"></span></span>
+        <span class="chip chip--clickable">Onboarding <span class="chip__x"></span></span>
+        <span class="chip chip--selected">Selected</span>
+        <span class="chip chip--selected">Selected <span class="chip__x"></span></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Badge -->
+  <div>
+    <div class="section-title">Badge (contadores & status)</div>
+    <div class="section-sub">pill · min 18×18 · Nunito Sans 800 10 · tabular-nums · dot 8×8 pra indicador silencioso</div>
+    <div class="board">
+      <div class="flow">
+        <span class="badge badge--primary">3</span>
+        <span class="badge badge--primary">12</span>
+        <span class="badge badge--primary">99+</span>
+        <span class="badge badge--positive">8</span>
+        <span class="badge badge--warning">2</span>
+        <span class="badge badge--delete">1</span>
+        <span class="badge badge--neutral">24</span>
+      </div>
+      <div class="flow" style="gap:16px;">
+        <span style="display:inline-flex; align-items:center; gap:6px; font-size:13px;"><span class="badge badge--dot badge--positive"></span>Online</span>
+        <span style="display:inline-flex; align-items:center; gap:6px; font-size:13px;"><span class="badge badge--dot badge--warning"></span>Em espera</span>
+        <span style="display:inline-flex; align-items:center; gap:6px; font-size:13px;"><span class="badge badge--dot badge--delete"></span>Falha</span>
+        <span style="display:inline-flex; align-items:center; gap:6px; font-size:13px;"><span class="badge badge--dot badge--neutral"></span>Inativo</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Checkbox & Radio -->
+  <div>
+    <div class="section-title">Checkbox & Radio</div>
+    <div class="section-sub">16×16 · raio 4 (cb) / 50% (radio) · borda 1.5 px · check em primary</div>
+    <div class="grid-2">
+      <div class="board">
+        <div style="font-family:ui-monospace,monospace; font-size:9px; color:var(--color-content-ghost); text-transform:uppercase;">Checkbox</div>
+        <label class="cb"><span class="cb__box"></span>Notificar por e-mail</label>
+        <label class="cb is-checked"><span class="cb__box"></span>Notificar por push</label>
+        <label class="cb is-indeterminate"><span class="cb__box"></span>Notificar por WhatsApp</label>
+        <label class="cb is-error"><span class="cb__box"></span><span style="color:rgb(230,15,15);">Aceite obrigatório</span></label>
+        <label class="cb is-disabled"><span class="cb__box"></span>Notificar por SMS (indisponível)</label>
+      </div>
+      <div class="board">
+        <div style="font-family:ui-monospace,monospace; font-size:9px; color:var(--color-content-ghost); text-transform:uppercase;">Radio group</div>
+        <label class="rad"><span class="rad__box"></span>Apenas no expediente</label>
+        <label class="rad is-checked"><span class="rad__box"></span>24/7 com plantão automático</label>
+        <label class="rad"><span class="rad__box"></span>Personalizado por canal</label>
+        <label class="rad is-disabled"><span class="rad__box"></span>Somente humanos (indisponível)</label>
+      </div>
+    </div>
+  </div>
+
+  <!-- Switch -->
+  <div>
+    <div class="section-title">Switch</div>
+    <div class="section-sub">short 32×16 · standard 40×20 · thumb branco com sombra drop · feedback instantâneo (sem confirmação)</div>
+    <div class="board">
+      <div class="grid-2">
+        <div class="sw-row"><span class="sw is-on"></span>Fallback humano <span style="margin-left:auto; font-size:11px; color:var(--color-content-ghost); font-family:ui-monospace,monospace;">on · short</span></div>
+        <div class="sw-row"><span class="sw"></span>Transcrição automática <span style="margin-left:auto; font-size:11px; color:var(--color-content-ghost); font-family:ui-monospace,monospace;">off · short</span></div>
+        <div class="sw-row"><span class="sw sw--standard is-on"></span>Deploy automático <span style="margin-left:auto; font-size:11px; color:var(--color-content-ghost); font-family:ui-monospace,monospace;">on · standard</span></div>
+        <div class="sw-row is-disabled"><span class="sw is-on is-disabled"></span>Enterprise SSO<span style="margin-left:auto; font-size:11px; color:var(--color-content-disable); font-family:ui-monospace,monospace;">disabled</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Specs -->
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Chip Tag</span><span class="spec__v">24h · pad 0 8 · r4 · 600 12/16</span></div>
+    <div class="spec"><span class="spec__k">Badge</span><span class="spec__v">18h · 800 10 · tabular</span></div>
+    <div class="spec"><span class="spec__k">Checkbox/Radio</span><span class="spec__v">16 · 1.5 px border · r4/50%</span></div>
+    <div class="spec"><span class="spec__k">Switch short</span><span class="spec__v">32×16 · thumb 12×12</span></div>
+    <div class="spec"><span class="spec__k">Switch standard</span><span class="spec__v">40×20 · thumb 16×16</span></div>
+    <div class="spec"><span class="spec__k">On color</span><span class="spec__v">#1E6BF1 primary</span></div>
+  </div>
+
+</div>
+</body></html>

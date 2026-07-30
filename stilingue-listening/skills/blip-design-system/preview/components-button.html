@@ -1,0 +1,172 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+/* Exact Figma specs: Nunito Sans 700 14px / 22px line-height
+   Solid Primary: bg #1E6BF1, border #1E6BF1, text white
+   Medium: h40, padding 0 16, gap 4, radius 8
+   Short:  h32, padding 0 12, gap 4, radius 8, text 12px
+   Large:  h48, padding 0 20, gap 6, radius 8, text 16px
+*/
+.btn {
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 700;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  display: inline-flex; align-items: center; justify-content: center;
+  gap: 4px;
+  cursor: pointer; white-space: nowrap;
+  transition: background-color 120ms, border-color 120ms, color 120ms;
+}
+.btn--short  { height: 32px; padding: 0 12px; font-size: 12px; line-height: 20px; }
+.btn--medium { height: 40px; padding: 0 16px; font-size: 14px; line-height: 22px; }
+.btn--large  { height: 48px; padding: 0 20px; font-size: 16px; line-height: 24px; gap: 6px; }
+
+.btn--solid   { background: #1E6BF1; border-color: #1E6BF1; color: #fff; }
+.btn--solid:hover { background: #185BCC; border-color: #185BCC; }
+.btn--solid.is-pressed { background: #0F4AA8; border-color: #0F4AA8; }
+.btn--solid.is-disabled { background: #D2DFE6; border-color: #D2DFE6; color: #FFFFFF; cursor: not-allowed; }
+
+.btn--outline { background: transparent; border-color: #1E6BF1; color: #1E6BF1; }
+.btn--outline:hover { background: rgba(30,107,241,0.08); }
+.btn--outline.is-pressed { background: rgba(30,107,241,0.16); }
+.btn--outline.is-disabled { border-color: #D2DFE6; color: #D2DFE6; cursor: not-allowed; }
+
+.btn--text { background: transparent; border-color: transparent; color: #1E6BF1; padding-left: 8px; padding-right: 8px; }
+.btn--text:hover { background: rgba(30,107,241,0.08); }
+.btn--text.is-pressed { background: rgba(30,107,241,0.16); }
+.btn--text.is-disabled { color: #D2DFE6; cursor: not-allowed; }
+
+.btn--delete { background: #E60F0F; border-color: #E60F0F; color: #fff; }
+.btn--delete:hover { background: #BE0808; border-color: #BE0808; }
+
+.ico {
+  width: 1em; height: 1em; display:inline-block;
+  background: currentColor;
+  mask: var(--ico-url) center/contain no-repeat;
+  -webkit-mask: var(--ico-url) center/contain no-repeat;
+}
+.ico--right { --ico-url: url('../assets/icons/outline/arrow-right.svg'); }
+.btn--short .ico { width: 16px; height: 16px; }
+.btn--medium .ico { width: 20px; height: 20px; }
+.btn--large .ico { width: 24px; height: 24px; }
+
+/* layout */
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+
+.grid {
+  display:grid; grid-template-columns: 90px repeat(4, 1fr); gap: 14px 16px;
+  align-items: center;
+}
+.grid__colhdr {
+  font-size: 9px; font-family: ui-monospace, monospace;
+  color: var(--color-content-ghost);
+  text-transform: uppercase; letter-spacing: 0.04em;
+  text-align: center;
+}
+.grid__rowhdr {
+  font-size: 10px; font-weight: 700;
+  color: var(--color-content-default);
+  letter-spacing: 0.02em;
+}
+.grid__cell { display:flex; justify-content:center; align-items:center; min-height: 52px; }
+
+.section-title {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--color-content-default);
+  margin-top: 8px;
+}
+
+.sizes-row { display:flex; gap:14px; align-items:center; padding: 18px; background: var(--color-surface-1); border-radius: 10px; border: 1px solid var(--color-border-2); }
+.size-cell { display:flex; flex-direction:column; align-items:center; gap:6px; }
+.size-cell__label { font-size:9px; font-family: ui-monospace, monospace; color: var(--color-content-ghost); }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; }
+.spec {
+  padding: 10px 12px;
+  background: var(--color-surface-1);
+  border-radius: 8px; border:1px solid var(--color-border-2);
+  display:flex; flex-direction:column; gap:4px;
+}
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+
+</style></head>
+<body>
+<div class="card" style="gap:18px; padding:28px;">
+
+  <div class="header">
+    <div class="header__title">Button · Solid / Outline / Text</div>
+    <div class="header__sub">Nunito Sans 700 · raio 8 px · ícone segue <code style="background:var(--color-surface-2); padding:1px 5px; border-radius:3px;">currentColor</code>. Extraído do DS Figma — specs pixel-perfect.</div>
+  </div>
+
+  <!-- Tamanhos -->
+  <div>
+    <div class="section-title" style="margin-bottom:8px;">Tamanhos · Solid Primary</div>
+    <div class="sizes-row">
+      <div class="size-cell">
+        <button class="btn btn--solid btn--short">Action <span class="ico ico--right"></span></button>
+        <div class="size-cell__label">short · 32 px</div>
+      </div>
+      <div class="size-cell">
+        <button class="btn btn--solid btn--medium">Verbo + complemento <span class="ico ico--right"></span></button>
+        <div class="size-cell__label">medium · 40 px · default</div>
+      </div>
+      <div class="size-cell">
+        <button class="btn btn--solid btn--large">Verbo + complemento <span class="ico ico--right"></span></button>
+        <div class="size-cell__label">large · 48 px</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Variants × States -->
+  <div>
+    <div class="section-title" style="margin-bottom:10px;">Variantes × Estados · medium</div>
+
+    <div class="grid">
+      <div></div>
+      <div class="grid__colhdr">Default</div>
+      <div class="grid__colhdr">Hover</div>
+      <div class="grid__colhdr">Pressed</div>
+      <div class="grid__colhdr">Disabled</div>
+
+      <div class="grid__rowhdr">Solid<br><span style="font-weight:400; color:var(--color-content-ghost); font-family:ui-monospace,monospace; font-size:9px;">primary</span></div>
+      <div class="grid__cell"><button class="btn btn--solid btn--medium">Confirmar</button></div>
+      <div class="grid__cell"><button class="btn btn--solid btn--medium" style="background:#185BCC; border-color:#185BCC;">Confirmar</button></div>
+      <div class="grid__cell"><button class="btn btn--solid btn--medium is-pressed">Confirmar</button></div>
+      <div class="grid__cell"><button class="btn btn--solid btn--medium is-disabled">Confirmar</button></div>
+
+      <div class="grid__rowhdr">Outline</div>
+      <div class="grid__cell"><button class="btn btn--outline btn--medium">Confirmar</button></div>
+      <div class="grid__cell"><button class="btn btn--outline btn--medium" style="background: rgba(30,107,241,0.08);">Confirmar</button></div>
+      <div class="grid__cell"><button class="btn btn--outline btn--medium is-pressed">Confirmar</button></div>
+      <div class="grid__cell"><button class="btn btn--outline btn--medium is-disabled">Confirmar</button></div>
+
+      <div class="grid__rowhdr">Text</div>
+      <div class="grid__cell"><button class="btn btn--text btn--medium">Confirmar</button></div>
+      <div class="grid__cell"><button class="btn btn--text btn--medium" style="background: rgba(30,107,241,0.08);">Confirmar</button></div>
+      <div class="grid__cell"><button class="btn btn--text btn--medium is-pressed">Confirmar</button></div>
+      <div class="grid__cell"><button class="btn btn--text btn--medium is-disabled">Confirmar</button></div>
+
+      <div class="grid__rowhdr">Delete</div>
+      <div class="grid__cell"><button class="btn btn--delete btn--medium">Excluir</button></div>
+      <div class="grid__cell"><button class="btn btn--delete btn--medium" style="background:#BE0808; border-color:#BE0808;">Excluir</button></div>
+      <div class="grid__cell"><button class="btn btn--delete btn--medium" style="background:#8F0505; border-color:#8F0505;">Excluir</button></div>
+      <div class="grid__cell"><button class="btn btn--delete btn--medium" style="background:#D2DFE6; border-color:#D2DFE6; cursor:not-allowed;">Excluir</button></div>
+    </div>
+  </div>
+
+  <!-- Specs -->
+  <div>
+    <div class="section-title" style="margin-bottom:8px;">Specs</div>
+    <div class="specs-row">
+      <div class="spec"><span class="spec__k">Typography</span><span class="spec__v">Nunito Sans 700 · 14/22</span></div>
+      <div class="spec"><span class="spec__k">Medium height</span><span class="spec__v">40 px · pad 0 16 · gap 4</span></div>
+      <div class="spec"><span class="spec__k">Radius</span><span class="spec__v">8 px</span></div>
+      <div class="spec"><span class="spec__k">Icon</span><span class="spec__v">24 px · currentColor</span></div>
+      <div class="spec"><span class="spec__k">Min width</span><span class="spec__v">~136 px (medium)</span></div>
+      <div class="spec"><span class="spec__k">Disabled fill</span><span class="spec__v">#D2DFE6 (wave)</span></div>
+    </div>
+  </div>
+
+</div>
+</body></html>

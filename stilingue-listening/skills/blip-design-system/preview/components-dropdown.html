@@ -1,0 +1,132 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 10px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 14px; font-family: ui-monospace, monospace; }
+
+.canvas { display:grid; grid-template-columns: repeat(2, 1fr); gap: 24px; padding: 28px; background: var(--color-surface-1); border-radius: 8px; border: 1px solid var(--color-border-2); }
+
+.dd-wrap { position: relative; font-family: 'Nunito Sans', sans-serif; }
+.dd-trigger {
+  height: 40px; padding: 0 14px;
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #fff; border: 1px solid var(--color-border-3); border-radius: 8px;
+  font-weight: 700; font-size: 14px; color: var(--color-content-default);
+  cursor: pointer;
+  min-width: 220px; justify-content: space-between;
+}
+.dd-trigger--active { border-color: rgb(30,107,241); box-shadow: 0 0 0 3px rgba(30,107,241,0.12); }
+
+.dd-menu {
+  position: absolute; top: calc(100% + 6px); left: 0;
+  min-width: 260px;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12), 0 1px 3px rgba(0,0,0,0.08);
+  border: 1px solid var(--color-border-2);
+  padding: 6px;
+  z-index: 10;
+}
+.dd-item {
+  display:flex; align-items:center; gap: 10px;
+  padding: 10px 12px;
+  font-size: 14px; line-height: 20px;
+  color: var(--color-content-default);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.dd-item:hover { background: var(--color-surface-1); }
+.dd-item.is-active { background: rgba(30,107,241, 0.08); color: rgb(30,107,241); font-weight: 700; }
+.dd-item--danger { color: rgb(230,15,15); }
+.dd-item--danger:hover { background: rgb(255,236,236); }
+.dd-item svg { width: 16px; height: 16px; }
+.dd-item__kb { margin-left: auto; font-size: 11px; font-family: ui-monospace, monospace; color: var(--color-content-ghost); }
+.dd-sep { height: 1px; background: var(--color-border-2); margin: 6px 4px; }
+.dd-head {
+  padding: 8px 12px 4px;
+  font-size: 10px; font-weight: 700; text-transform: uppercase;
+  color: var(--color-content-ghost); letter-spacing: 0.06em;
+}
+
+/* Menu com avatar (selector user) */
+.dd-user { display:flex; align-items:center; gap: 12px; padding: 12px; }
+.dd-user__av { width: 36px; height: 36px; border-radius: 50%; background: rgb(178,223,253); color: rgb(18,90,213); display:flex; align-items:center; justify-content:center; font-weight: 700; font-size: 13px; }
+.dd-user__meta { display:flex; flex-direction: column; }
+.dd-user__n { font-weight: 700; font-size: 13px; }
+.dd-user__m { font-size: 11px; color: var(--color-content-ghost); }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+  <div class="header">
+    <div class="header__title">Dropdown · Menu</div>
+    <div class="header__sub">Menu contextual com itens, headers, separadores e atalhos. Item 40 px · radius item 6 · menu radius 8 · sombra elevation-3.</div>
+  </div>
+
+  <div>
+    <div class="section-title">Ações de linha · row actions menu</div>
+    <div class="section-sub">Abre a partir de um botão kebab · agrupa por seção · ação destrutiva ao final</div>
+    <div class="canvas" style="grid-template-columns: 1fr 1fr; min-height: 360px;">
+      <div class="dd-wrap" style="height: 320px;">
+        <button class="dd-trigger dd-trigger--active">
+          <span>Ações da conversa</span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="dd-menu">
+          <div class="dd-head">Navegação</div>
+          <div class="dd-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5l7 7-7 7"/></svg>Ir para conversa <span class="dd-item__kb">⌘ O</span></div>
+          <div class="dd-item is-active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Marcar como não lida</div>
+          <div class="dd-sep"></div>
+          <div class="dd-head">Atribuição</div>
+          <div class="dd-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Transferir agente <span class="dd-item__kb">⌘ T</span></div>
+          <div class="dd-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Escalonar prioridade</div>
+          <div class="dd-sep"></div>
+          <div class="dd-item dd-item--danger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+            Encerrar conversa <span class="dd-item__kb">⌘ ⌫</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="dd-wrap" style="height: 320px;">
+        <button class="dd-trigger dd-trigger--active">
+          <span style="display:flex;align-items:center;gap:8px;">
+            <span style="width:24px;height:24px;border-radius:50%;background:rgb(253,233,155);color:rgb(117,85,16);display:inline-flex;align-items:center;justify-content:center;font-weight:700;font-size:11px;">MS</span>
+            Maria Silva
+          </span>
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="dd-menu" style="min-width: 280px;">
+          <div class="dd-user">
+            <span class="dd-user__av" style="background:rgb(253,233,155);color:rgb(117,85,16);">MS</span>
+            <div class="dd-user__meta"><span class="dd-user__n">Maria Silva</span><span class="dd-user__m">maria.s@blip.ai</span></div>
+          </div>
+          <div class="dd-sep"></div>
+          <div class="dd-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>Meu perfil</div>
+          <div class="dd-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33h0a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51h0a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v0a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Configurações</div>
+          <div class="dd-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/></svg>Ajuda & suporte</div>
+          <div class="dd-sep"></div>
+          <div class="dd-item dd-item--danger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+            Sair
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Menu radius</span><span class="spec__v">8 · item radius 6</span></div>
+    <div class="spec"><span class="spec__k">Item</span><span class="spec__v">pad 10 12 · h40</span></div>
+    <div class="spec"><span class="spec__k">Hover</span><span class="spec__v">surface-1</span></div>
+    <div class="spec"><span class="spec__k">Active</span><span class="spec__v">primary @ 8%</span></div>
+    <div class="spec"><span class="spec__k">Shadow</span><span class="spec__v">0 8 24 rgba(0,0,0,.12)</span></div>
+    <div class="spec"><span class="spec__k">Danger</span><span class="spec__v">#E60F0F · bg #FFECEC hover</span></div>
+  </div>
+</div>
+</body></html>

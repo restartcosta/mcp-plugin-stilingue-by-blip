@@ -1,0 +1,25 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css">
+<style>
+  .gallery { display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px; }
+  .gallery__tile { display:flex; flex-direction:column; align-items:center; gap:6px; padding:10px 6px; border-radius:8px; background:var(--color-surface-1); }
+  .gallery__tile img { width:72px; height:72px; object-fit:contain; }
+  .gallery__name { font-size:9px; color:var(--color-content-ghost); text-align:center; font-family:ui-monospace,monospace; word-break:break-all; line-height:1.2; }
+</style>
+</head>
+<body>
+<div class="card">
+  <div style="font-size:13px; color:var(--color-content-ghost);">
+    144 official Blip illustrations — empty states, hero spots, category markers, personas. All flat-fill SVG, single color or duo-tone, brand palette.
+  </div>
+  <div class="gallery" id="g"></div>
+</div>
+<script>
+  const names = ["accessibility-1","accessibility-2","accessibility-3","accessibility-4","accessibility-5","accessibility-6","agent-1","agent-2","agent-flat-1","agent-flat-2","agent-flat-3","agent-flat-4","air-balloon","analytics-satisfaction","atention","attendance-1","attendance-2","attendance-3","attendance-4","automation","avatar","bill-1","binoculars","blip-chat-health","blip-chat-logistic","blip-chat-marketing","blip-chat","blip-ideas-blue-bg","blip-ideas","blip-sales-1","blip-sales","bot-list","boy-computer","cancel-error","chat-bank","chat-sales","check-okay","check","clock-1","clock-2","close","collaboration-1","collaboration-2","collaboration-3","column-chart","connectivity","cookie","delete","delivery-chat","ecossystem-1","empty","error-empty","error","exchange-person","faq","folder-1","folder-2","folder-3","folder-4","folder-5","folder-6","folder-7","frame-3338","girl-email","girl-tablet","glad","greeting-1","greeting-2","hand-1","hand-2","hand-3","hand-4","hand-5","hand-6","idea","information-security","invite-blip","letter-1","loading-error","lock-1","lock-2","management","map","message-notification","message-template-1","message-template-2","new-feature","newsletter","notification-1","organizations","paper-plane","password","pie-chart","pizza","plataform-1","professional-1","professional-2","professional-3","professional-4","professional-5","professional-6","professional-7","professional-8","profile-1","rating-1","rh-hunting","ringtones","robot-1","robot-2","robot-3","robot-4","robot-5","robot-6","robots","rocket","search-1","search-2","search-attention","search-avatars","search-question","search","segmentos","send-ticket","settings-1","solicitation","solutions-agent","speak-bubble","star","stilingue-1","stilingue-2","stilingue-3","stilingue-4","surprise","talking","tangram","team-work","ticket","time-1","time-2","user-1","user-2","user-3","user-4","user-plataform","warning","webhook","welcome-blip","whatsapp-web","whatsapp"];
+  const g = document.getElementById('g');
+  g.innerHTML = names.map(n => `
+    <div class="gallery__tile">
+      <img src="../assets/illustrations/${n}.svg" loading="lazy" alt="${n}">
+      <div class="gallery__name">${n}</div>
+    </div>`).join('');
+</script>
+</body></html>

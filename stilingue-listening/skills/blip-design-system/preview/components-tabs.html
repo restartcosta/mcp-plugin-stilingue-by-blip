@@ -1,0 +1,149 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 8px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 12px; font-family: ui-monospace, monospace; }
+
+/* Tabs — underline style */
+.tabs {
+  display: flex;
+  border-bottom: 1px solid var(--color-border-2);
+  font-family: 'Nunito Sans', sans-serif;
+  gap: 0;
+}
+.tab {
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 22px;
+  color: var(--color-content-ghost);
+  cursor: pointer;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  display: inline-flex; align-items: center; gap: 8px;
+  transition: color .15s, border-color .15s;
+}
+.tab:hover { color: rgb(30,107,241); }
+.tab.is-active { color: rgb(30,107,241); border-bottom-color: rgb(30,107,241); }
+.tab.is-disabled { color: rgb(190,190,190); cursor: not-allowed; }
+.tab__count {
+  display:inline-flex; align-items:center; justify-content:center;
+  min-width: 20px; height: 20px; padding: 0 6px;
+  border-radius: 10px;
+  background: rgb(229,229,229); color: rgb(99,99,99);
+  font-size: 11px; font-weight: 700;
+}
+.tab.is-active .tab__count { background: rgb(30,107,241); color: #fff; }
+
+.tab-panel {
+  padding: 24px;
+  background: var(--color-surface-0);
+  border: 1px solid var(--color-border-2);
+  border-top: none;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px; line-height: 22px;
+  color: rgb(32,44,68);
+}
+
+/* Segmented (pill style) */
+.segmented {
+  display: inline-flex;
+  background: var(--color-surface-1);
+  border-radius: 8px;
+  padding: 4px;
+  gap: 4px;
+}
+.segmented__item {
+  padding: 6px 16px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-weight: 700;
+  font-size: 13px;
+  color: var(--color-content-ghost);
+  border-radius: 6px;
+  cursor: pointer;
+}
+.segmented__item.is-active {
+  background: #fff;
+  color: rgb(30,107,241);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+/* Filled tabs (card style) */
+.tabs-filled { display: inline-flex; background: var(--color-surface-1); border-radius: 8px; padding: 4px; gap: 2px; font-family: 'Nunito Sans', sans-serif; }
+.tabs-filled__item { padding: 8px 16px; font-weight: 700; font-size: 13px; color: var(--color-content-ghost); border-radius: 6px; cursor: pointer; display:inline-flex; align-items:center; gap:6px; }
+.tabs-filled__item.is-active { background: rgb(30,107,241); color: #fff; }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+
+  <div class="header">
+    <div class="header__title">Tabs</div>
+    <div class="header__sub">3 variantes — Underline (navegação principal), Segmented (filtros), Filled (pequenas seções).</div>
+  </div>
+
+  <!-- Underline -->
+  <div>
+    <div class="section-title">Underline · navegação principal</div>
+    <div class="section-sub">Texto 700 14/22 · pad 12 20 · border-bottom 2px ativo</div>
+    <div class="tabs">
+      <span class="tab is-active">Visão geral</span>
+      <span class="tab">Conversas <span class="tab__count">247</span></span>
+      <span class="tab">Agentes <span class="tab__count">12</span></span>
+      <span class="tab">Relatórios</span>
+      <span class="tab is-disabled">Integrações</span>
+    </div>
+    <div class="tab-panel">
+      <div style="font-weight:700; font-size:16px; margin-bottom:8px;">Visão geral de atendimento</div>
+      <div style="color: rgb(99,99,99);">Esta aba concentra métricas de alto nível da operação: TMR, NPS, volume por canal e tempo ocioso.</div>
+    </div>
+  </div>
+
+  <!-- Segmented -->
+  <div>
+    <div class="section-title">Segmented · filtros / modos</div>
+    <div class="section-sub">Fundo surface-1 · ativo em #FFF com shadow · ideal para 2–4 opções</div>
+    <div style="display:flex; gap: 16px; flex-wrap:wrap;">
+      <div class="segmented">
+        <span class="segmented__item is-active">Hoje</span>
+        <span class="segmented__item">7 dias</span>
+        <span class="segmented__item">30 dias</span>
+        <span class="segmented__item">Personalizado</span>
+      </div>
+      <div class="segmented">
+        <span class="segmented__item is-active">Lista</span>
+        <span class="segmented__item">Kanban</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filled -->
+  <div>
+    <div class="section-title">Filled · sub-seções</div>
+    <div class="section-sub">Ativo recebe fill primário · ícone opcional à esquerda</div>
+    <div class="tabs-filled">
+      <span class="tabs-filled__item is-active">
+        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+        Todos
+      </span>
+      <span class="tabs-filled__item">Ativos</span>
+      <span class="tabs-filled__item">Pausados</span>
+      <span class="tabs-filled__item">Arquivados</span>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Underline pad</span><span class="spec__v">12 × 20 · border 2 px</span></div>
+    <div class="spec"><span class="spec__k">Texto</span><span class="spec__v">Nunito 700 14/22</span></div>
+    <div class="spec"><span class="spec__k">Ativo</span><span class="spec__v">#1E6BF1 (primary-default)</span></div>
+    <div class="spec"><span class="spec__k">Segmented</span><span class="spec__v">h36 · radius 8 · pad 4</span></div>
+    <div class="spec"><span class="spec__k">Count badge</span><span class="spec__v">h20 · radius 10 · pad 0 6</span></div>
+    <div class="spec"><span class="spec__k">Disabled</span><span class="spec__v">color-default-disable</span></div>
+  </div>
+</div>
+</body></html>

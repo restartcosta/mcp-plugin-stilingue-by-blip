@@ -1,0 +1,60 @@
+/* Preview-card shared styles. All cards import colors_and_type.css + this. */
+@import url('../colors_and_type.css');
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--color-surface-0);
+  color: var(--color-content-default);
+  font-family: var(--bds-font-family);
+}
+
+.card {
+  box-sizing: border-box;
+  width: 700px;
+  padding: 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.row {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.swatch {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+.swatch__chip {
+  width: 100%;
+  height: 56px;
+  border-radius: 8px;
+  border: 1px solid var(--color-border-3);
+}
+.swatch__name {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-content-default);
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+.swatch__hex {
+  font-size: 10px;
+  font-family: ui-monospace, monospace;
+  color: var(--color-content-ghost);
+  line-height: 1;
+}
+
+.grid-10 { display: grid; grid-template-columns: repeat(10, 1fr); gap: 10px; width: 100%; }
+.grid-8  { display: grid; grid-template-columns: repeat(8, 1fr);  gap: 10px; width: 100%; }
+.grid-6  { display: grid; grid-template-columns: repeat(6, 1fr);  gap: 10px; width: 100%; }
+.grid-5  { display: grid; grid-template-columns: repeat(5, 1fr);  gap: 10px; width: 100%; }
+.grid-4  { display: grid; grid-template-columns: repeat(4, 1fr);  gap: 10px; width: 100%; }
+.grid-3  { display: grid; grid-template-columns: repeat(3, 1fr);  gap: 10px; width: 100%; }

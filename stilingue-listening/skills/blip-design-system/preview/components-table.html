@@ -1,0 +1,201 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 8px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 12px; font-family: ui-monospace, monospace; }
+
+.tbl-wrap { border: 1px solid var(--color-border-2); border-radius: 8px; overflow: hidden; background: var(--color-surface-0); }
+.tbl { width: 100%; border-collapse: collapse; font-family: 'Nunito Sans', sans-serif; }
+.tbl thead th {
+  text-align: left;
+  padding: 14px 16px;
+  background: var(--color-surface-1);
+  border-bottom: 1px solid var(--color-border-2);
+  font-size: 11px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--color-content-ghost);
+  white-space: nowrap;
+}
+.tbl thead th .sort { display:inline-block; width:0;height:0; border:4px solid transparent; border-top-color: currentColor; transform: translateY(4px); margin-left: 4px; opacity:.5; }
+.tbl thead th.sort-active { color: var(--color-content-default); }
+.tbl thead th.sort-active .sort { opacity: 1; }
+.tbl tbody td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--color-border-2);
+  font-size: 14px; line-height: 20px; color: rgb(32,44,68);
+  vertical-align: middle;
+}
+.tbl tbody tr:last-child td { border-bottom: none; }
+.tbl tbody tr:hover { background: var(--color-surface-1); }
+.tbl tbody tr.selected { background: rgba(30,107,241,0.06); }
+
+.cell-check { width: 40px; }
+.cell-check input { accent-color: rgb(30,107,241); width: 18px; height: 18px; }
+
+.cell-user { display: flex; align-items: center; gap: 12px; }
+.avatar-sm { width: 32px; height: 32px; border-radius: 50%; background: rgb(178,223,253); display:flex;align-items:center;justify-content:center; color: rgb(18,90,213); font-weight: 700; font-size: 12px; flex-shrink: 0; }
+.cell-user__meta { display: flex; flex-direction: column; }
+.cell-user__name { font-weight: 700; font-size: 14px; line-height: 20px; }
+.cell-user__mail { font-size: 12px; color: var(--color-content-ghost); }
+
+.pill { display:inline-flex; align-items:center; gap:6px; height: 22px; padding: 0 8px; border-radius: 100px; font-size: 11px; font-weight: 700; }
+.pill--ok { background: rgb(214,243,225); color: rgb(0,122,66); }
+.pill--warn { background: rgb(253,233,155); color: rgb(117,85,16); }
+.pill--err { background: rgb(255,214,214); color: rgb(138,0,0); }
+.pill--neu { background: rgb(229,229,229); color: rgb(99,99,99); }
+.pill__dot { width: 6px; height: 6px; border-radius: 50%; background: currentColor; }
+
+.row-actions { display: flex; gap: 4px; justify-content: flex-end; }
+.icon-btn { width: 28px; height: 28px; display:inline-flex;align-items:center;justify-content:center; border-radius: 6px; cursor: pointer; color: var(--color-content-ghost); }
+.icon-btn:hover { background: var(--color-surface-1); color: var(--color-content-default); }
+.icon-btn svg { width: 16px; height: 16px; }
+
+.tbl-foot { display:flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--color-surface-1); border-top: 1px solid var(--color-border-2); font-size: 12px; font-family: 'Nunito Sans', sans-serif; color: var(--color-content-ghost); }
+.page-nav { display: flex; gap: 4px; }
+.page-nav button { width: 28px; height: 28px; border: 1px solid var(--color-border-2); background: #fff; border-radius: 6px; cursor: pointer; font-family: inherit; color: var(--color-content-default); }
+.page-nav button.active { background: rgb(30,107,241); color:#fff; border-color: rgb(30,107,241); }
+.page-nav button:disabled { opacity:.4; cursor: not-allowed; }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+
+  <div class="header">
+    <div class="header__title">Data Table</div>
+    <div class="header__sub">Tabela com seleção, ordenação, status e paginação. Linha 48px · header 44px · hover em surface-1.</div>
+  </div>
+
+  <!-- Main table -->
+  <div>
+    <div class="section-title">Default · linhas selecionáveis · header ordenável</div>
+    <div class="section-sub">6 colunas · 5 linhas · header uppercase 11/700 · corpo 14/400</div>
+    <div class="tbl-wrap">
+      <table class="tbl">
+        <thead>
+          <tr>
+            <th class="cell-check"><input type="checkbox" checked></th>
+            <th class="sort-active">Agente<span class="sort"></span></th>
+            <th>Equipe</th>
+            <th>Status</th>
+            <th>Conversas hoje</th>
+            <th>TMR<span class="sort"></span></th>
+            <th style="width:80px;"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="selected">
+            <td class="cell-check"><input type="checkbox" checked></td>
+            <td>
+              <div class="cell-user">
+                <span class="avatar-sm">AH</span>
+                <div class="cell-user__meta"><span class="cell-user__name">Ana Helena</span><span class="cell-user__mail">ana.helena@blip.ai</span></div>
+              </div>
+            </td>
+            <td>Atendimento Vendas</td>
+            <td><span class="pill pill--ok"><span class="pill__dot"></span>Online</span></td>
+            <td>42</td>
+            <td>1m 12s</td>
+            <td><div class="row-actions">
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span>
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></span>
+            </div></td>
+          </tr>
+          <tr>
+            <td class="cell-check"><input type="checkbox"></td>
+            <td>
+              <div class="cell-user">
+                <span class="avatar-sm" style="background:rgb(255,228,184);color:rgb(163,76,19);">BO</span>
+                <div class="cell-user__meta"><span class="cell-user__name">Bot Oficial</span><span class="cell-user__mail">bot_vendas_v3</span></div>
+              </div>
+            </td>
+            <td>—</td>
+            <td><span class="pill pill--ok"><span class="pill__dot"></span>Ativo</span></td>
+            <td>1.284</td>
+            <td>3s</td>
+            <td><div class="row-actions">
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span>
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></span>
+            </div></td>
+          </tr>
+          <tr>
+            <td class="cell-check"><input type="checkbox"></td>
+            <td>
+              <div class="cell-user">
+                <span class="avatar-sm" style="background:rgb(248,210,248);color:rgb(117,16,117);">CR</span>
+                <div class="cell-user__meta"><span class="cell-user__name">Carlos Rocha</span><span class="cell-user__mail">carlos.r@blip.ai</span></div>
+              </div>
+            </td>
+            <td>Suporte N2</td>
+            <td><span class="pill pill--warn"><span class="pill__dot"></span>Ausente</span></td>
+            <td>12</td>
+            <td>4m 38s</td>
+            <td><div class="row-actions">
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span>
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></span>
+            </div></td>
+          </tr>
+          <tr>
+            <td class="cell-check"><input type="checkbox"></td>
+            <td>
+              <div class="cell-user">
+                <span class="avatar-sm" style="background:rgb(214,243,225);color:rgb(0,122,66);">DS</span>
+                <div class="cell-user__meta"><span class="cell-user__name">Daniela Souza</span><span class="cell-user__mail">daniela.s@blip.ai</span></div>
+              </div>
+            </td>
+            <td>Atendimento Vendas</td>
+            <td><span class="pill pill--ok"><span class="pill__dot"></span>Online</span></td>
+            <td>38</td>
+            <td>1m 44s</td>
+            <td><div class="row-actions">
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span>
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></span>
+            </div></td>
+          </tr>
+          <tr>
+            <td class="cell-check"><input type="checkbox"></td>
+            <td>
+              <div class="cell-user">
+                <span class="avatar-sm" style="background:rgb(255,214,214);color:rgb(138,0,0);">ER</span>
+                <div class="cell-user__meta"><span class="cell-user__name">Eduardo Reis</span><span class="cell-user__mail">eduardo.r@blip.ai</span></div>
+              </div>
+            </td>
+            <td>Suporte N1</td>
+            <td><span class="pill pill--err"><span class="pill__dot"></span>Offline</span></td>
+            <td>0</td>
+            <td>—</td>
+            <td><div class="row-actions">
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4 12.5-12.5z"/></svg></span>
+              <span class="icon-btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="5" r="2"/><circle cx="12" cy="12" r="2"/><circle cx="12" cy="19" r="2"/></svg></span>
+            </div></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="tbl-foot">
+        <span>Mostrando 1–5 de 47 agentes · 1 selecionado</span>
+        <div class="page-nav">
+          <button disabled>‹</button>
+          <button class="active">1</button>
+          <button>2</button>
+          <button>3</button>
+          <button>…</button>
+          <button>10</button>
+          <button>›</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Row height</span><span class="spec__v">48 px · pad 14 16</span></div>
+    <div class="spec"><span class="spec__k">Header</span><span class="spec__v">44 px · 700 11 uppercase</span></div>
+    <div class="spec"><span class="spec__k">Hover</span><span class="spec__v">surface-1</span></div>
+    <div class="spec"><span class="spec__k">Selected row</span><span class="spec__v">primary @ 6%</span></div>
+    <div class="spec"><span class="spec__k">Pill</span><span class="spec__v">h22 · pad 0 8 · radius 100</span></div>
+    <div class="spec"><span class="spec__k">Border</span><span class="spec__v">1 px border-2</span></div>
+  </div>
+</div>
+</body></html>

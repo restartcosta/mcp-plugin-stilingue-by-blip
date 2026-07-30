@@ -1,0 +1,177 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 10px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 14px; font-family: ui-monospace, monospace; }
+
+.canvas { display:grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 28px; background: var(--color-surface-1); border-radius: 8px; border: 1px solid var(--color-border-2); }
+
+.dp-trigger {
+  display: inline-flex; align-items: center; gap: 10px;
+  height: 40px; padding: 0 14px;
+  background: #fff; border: 1px solid var(--color-border-3); border-radius: 8px;
+  font-family: 'Nunito Sans', sans-serif; font-weight: 700; font-size: 14px;
+  color: var(--color-content-default);
+  min-width: 220px;
+  cursor: pointer;
+}
+.dp-trigger svg { color: rgb(30,107,241); }
+.dp-trigger--active { border-color: rgb(30,107,241); box-shadow: 0 0 0 3px rgba(30,107,241,0.12); }
+
+/* Calendar popover */
+.dp-pop {
+  background: #fff;
+  border-radius: 10px;
+  border: 1px solid var(--color-border-2);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.15);
+  padding: 16px;
+  font-family: 'Nunito Sans', sans-serif;
+  width: 304px;
+}
+.dp-pop__hd {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 12px;
+}
+.dp-pop__mo { font-weight: 700; font-size: 14px; color: var(--color-content-default); }
+.dp-pop__nav { display:flex; gap: 4px; }
+.dp-pop__nav button { width: 28px; height: 28px; border: none; background: transparent; border-radius: 6px; cursor: pointer; color: var(--color-content-default); display:inline-flex; align-items:center; justify-content:center; }
+.dp-pop__nav button:hover { background: var(--color-surface-1); }
+
+.dp-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; }
+.dp-dow { font-size: 11px; font-weight: 700; color: var(--color-content-ghost); text-align: center; padding: 8px 0; text-transform: uppercase; }
+.dp-day {
+  aspect-ratio: 1;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; color: var(--color-content-default);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+}
+.dp-day:hover { background: var(--color-surface-1); }
+.dp-day--other { color: rgb(190,190,190); }
+.dp-day--today { font-weight: 700; color: rgb(30,107,241); }
+.dp-day--today::after { content:''; position: absolute; bottom: 4px; left: 50%; transform: translateX(-50%); width: 4px; height: 4px; border-radius: 50%; background: rgb(30,107,241); }
+.dp-day--selected { background: rgb(30,107,241); color: #fff; font-weight: 700; }
+.dp-day--selected::after { background: #fff; }
+.dp-day--in-range { background: rgba(30,107,241,0.12); border-radius: 0; color: rgb(18,90,213); }
+.dp-day--start { background: rgb(30,107,241); color: #fff; border-radius: 6px 0 0 6px; font-weight: 700; }
+.dp-day--end { background: rgb(30,107,241); color: #fff; border-radius: 0 6px 6px 0; font-weight: 700; }
+.dp-day--disabled { color: rgb(210,210,210); cursor: not-allowed; text-decoration: line-through; }
+
+.dp-pop__ft {
+  display: flex; justify-content: space-between; align-items: center;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--color-border-2);
+}
+.dp-pop__ft button { height: 32px; padding: 0 12px; border-radius: 6px; font-family: inherit; font-weight: 700; font-size: 13px; cursor: pointer; border: 1px solid transparent; }
+.dp-pop__ft button.sec { background: transparent; color: rgb(30,107,241); border-color: rgb(30,107,241); }
+.dp-pop__ft button.pri { background: rgb(30,107,241); color: #fff; }
+
+/* Presets column */
+.dp-range { display: flex; }
+.dp-presets { width: 140px; padding: 16px 8px 16px 16px; border-right: 1px solid var(--color-border-2); display:flex; flex-direction: column; gap: 4px; }
+.dp-preset { padding: 8px 10px; font-size: 13px; font-weight: 700; color: var(--color-content-default); cursor: pointer; border-radius: 6px; }
+.dp-preset:hover { background: var(--color-surface-1); }
+.dp-preset.is-active { background: rgba(30,107,241,0.08); color: rgb(30,107,241); }
+.dp-range-body { padding: 16px; }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+  <div class="header">
+    <div class="header__title">Date Picker</div>
+    <div class="header__sub">Seletor de data única e range. Trigger h40 · calendário 304 px · célula 36×36 · ícone calendar em primary.</div>
+  </div>
+
+  <!-- Single date -->
+  <div>
+    <div class="section-title">Data única · popover aberto com "hoje"</div>
+    <div class="section-sub">Dia atual marcado com dot · dia selecionado em fill primary</div>
+    <div class="canvas" style="align-items: start;">
+      <div>
+        <button class="dp-trigger dp-trigger--active">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>15 mar 2026</span>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left:auto;color:var(--color-content-ghost);"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="dp-pop" style="margin-top: 8px;">
+          <div class="dp-pop__hd">
+            <span class="dp-pop__mo">Março 2026</span>
+            <span class="dp-pop__nav">
+              <button><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+              <button><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+            </span>
+          </div>
+          <div class="dp-grid">
+            <span class="dp-dow">D</span><span class="dp-dow">S</span><span class="dp-dow">T</span><span class="dp-dow">Q</span><span class="dp-dow">Q</span><span class="dp-dow">S</span><span class="dp-dow">S</span>
+            <span class="dp-day dp-day--other">22</span><span class="dp-day dp-day--other">23</span><span class="dp-day dp-day--other">24</span><span class="dp-day dp-day--other">25</span><span class="dp-day dp-day--other">26</span><span class="dp-day dp-day--other">27</span><span class="dp-day dp-day--other">28</span>
+            <span class="dp-day">1</span><span class="dp-day">2</span><span class="dp-day">3</span><span class="dp-day">4</span><span class="dp-day">5</span><span class="dp-day">6</span><span class="dp-day">7</span>
+            <span class="dp-day">8</span><span class="dp-day">9</span><span class="dp-day">10</span><span class="dp-day">11</span><span class="dp-day">12</span><span class="dp-day">13</span><span class="dp-day">14</span>
+            <span class="dp-day dp-day--selected">15</span><span class="dp-day">16</span><span class="dp-day">17</span><span class="dp-day">18</span><span class="dp-day">19</span><span class="dp-day">20</span><span class="dp-day dp-day--today">21</span>
+            <span class="dp-day">22</span><span class="dp-day">23</span><span class="dp-day">24</span><span class="dp-day">25</span><span class="dp-day">26</span><span class="dp-day">27</span><span class="dp-day">28</span>
+            <span class="dp-day">29</span><span class="dp-day">30</span><span class="dp-day">31</span><span class="dp-day dp-day--other">1</span><span class="dp-day dp-day--other">2</span><span class="dp-day dp-day--other">3</span><span class="dp-day dp-day--other">4</span>
+          </div>
+          <div class="dp-pop__ft">
+            <button class="sec">Limpar</button>
+            <button class="pri">Aplicar</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Date range -->
+      <div>
+        <button class="dp-trigger dp-trigger--active" style="min-width: 300px;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>08 – 18 mar 2026</span>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" style="margin-left:auto;color:var(--color-content-ghost);"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="dp-pop dp-range" style="margin-top: 8px; padding: 0; width: 460px;">
+          <div class="dp-presets">
+            <div style="font-size:10px;font-weight:700;color:var(--color-content-ghost);padding:4px 10px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px;">Períodos</div>
+            <span class="dp-preset">Hoje</span>
+            <span class="dp-preset">Últimos 7 dias</span>
+            <span class="dp-preset is-active">Últimos 14 dias</span>
+            <span class="dp-preset">Últimos 30 dias</span>
+            <span class="dp-preset">Este mês</span>
+            <span class="dp-preset">Mês anterior</span>
+            <span class="dp-preset">Personalizado</span>
+          </div>
+          <div class="dp-range-body" style="flex:1;">
+            <div class="dp-pop__hd">
+              <span class="dp-pop__mo">Março 2026</span>
+              <span class="dp-pop__nav">
+                <button><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+                <button><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+              </span>
+            </div>
+            <div class="dp-grid">
+              <span class="dp-dow">D</span><span class="dp-dow">S</span><span class="dp-dow">T</span><span class="dp-dow">Q</span><span class="dp-dow">Q</span><span class="dp-dow">S</span><span class="dp-dow">S</span>
+              <span class="dp-day dp-day--other">22</span><span class="dp-day dp-day--other">23</span><span class="dp-day dp-day--other">24</span><span class="dp-day dp-day--other">25</span><span class="dp-day dp-day--other">26</span><span class="dp-day dp-day--other">27</span><span class="dp-day dp-day--other">28</span>
+              <span class="dp-day">1</span><span class="dp-day">2</span><span class="dp-day">3</span><span class="dp-day">4</span><span class="dp-day">5</span><span class="dp-day">6</span><span class="dp-day">7</span>
+              <span class="dp-day dp-day--start">8</span><span class="dp-day dp-day--in-range">9</span><span class="dp-day dp-day--in-range">10</span><span class="dp-day dp-day--in-range">11</span><span class="dp-day dp-day--in-range">12</span><span class="dp-day dp-day--in-range">13</span><span class="dp-day dp-day--in-range">14</span>
+              <span class="dp-day dp-day--in-range">15</span><span class="dp-day dp-day--in-range">16</span><span class="dp-day dp-day--in-range">17</span><span class="dp-day dp-day--end">18</span><span class="dp-day">19</span><span class="dp-day">20</span><span class="dp-day dp-day--today">21</span>
+              <span class="dp-day">22</span><span class="dp-day dp-day--disabled">23</span><span class="dp-day dp-day--disabled">24</span><span class="dp-day dp-day--disabled">25</span><span class="dp-day dp-day--disabled">26</span><span class="dp-day dp-day--disabled">27</span><span class="dp-day dp-day--disabled">28</span>
+              <span class="dp-day dp-day--disabled">29</span><span class="dp-day dp-day--disabled">30</span><span class="dp-day dp-day--disabled">31</span><span class="dp-day dp-day--other">1</span><span class="dp-day dp-day--other">2</span><span class="dp-day dp-day--other">3</span><span class="dp-day dp-day--other">4</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Popover</span><span class="spec__v">radius 10 · shadow 0 12 28 .15</span></div>
+    <div class="spec"><span class="spec__k">Cell</span><span class="spec__v">36 × 36 · radius 6</span></div>
+    <div class="spec"><span class="spec__k">Selected</span><span class="spec__v">bg primary · white text</span></div>
+    <div class="spec"><span class="spec__k">In range</span><span class="spec__v">primary @ 12% · sharp edges</span></div>
+    <div class="spec"><span class="spec__k">Today</span><span class="spec__v">primary text + dot</span></div>
+    <div class="spec"><span class="spec__k">Disabled</span><span class="spec__v">color-ghost + strikethrough</span></div>
+  </div>
+</div>
+</body></html>

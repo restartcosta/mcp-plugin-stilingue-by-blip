@@ -1,0 +1,127 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 8px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 12px; font-family: ui-monospace, monospace; }
+
+.bc-wrap { padding: 20px 24px; background: var(--color-surface-1); border-radius: 8px; border: 1px solid var(--color-border-2); }
+
+.bc { display: inline-flex; align-items: center; gap: 8px; font-family: 'Nunito Sans', sans-serif; font-size: 13px; line-height: 20px; flex-wrap: wrap; }
+.bc__link { color: rgb(30,107,241); cursor: pointer; text-decoration: none; font-weight: 700; }
+.bc__link:hover { text-decoration: underline; }
+.bc__sep { color: rgb(163,163,163); display:inline-flex; align-items:center; }
+.bc__cur { color: var(--color-content-default); font-weight: 700; }
+.bc__home { color: rgb(30,107,241); display:inline-flex; align-items:center; }
+.bc__elipsis { color: rgb(99,99,99); cursor: pointer; padding: 2px 6px; border-radius: 4px; }
+.bc__elipsis:hover { background: var(--color-surface-2); }
+
+/* Mobile state: só back + current */
+.bc-mobile {
+  display: inline-flex; align-items:center; gap:8px;
+  background: var(--color-surface-1); border-radius: 8px;
+  padding: 8px 12px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 13px;
+}
+.bc-mobile__back { color: rgb(30,107,241); display:inline-flex; align-items:center; gap:4px; font-weight: 700; cursor:pointer; }
+.bc-mobile__cur { color: var(--color-content-default); font-weight: 700; }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+
+  <div class="header">
+    <div class="header__title">Breadcrumb</div>
+    <div class="header__sub">Indica os níveis de navegação até a tela atual. Links em primary · separador em neutral-light · página atual sem link.</div>
+  </div>
+
+  <!-- até 3 níveis -->
+  <div>
+    <div class="section-title">Até 3 níveis · completo</div>
+    <div class="section-sub">Todos os segmentos visíveis, último sem link</div>
+    <div class="bc-wrap">
+      <nav class="bc">
+        <span class="bc__home">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>
+        </span>
+        <span class="bc__sep">/</span>
+        <a class="bc__link">Conversas</a>
+        <span class="bc__sep">/</span>
+        <a class="bc__link">Atendimento Vendas</a>
+        <span class="bc__sep">/</span>
+        <span class="bc__cur">Conversa #8432</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- 4+ níveis colapsado -->
+  <div>
+    <div class="section-title">4+ níveis · ellipsis collapse</div>
+    <div class="section-sub">Níveis intermediários escondidos em "…" clicável (expande dropdown)</div>
+    <div class="bc-wrap">
+      <nav class="bc">
+        <span class="bc__home"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>
+        <span class="bc__sep">/</span>
+        <a class="bc__link">Chatbots</a>
+        <span class="bc__sep">/</span>
+        <span class="bc__elipsis">…</span>
+        <span class="bc__sep">/</span>
+        <a class="bc__link">Fluxos</a>
+        <span class="bc__sep">/</span>
+        <span class="bc__cur">Boas-vindas</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Com ícones por nível -->
+  <div>
+    <div class="section-title">Com ícones por seção</div>
+    <div class="section-sub">Ícone outline 16px antes do label · útil quando nomes são genéricos</div>
+    <div class="bc-wrap">
+      <nav class="bc">
+        <a class="bc__link" style="display:inline-flex;align-items:center;gap:4px;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Conversas
+        </a>
+        <span class="bc__sep">/</span>
+        <a class="bc__link" style="display:inline-flex;align-items:center;gap:4px;">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Equipes
+        </a>
+        <span class="bc__sep">/</span>
+        <span class="bc__cur">Atendimento Vendas</span>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Mobile -->
+  <div>
+    <div class="section-title">Mobile · back + current</div>
+    <div class="section-sub">Abaixo de 375px · esconde hierarquia, mostra só volta + página atual</div>
+    <div class="bc-wrap">
+      <span class="bc-mobile">
+        <span class="bc-mobile__back">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          Voltar
+        </span>
+        <span class="bc__sep">/</span>
+        <span class="bc-mobile__cur">Conversa #8432</span>
+      </span>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Texto</span><span class="spec__v">Nunito 700 · 13/20</span></div>
+    <div class="spec"><span class="spec__k">Link</span><span class="spec__v">primary-default</span></div>
+    <div class="spec"><span class="spec__k">Current</span><span class="spec__v">content-default · sem link</span></div>
+    <div class="spec"><span class="spec__k">Separador</span><span class="spec__v">/ · neutral-light</span></div>
+    <div class="spec"><span class="spec__k">Gap</span><span class="spec__v">8 px entre segmentos</span></div>
+    <div class="spec"><span class="spec__k">Collapse</span><span class="spec__v">4+ níveis → ellipsis</span></div>
+  </div>
+</div>
+</body></html>

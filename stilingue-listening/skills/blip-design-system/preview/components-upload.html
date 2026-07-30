@@ -1,0 +1,191 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 10px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 14px; font-family: ui-monospace, monospace; }
+
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+/* Drop zone */
+.dz {
+  border: 2px dashed var(--color-border-3);
+  border-radius: 10px;
+  padding: 32px 24px;
+  text-align: center;
+  background: var(--color-surface-1);
+  font-family: 'Nunito Sans', sans-serif;
+  cursor: pointer;
+  transition: all .15s;
+}
+.dz:hover { border-color: rgb(30,107,241); background: rgb(240,246,255); }
+.dz--active { border-color: rgb(30,107,241); background: rgb(230,240,255); border-style: solid; }
+.dz__ico {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: rgba(30,107,241,0.12); color: rgb(30,107,241);
+  display:inline-flex; align-items:center; justify-content:center;
+  margin-bottom: 12px;
+}
+.dz__title { font-weight: 700; font-size: 16px; color: var(--color-content-default); margin-bottom: 4px; }
+.dz__title mark { background: transparent; color: rgb(30,107,241); text-decoration: underline; }
+.dz__hint { font-size: 12px; color: var(--color-content-ghost); line-height: 18px; }
+
+/* File list */
+.file-list { display: flex; flex-direction: column; gap: 8px; }
+.file-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid var(--color-border-2);
+  border-radius: 8px;
+  font-family: 'Nunito Sans', sans-serif;
+}
+.file-row__ico { width: 40px; height: 40px; border-radius: 8px; background: var(--color-surface-1); display:flex; align-items:center; justify-content:center; color: rgb(30,107,241); flex-shrink: 0; }
+.file-row__ico--ok { background: rgba(0,122,66,0.12); color: rgb(0,122,66); }
+.file-row__ico--err { background: rgba(230,15,15,0.12); color: rgb(230,15,15); }
+.file-row__meta { flex: 1; min-width: 0; }
+.file-row__name { font-size: 14px; font-weight: 700; color: var(--color-content-default); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.file-row__sub { font-size: 11px; color: var(--color-content-ghost); margin-top: 2px; }
+.file-row__err { color: rgb(230,15,15); }
+.file-row__action { color: var(--color-content-ghost); cursor: pointer; padding: 6px; border-radius: 4px; }
+.file-row__action:hover { background: var(--color-surface-1); color: var(--color-content-default); }
+
+.progress { height: 4px; background: var(--color-surface-1); border-radius: 2px; overflow: hidden; margin-top: 6px; }
+.progress__bar { height: 100%; background: rgb(30,107,241); border-radius: 2px; transition: width .3s; }
+.progress--ok .progress__bar { background: rgb(0,122,66); }
+
+/* Avatar uploader */
+.av-up {
+  display: flex; align-items: center; gap: 20px;
+  padding: 20px; background: var(--color-surface-1); border-radius: 8px;
+  border: 1px solid var(--color-border-2);
+  font-family: 'Nunito Sans', sans-serif;
+}
+.av-up__av {
+  width: 88px; height: 88px; border-radius: 50%;
+  background: rgb(178,223,253); color: rgb(18,90,213);
+  display:flex; align-items:center; justify-content:center;
+  font-weight: 700; font-size: 30px;
+  position: relative;
+}
+.av-up__cam {
+  position: absolute; bottom: 0; right: 0;
+  width: 28px; height: 28px; border-radius: 50%;
+  background: rgb(30,107,241); color: #fff;
+  display: inline-flex; align-items: center; justify-content:center;
+  border: 2px solid #fff;
+  cursor: pointer;
+}
+.av-up__info { flex: 1; }
+.av-up__n { font-size: 14px; font-weight: 700; color: var(--color-content-default); margin-bottom: 2px; }
+.av-up__h { font-size: 12px; color: var(--color-content-ghost); line-height: 18px; }
+.av-up__btns { display:flex; gap: 8px; margin-top: 10px; }
+.av-up__btn { height: 32px; padding: 0 12px; font-family: inherit; font-weight: 700; font-size: 13px; border-radius: 6px; cursor: pointer; border: 1px solid transparent; }
+.av-up__btn.pri { background: rgb(30,107,241); color: #fff; }
+.av-up__btn.sec { background: transparent; color: rgb(230,15,15); border-color: rgb(230,15,15); }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+  <div class="header">
+    <div class="header__title">Upload</div>
+    <div class="header__sub">Drop zone default · drag-over · lista com progresso · avatar uploader.</div>
+  </div>
+
+  <div>
+    <div class="section-title">Drop zone · default & drag-active</div>
+    <div class="section-sub">Dashed border 2 px · troca para solid+fill primary quando arquivo é arrastado sobre</div>
+    <div class="grid-2">
+      <label class="dz">
+        <div class="dz__ico">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <div class="dz__title">Arraste arquivos aqui ou <mark>selecione do computador</mark></div>
+        <div class="dz__hint">PDF, PNG, JPG até 10 MB · máx. 5 arquivos por vez</div>
+      </label>
+      <label class="dz dz--active">
+        <div class="dz__ico">
+          <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        </div>
+        <div class="dz__title" style="color: rgb(30,107,241);">Solte os arquivos para enviar</div>
+        <div class="dz__hint">3 arquivos detectados</div>
+      </label>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-title">Lista de arquivos · progresso, sucesso, erro</div>
+    <div class="section-sub">Ícone por tipo · barra 4px · substitui ícone por check ou alert ao concluir</div>
+    <div class="file-list">
+      <div class="file-row">
+        <span class="file-row__ico file-row__ico--ok">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+        </span>
+        <div class="file-row__meta">
+          <div class="file-row__name">relatorio-vendas-q1.pdf</div>
+          <div class="file-row__sub">1.8 MB · enviado há 2 s</div>
+          <div class="progress progress--ok"><div class="progress__bar" style="width: 100%;"></div></div>
+        </div>
+        <span class="file-row__action">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+        </span>
+      </div>
+      <div class="file-row">
+        <span class="file-row__ico">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        </span>
+        <div class="file-row__meta">
+          <div class="file-row__name">contrato-parceria-2026.docx</div>
+          <div class="file-row__sub">3.4 MB · 62% · 4 s restantes</div>
+          <div class="progress"><div class="progress__bar" style="width: 62%;"></div></div>
+        </div>
+        <span class="file-row__action">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </span>
+      </div>
+      <div class="file-row">
+        <span class="file-row__ico file-row__ico--err">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </span>
+        <div class="file-row__meta">
+          <div class="file-row__name">video-demo.mp4</div>
+          <div class="file-row__sub file-row__err">Erro: arquivo excede 10 MB (tamanho: 24.8 MB)</div>
+        </div>
+        <span class="file-row__action" style="color: rgb(30,107,241);font-size:12px;font-weight:700;padding:6px 10px;">Tentar novamente</span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-title">Avatar uploader</div>
+    <div class="section-sub">Preview circular 88 px · camera badge no canto · remove/replace</div>
+    <div class="av-up">
+      <div class="av-up__av">
+        AH
+        <span class="av-up__cam"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></span>
+      </div>
+      <div class="av-up__info">
+        <div class="av-up__n">Foto de perfil</div>
+        <div class="av-up__h">PNG ou JPG quadrado · mín. 200×200 px · máx. 2 MB</div>
+        <div class="av-up__btns">
+          <button class="av-up__btn pri">Enviar nova</button>
+          <button class="av-up__btn sec">Remover</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Drop zone</span><span class="spec__v">border 2 dashed · radius 10</span></div>
+    <div class="spec"><span class="spec__k">Active</span><span class="spec__v">border solid primary · bg tint</span></div>
+    <div class="spec"><span class="spec__k">File row</span><span class="spec__v">h64 · pad 12 · gap 12</span></div>
+    <div class="spec"><span class="spec__k">Progress</span><span class="spec__v">4 px · primary → success</span></div>
+    <div class="spec"><span class="spec__k">Erro</span><span class="spec__v">alert fill · texto #E60F0F</span></div>
+    <div class="spec"><span class="spec__k">Avatar</span><span class="spec__v">88 × 88 · badge 28 px</span></div>
+  </div>
+</div>
+</body></html>

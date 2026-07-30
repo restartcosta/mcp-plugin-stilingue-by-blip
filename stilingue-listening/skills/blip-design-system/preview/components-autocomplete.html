@@ -1,0 +1,177 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 10px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 14px; font-family: ui-monospace, monospace; }
+
+.canvas { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 28px; background: var(--color-surface-1); border-radius: 8px; border: 1px solid var(--color-border-2); }
+
+.fld { display:flex; flex-direction:column; gap: 6px; font-family: 'Nunito Sans', sans-serif; }
+.fld__label { font-size: 12px; font-weight: 700; color: var(--color-content-default); line-height: 16px; }
+.fld__hint { font-size: 11px; color: var(--color-content-ghost); line-height: 16px; }
+
+.ac-wrap { position: relative; }
+.ac-input {
+  width: 100%; height: 40px; padding: 0 40px 0 14px;
+  background: #fff; border: 1px solid var(--color-border-3); border-radius: 8px;
+  font-family: inherit; font-size: 14px; color: var(--color-content-default);
+  outline: none;
+}
+.ac-input:focus { border-color: rgb(30,107,241); box-shadow: 0 0 0 3px rgba(30,107,241,0.12); }
+.ac-input__chev { position: absolute; right: 12px; top: 50%; transform: translateY(-50%); color: var(--color-content-ghost); pointer-events: none; }
+
+/* Tags (multi) */
+.ac-tags {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  min-height: 40px; padding: 6px 10px;
+  background: #fff; border: 1px solid var(--color-border-3); border-radius: 8px;
+  align-items: center;
+}
+.ac-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 26px; padding: 0 8px;
+  background: rgba(30,107,241,0.1); color: rgb(18,90,213);
+  border-radius: 13px;
+  font-size: 12px; font-weight: 700;
+}
+.ac-tag__x { cursor: pointer; opacity: .6; }
+.ac-tags input { border: none; outline: none; flex: 1; min-width: 80px; font-family: inherit; font-size: 14px; color: var(--color-content-default); }
+
+/* Options panel */
+.ac-panel {
+  position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+  background: #fff; border-radius: 8px; border: 1px solid var(--color-border-2);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  max-height: 260px; overflow-y: auto; z-index: 10;
+}
+.ac-opt {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px;
+  font-family: 'Nunito Sans', sans-serif; font-size: 14px;
+  color: var(--color-content-default);
+  cursor: pointer;
+}
+.ac-opt:hover, .ac-opt.is-highlight { background: var(--color-surface-1); }
+.ac-opt.is-selected { background: rgba(30,107,241,0.08); color: rgb(30,107,241); font-weight: 700; }
+.ac-opt mark { background: rgba(30,107,241,0.15); color: rgb(30,107,241); padding: 0 2px; border-radius: 2px; font-weight: 700; }
+.ac-opt__av { width: 28px; height: 28px; border-radius: 50%; background: rgb(178,223,253); color: rgb(18,90,213); display:flex; align-items:center; justify-content:center; font-size: 11px; font-weight: 700; flex-shrink: 0; }
+.ac-opt__meta { flex: 1; display: flex; flex-direction: column; }
+.ac-opt__s { font-size: 11px; color: var(--color-content-ghost); font-weight: 400; }
+.ac-opt__check { color: rgb(30,107,241); }
+
+.ac-empty { padding: 24px; text-align: center; font-family: 'Nunito Sans'; color: var(--color-content-ghost); font-size: 13px; }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+  <div class="header">
+    <div class="header__title">Autocomplete</div>
+    <div class="header__sub">Input com sugestões filtradas. Single-select com avatar · multi-select com tags · estado vazio quando sem resultados.</div>
+  </div>
+
+  <div>
+    <div class="section-title">Variantes</div>
+    <div class="section-sub">Item ativo por teclado ganha bg surface-1 · selecionado em primary @ 8%</div>
+    <div class="canvas" style="min-height: 420px;">
+      <!-- Single-select com avatar -->
+      <div class="fld">
+        <span class="fld__label">Atribuir agente</span>
+        <span class="fld__hint">Sugestões filtradas conforme você digita</span>
+        <div class="ac-wrap" style="height: 300px;">
+          <input class="ac-input" value="mar" style="border-color:rgb(30,107,241); box-shadow: 0 0 0 3px rgba(30,107,241,0.12);">
+          <span class="ac-input__chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+          <div class="ac-panel">
+            <div class="ac-opt is-highlight">
+              <span class="ac-opt__av">MS</span>
+              <div class="ac-opt__meta">
+                <span><mark>Mar</mark>ia Silva</span>
+                <span class="ac-opt__s">Atendimento Vendas · online</span>
+              </div>
+            </div>
+            <div class="ac-opt">
+              <span class="ac-opt__av" style="background:rgb(253,233,155);color:rgb(117,85,16);">MC</span>
+              <div class="ac-opt__meta">
+                <span><mark>Mar</mark>iana Costa</span>
+                <span class="ac-opt__s">Suporte N1 · online</span>
+              </div>
+            </div>
+            <div class="ac-opt is-selected">
+              <span class="ac-opt__av" style="background:rgb(214,243,225);color:rgb(0,122,66);">MT</span>
+              <div class="ac-opt__meta">
+                <span><mark>Mar</mark>cos Tavares</span>
+                <span class="ac-opt__s">Suporte N2 · online</span>
+              </div>
+              <span class="ac-opt__check">
+                <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Multi-select com tags -->
+      <div class="fld">
+        <span class="fld__label">Tags da conversa</span>
+        <span class="fld__hint">Vários valores · backspace remove última tag</span>
+        <div class="ac-wrap" style="height: 300px;">
+          <div class="ac-tags" style="border-color:rgb(30,107,241); box-shadow: 0 0 0 3px rgba(30,107,241,0.12);">
+            <span class="ac-tag">urgente <span class="ac-tag__x"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></span>
+            <span class="ac-tag">vip <span class="ac-tag__x"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></span>
+            <span class="ac-tag">reclamação <span class="ac-tag__x"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span></span>
+            <input value="fin" placeholder="">
+          </div>
+          <div class="ac-panel">
+            <div class="ac-opt is-highlight">
+              <span class="ac-opt__meta"><span><mark>fin</mark>anceiro</span></span>
+            </div>
+            <div class="ac-opt">
+              <span class="ac-opt__meta"><span><mark>fin</mark>alizar-24h</span></span>
+            </div>
+            <div style="padding: 8px 14px; font-size: 11px; color: var(--color-content-ghost); border-top: 1px solid var(--color-border-2); font-family: 'Nunito Sans';">Pressione <strong>Enter</strong> para criar "fin"</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Empty state -->
+      <div class="fld">
+        <span class="fld__label">Buscar template</span>
+        <span class="fld__hint">Estado vazio quando nenhum resultado</span>
+        <div class="ac-wrap" style="height: 200px;">
+          <input class="ac-input" value="xyz123" style="border-color:rgb(30,107,241); box-shadow: 0 0 0 3px rgba(30,107,241,0.12);">
+          <span class="ac-input__chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+          <div class="ac-panel">
+            <div class="ac-empty">
+              <div style="color: rgb(99,99,99); margin-bottom: 4px;">Nenhum resultado para <strong style="color:var(--color-content-default);">"xyz123"</strong></div>
+              <div style="font-size: 12px;">Verifique a grafia ou crie um novo template.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Default closed state -->
+      <div class="fld">
+        <span class="fld__label">Cliente</span>
+        <span class="fld__hint">Estado default · ainda não digitou</span>
+        <div class="ac-wrap">
+          <input class="ac-input" placeholder="Digite para buscar cliente…">
+          <span class="ac-input__chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Input</span><span class="spec__v">h40 · radius 8 · pad 0 14</span></div>
+    <div class="spec"><span class="spec__k">Panel</span><span class="spec__v">max-h 260 · scroll · shadow-3</span></div>
+    <div class="spec"><span class="spec__k">Option</span><span class="spec__v">pad 10 14 · highlight surface-1</span></div>
+    <div class="spec"><span class="spec__k">Tag</span><span class="spec__v">h26 · radius 13 · primary @ 10%</span></div>
+    <div class="spec"><span class="spec__k">Selected</span><span class="spec__v">bg primary @ 8% · check 16 px</span></div>
+    <div class="spec"><span class="spec__k">Navegação</span><span class="spec__v">↑↓ · Enter · Esc · Backspace</span></div>
+  </div>
+</div>
+</body></html>

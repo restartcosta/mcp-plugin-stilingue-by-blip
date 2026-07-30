@@ -1,0 +1,212 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 10px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 14px; font-family: ui-monospace, monospace; }
+
+.demo { padding: 28px; background: var(--color-surface-1); border-radius: 8px; border: 1px solid var(--color-border-2); }
+
+/* Horizontal */
+.stp {
+  display: flex; align-items: flex-start;
+  font-family: 'Nunito Sans', sans-serif;
+}
+.stp__step { flex: 1; display: flex; flex-direction: column; align-items: center; position: relative; }
+.stp__step:not(:last-child)::after {
+  content:''; position: absolute;
+  top: 16px; left: 50%; right: -50%;
+  height: 2px; background: var(--color-border-2);
+}
+.stp__step.done::after { background: rgb(30,107,241); }
+.stp__circle {
+  width: 32px; height: 32px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+  background: var(--color-surface-1); color: var(--color-content-ghost);
+  border: 2px solid var(--color-border-3);
+  position: relative;
+  z-index: 1;
+}
+.stp__step.done .stp__circle { background: rgb(30,107,241); color: #fff; border-color: rgb(30,107,241); }
+.stp__step.active .stp__circle { background: #fff; color: rgb(30,107,241); border-color: rgb(30,107,241); box-shadow: 0 0 0 4px rgba(30,107,241,0.15); }
+.stp__step.err .stp__circle { background: #fff; color: rgb(230,15,15); border-color: rgb(230,15,15); }
+.stp__t { font-size: 12px; font-weight: 700; color: var(--color-content-ghost); margin-top: 8px; text-align: center; max-width: 120px; }
+.stp__step.done .stp__t, .stp__step.active .stp__t { color: var(--color-content-default); }
+.stp__step.active .stp__t { color: rgb(30,107,241); }
+.stp__step.err .stp__t { color: rgb(230,15,15); }
+.stp__s { font-size: 10px; color: var(--color-content-ghost); margin-top: 2px; }
+
+/* Vertical */
+.stp-v { display: flex; flex-direction: column; font-family: 'Nunito Sans', sans-serif; }
+.stp-v__step { display: flex; gap: 16px; position: relative; padding-bottom: 24px; }
+.stp-v__step:not(:last-child)::after {
+  content:''; position: absolute;
+  left: 15px; top: 32px; bottom: 0;
+  width: 2px; background: var(--color-border-2);
+}
+.stp-v__step.done::after { background: rgb(30,107,241); }
+.stp-v__circle { width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; background: var(--color-surface-1); color: var(--color-content-ghost); border: 2px solid var(--color-border-3); flex-shrink: 0; z-index: 1; background-clip: padding-box; }
+.stp-v__step.done .stp-v__circle { background: rgb(30,107,241); color: #fff; border-color: rgb(30,107,241); }
+.stp-v__step.active .stp-v__circle { background: #fff; color: rgb(30,107,241); border-color: rgb(30,107,241); box-shadow: 0 0 0 4px rgba(30,107,241,0.15); }
+.stp-v__body { padding-top: 4px; flex: 1; }
+.stp-v__t { font-size: 14px; font-weight: 700; color: var(--color-content-default); }
+.stp-v__d { font-size: 12px; color: var(--color-content-ghost); margin-top: 2px; line-height: 18px; }
+.stp-v__step.done .stp-v__t { color: var(--color-content-default); }
+.stp-v__step.active .stp-v__t { color: rgb(30,107,241); }
+
+/* Numeric counter style */
+.stp-count {
+  display: inline-flex; align-items: center;
+  height: 36px;
+  background: #fff; border: 1px solid var(--color-border-3); border-radius: 8px;
+}
+.stp-count button { width: 36px; height: 36px; background: transparent; border: none; cursor: pointer; color: var(--color-content-default); font-size: 16px; }
+.stp-count button:hover { background: var(--color-surface-1); }
+.stp-count button:disabled { color: rgb(190,190,190); cursor: not-allowed; }
+.stp-count__val { width: 56px; text-align: center; font-family: 'Nunito Sans'; font-weight: 700; font-size: 14px; color: var(--color-content-default); border-left: 1px solid var(--color-border-3); border-right: 1px solid var(--color-border-3); line-height: 34px; }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+  <div class="header">
+    <div class="header__title">Stepper · Wizard</div>
+    <div class="header__sub">Progresso em etapas: horizontal (fluxo linear) · vertical (com descrições) · numeric counter.</div>
+  </div>
+
+  <div>
+    <div class="section-title">Horizontal · linear</div>
+    <div class="section-sub">Círculo 32 px · line 2 px · done recebe check, active recebe ring primary</div>
+    <div class="demo">
+      <div class="stp">
+        <div class="stp__step done">
+          <div class="stp__circle">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="stp__t">Dados do chatbot</div>
+          <div class="stp__s">Concluído</div>
+        </div>
+        <div class="stp__step done">
+          <div class="stp__circle">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <div class="stp__t">Canais ativos</div>
+          <div class="stp__s">Concluído</div>
+        </div>
+        <div class="stp__step active">
+          <div class="stp__circle">3</div>
+          <div class="stp__t">Fluxo de boas-vindas</div>
+          <div class="stp__s">Em andamento</div>
+        </div>
+        <div class="stp__step">
+          <div class="stp__circle">4</div>
+          <div class="stp__t">Integrações</div>
+        </div>
+        <div class="stp__step">
+          <div class="stp__circle">5</div>
+          <div class="stp__t">Revisão & publicação</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-title">Horizontal · com erro</div>
+    <div class="section-sub">Step com erro mostra borda alert · ainda permite navegação</div>
+    <div class="demo">
+      <div class="stp">
+        <div class="stp__step done">
+          <div class="stp__circle"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="stp__t">Upload CSV</div>
+        </div>
+        <div class="stp__step err">
+          <div class="stp__circle"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></div>
+          <div class="stp__t">Mapeamento de colunas</div>
+          <div class="stp__s">3 erros encontrados</div>
+        </div>
+        <div class="stp__step">
+          <div class="stp__circle">3</div>
+          <div class="stp__t">Validação</div>
+        </div>
+        <div class="stp__step">
+          <div class="stp__circle">4</div>
+          <div class="stp__t">Importar</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-title">Vertical · com descrições</div>
+    <div class="section-sub">Ideal para onboarding mais denso · cada passo com sub-texto explicativo</div>
+    <div class="demo">
+      <div class="stp-v">
+        <div class="stp-v__step done">
+          <div class="stp-v__circle"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="stp-v__body">
+            <div class="stp-v__t">Conectar número WhatsApp</div>
+            <div class="stp-v__d">Verificação concluída · +55 11 4000-1234</div>
+          </div>
+        </div>
+        <div class="stp-v__step done">
+          <div class="stp-v__circle"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="3"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <div class="stp-v__body">
+            <div class="stp-v__t">Aprovar perfil no Meta Business</div>
+            <div class="stp-v__d">Perfil verificado · logo e descrição publicados</div>
+          </div>
+        </div>
+        <div class="stp-v__step active">
+          <div class="stp-v__circle">3</div>
+          <div class="stp-v__body">
+            <div class="stp-v__t">Cadastrar templates iniciais</div>
+            <div class="stp-v__d">Crie pelo menos 1 template para envio ativo. Aprovação do Meta leva até 24h.</div>
+          </div>
+        </div>
+        <div class="stp-v__step">
+          <div class="stp-v__circle">4</div>
+          <div class="stp-v__body">
+            <div class="stp-v__t">Publicar chatbot</div>
+            <div class="stp-v__d">Após revisar o fluxo, publique para começar a atender.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-title">Numeric stepper · incremento/decremento</div>
+    <div class="section-sub">Para campos numéricos pequenos (quantidade, delay, retries)</div>
+    <div class="demo" style="display:flex; gap: 24px; align-items: center;">
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <span style="font-size:12px;font-weight:700;color:var(--color-content-default);">Tentativas</span>
+        <span class="stp-count">
+          <button>−</button>
+          <span class="stp-count__val">3</span>
+          <button>+</button>
+        </span>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:6px;">
+        <span style="font-size:12px;font-weight:700;color:var(--color-content-default);">Agentes simultâneos</span>
+        <span class="stp-count">
+          <button disabled>−</button>
+          <span class="stp-count__val">0</span>
+          <button>+</button>
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Circle</span><span class="spec__v">32 px · border 2 · radius 50%</span></div>
+    <div class="spec"><span class="spec__k">Active ring</span><span class="spec__v">4 px primary @ 15%</span></div>
+    <div class="spec"><span class="spec__k">Line</span><span class="spec__v">2 px · primary (done)</span></div>
+    <div class="spec"><span class="spec__k">Label</span><span class="spec__v">700 12/16 · sub 10/14</span></div>
+    <div class="spec"><span class="spec__k">Erro</span><span class="spec__v">#E60F0F · X icon</span></div>
+    <div class="spec"><span class="spec__k">Counter</span><span class="spec__v">h36 · 56 px val</span></div>
+  </div>
+</div>
+</body></html>

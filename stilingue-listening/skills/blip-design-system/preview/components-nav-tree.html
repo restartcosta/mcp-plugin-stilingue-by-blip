@@ -1,0 +1,179 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 10px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 14px; font-family: ui-monospace, monospace; }
+
+.demo { padding: 20px; background: var(--color-surface-1); border-radius: 8px; border: 1px solid var(--color-border-2); display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.tree {
+  background: #fff; border-radius: 8px; border: 1px solid var(--color-border-2);
+  padding: 12px;
+  font-family: 'Nunito Sans', sans-serif;
+}
+.tree__node { position: relative; }
+.tree__row {
+  display: flex; align-items: center; gap: 8px;
+  padding: 6px 8px; border-radius: 6px;
+  font-size: 13px; color: var(--color-content-default);
+  cursor: pointer;
+  line-height: 20px;
+}
+.tree__row:hover { background: var(--color-surface-1); }
+.tree__row.is-active { background: rgba(30,107,241,0.10); color: rgb(30,107,241); font-weight: 700; }
+.tree__chev {
+  width: 16px; height: 16px; flex-shrink: 0;
+  display:inline-flex; align-items:center; justify-content:center;
+  color: var(--color-content-ghost);
+  transition: transform .15s;
+}
+.tree__chev.open { transform: rotate(90deg); color: rgb(30,107,241); }
+.tree__chev--empty { visibility: hidden; }
+.tree__icon { width: 16px; height: 16px; color: var(--color-content-ghost); flex-shrink: 0; }
+.tree__row.is-active .tree__icon { color: rgb(30,107,241); }
+.tree__label { flex: 1; }
+.tree__count { font-size: 11px; color: var(--color-content-ghost); font-weight: 400; }
+.tree__children { position: relative; margin-left: 12px; padding-left: 12px; border-left: 1px solid var(--color-border-2); }
+
+/* Checkbox tree (file selector) */
+.tree-cb .tree__row { gap: 10px; }
+.tree__cb {
+  width: 16px; height: 16px; border: 1.5px solid var(--color-border-3); border-radius: 3px;
+  display:inline-flex; align-items:center;justify-content:center;
+  background: #fff;
+  flex-shrink: 0;
+}
+.tree__cb.on { background: rgb(30,107,241); border-color: rgb(30,107,241); color: #fff; }
+.tree__cb.partial { background: #fff; border-color: rgb(30,107,241); }
+.tree__cb.partial::after { content:''; width: 8px; height: 2px; background: rgb(30,107,241); border-radius: 1px; }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+  <div class="header">
+    <div class="header__title">Nav Tree · Árvore de navegação</div>
+    <div class="header__sub">Hierarquia com chevron + ícone + label + count. Indent via borda lateral · 3 níveis típicos.</div>
+  </div>
+
+  <div>
+    <div class="section-title">Navegação hierárquica · folders e fluxos</div>
+    <div class="section-sub">Chevron rotaciona 90° quando aberto · ativo em primary @ 10%</div>
+    <div class="demo">
+      <div class="tree">
+        <!-- Root 1 open -->
+        <div class="tree__node">
+          <div class="tree__row">
+            <span class="tree__chev open"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+            <span class="tree__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></span>
+            <span class="tree__label">Atendimento</span>
+            <span class="tree__count">12</span>
+          </div>
+          <div class="tree__children">
+            <div class="tree__node">
+              <div class="tree__row is-active">
+                <span class="tree__chev tree__chev--empty"></span>
+                <span class="tree__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></span>
+                <span class="tree__label">Fluxo de boas-vindas</span>
+              </div>
+            </div>
+            <div class="tree__node">
+              <div class="tree__row">
+                <span class="tree__chev open"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+                <span class="tree__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></span>
+                <span class="tree__label">Vendas</span>
+                <span class="tree__count">5</span>
+              </div>
+              <div class="tree__children">
+                <div class="tree__row">
+                  <span class="tree__chev tree__chev--empty"></span>
+                  <span class="tree__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></span>
+                  <span class="tree__label">Qualificação de lead</span>
+                </div>
+                <div class="tree__row">
+                  <span class="tree__chev tree__chev--empty"></span>
+                  <span class="tree__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></span>
+                  <span class="tree__label">Pós-venda</span>
+                </div>
+                <div class="tree__row">
+                  <span class="tree__chev tree__chev--empty"></span>
+                  <span class="tree__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg></span>
+                  <span class="tree__label">Recuperação de carrinho</span>
+                </div>
+              </div>
+            </div>
+            <div class="tree__node">
+              <div class="tree__row">
+                <span class="tree__chev"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+                <span class="tree__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></span>
+                <span class="tree__label">Suporte</span>
+                <span class="tree__count">7</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="tree__node">
+          <div class="tree__row">
+            <span class="tree__chev"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+            <span class="tree__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></span>
+            <span class="tree__label">Marketing</span>
+            <span class="tree__count">4</span>
+          </div>
+        </div>
+        <div class="tree__node">
+          <div class="tree__row">
+            <span class="tree__chev"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+            <span class="tree__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 19a2 2 0 01-2 2H4a2 2 0 01-2-2V5a2 2 0 012-2h5l2 3h9a2 2 0 012 2z"/></svg></span>
+            <span class="tree__label">Arquivados</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Checkbox tree -->
+      <div class="tree tree-cb">
+        <div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--color-content-ghost);padding:4px 8px 12px;letter-spacing:.06em;">Permissões do agente</div>
+        <div class="tree__node">
+          <div class="tree__row">
+            <span class="tree__chev open"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+            <span class="tree__cb partial"></span>
+            <span class="tree__label">Conversas</span>
+          </div>
+          <div class="tree__children">
+            <div class="tree__row"><span class="tree__chev tree__chev--empty"></span><span class="tree__cb on"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg></span><span class="tree__label">Visualizar</span></div>
+            <div class="tree__row"><span class="tree__chev tree__chev--empty"></span><span class="tree__cb on"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg></span><span class="tree__label">Responder</span></div>
+            <div class="tree__row"><span class="tree__chev tree__chev--empty"></span><span class="tree__cb"></span><span class="tree__label">Transferir</span></div>
+            <div class="tree__row"><span class="tree__chev tree__chev--empty"></span><span class="tree__cb"></span><span class="tree__label">Encerrar</span></div>
+          </div>
+        </div>
+        <div class="tree__node">
+          <div class="tree__row">
+            <span class="tree__chev"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+            <span class="tree__cb"></span>
+            <span class="tree__label">Chatbots</span>
+          </div>
+        </div>
+        <div class="tree__node">
+          <div class="tree__row">
+            <span class="tree__chev"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></span>
+            <span class="tree__cb on"><svg viewBox="0 0 24 24" width="10" height="10" fill="none" stroke="currentColor" stroke-width="3.5"><polyline points="20 6 9 17 4 12"/></svg></span>
+            <span class="tree__label">Relatórios</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Row</span><span class="spec__v">h32 · pad 6 8 · radius 6</span></div>
+    <div class="spec"><span class="spec__k">Indent</span><span class="spec__v">12 px · border-left ghost</span></div>
+    <div class="spec"><span class="spec__k">Chevron</span><span class="spec__v">16 px · rotate 90° open</span></div>
+    <div class="spec"><span class="spec__k">Icon</span><span class="spec__v">16 px · ghost/primary</span></div>
+    <div class="spec"><span class="spec__k">Checkbox</span><span class="spec__v">16 · on/off/partial</span></div>
+    <div class="spec"><span class="spec__k">Active</span><span class="spec__v">primary @ 10% · 700</span></div>
+  </div>
+</div>
+</body></html>

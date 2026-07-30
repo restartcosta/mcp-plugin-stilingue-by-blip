@@ -1,0 +1,262 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+/* Figma specs
+   Container: border 1px rgb(201,201,201), radius 8, height 56 (with label) / 40 (no label)
+   Label: Nunito Sans 700, 12/20, rgb(99,99,99)
+   Placeholder: Nunito Sans 400, 14/22, rgb(140,140,140)
+   Text: 14/22, rgb(69,69,69)
+   Cursor: rgb(30,107,241)
+   Helper message: 12/20, rgb(69,69,69)
+   Error border: rgb(230,15,15); Success border: rgb(0,122,66)
+*/
+.inp {
+  width: 100%;
+  display:flex; flex-direction:column; gap:4px;
+  font-family: 'Nunito Sans', sans-serif;
+}
+.inp__label {
+  font-weight: 700; font-size: 12px; line-height: 20px;
+  color: rgb(99,99,99);
+}
+.inp__box {
+  position: relative;
+  display:flex; align-items:center; gap:8px;
+  height: 40px;
+  border-radius: 8px;
+  border: 1px solid rgb(201,201,201);
+  background: #fff;
+  padding: 0 12px;
+  transition: border-color 120ms;
+}
+.inp__box:hover { border-color: rgb(140,140,140); }
+.inp__box.is-focus { border-color: rgb(30,107,241); }
+.inp__box.is-error { border-color: rgb(230,15,15); }
+.inp__box.is-success { border-color: rgb(0,122,66); }
+.inp__box.is-disabled { background: rgb(246,246,246); border-color: rgb(224,224,224); cursor: not-allowed; }
+.inp__box.is-filled   { border-color: rgb(140,140,140); }
+
+.inp__icon {
+  width: 20px; height: 20px; flex-shrink: 0;
+  background: rgb(99,99,99);
+  mask: var(--u) center/contain no-repeat;
+  -webkit-mask: var(--u) center/contain no-repeat;
+}
+.inp__box.is-disabled .inp__icon { background: rgb(163,163,163); }
+.inp__box.is-focus .inp__icon { background: rgb(30,107,241); }
+.inp__box.is-error .inp__icon { background: rgb(230,15,15); }
+
+.inp__field {
+  flex: 1;
+  font-family: inherit; font-size: 14px; line-height: 22px;
+  color: rgb(69,69,69);
+  border: none; outline: none; background: transparent;
+  caret-color: rgb(30,107,241);
+}
+.inp__field::placeholder { color: rgb(140,140,140); }
+.inp__box.is-disabled .inp__field { color: rgb(163,163,163); }
+.inp__box.is-disabled .inp__field::placeholder { color: rgb(163,163,163); }
+
+.inp__action {
+  width: 20px; height: 20px; flex-shrink: 0; cursor: pointer;
+  background: rgb(69,69,69);
+  mask: var(--u) center/contain no-repeat;
+  -webkit-mask: var(--u) center/contain no-repeat;
+}
+.inp__counter {
+  font-size: 12px; line-height: 16px; color: rgb(140,140,140);
+  font-variant-numeric: tabular-nums;
+}
+
+.inp__msg {
+  display:flex; align-items:center; gap: 4px;
+  font-size: 12px; line-height: 20px;
+  color: rgb(69,69,69);
+}
+.inp__msg .inp__icon { width: 16px; height: 16px; background: rgb(69,69,69); }
+.inp__msg.is-error   { color: rgb(230,15,15); }
+.inp__msg.is-error .inp__icon   { background: rgb(230,15,15); }
+.inp__msg.is-success { color: rgb(0,122,66); }
+.inp__msg.is-success .inp__icon { background: rgb(0,122,66); }
+
+/* chips inside input */
+.inp__chips { display:flex; gap: 4px; flex-wrap: wrap; align-items:center; }
+.inp__chip  {
+  height: 22px; padding: 0 6px 0 8px;
+  background: rgba(30,107,241,0.12);
+  color: rgb(18,90,213);
+  border-radius: 4px;
+  display:inline-flex; align-items:center; gap: 4px;
+  font-size: 12px; font-weight: 600;
+}
+.inp__chip__x {
+  width: 12px; height: 12px; opacity: 0.7; cursor: pointer;
+  background: currentColor;
+  mask: url('../assets/icons/outline/close.svg') center/contain no-repeat;
+  -webkit-mask: url('../assets/icons/outline/close.svg') center/contain no-repeat;
+}
+
+/* strength bar */
+.strength { display:flex; gap: 4px; height: 4px; }
+.strength__seg { flex: 1; border-radius: 2px; background: rgb(224,224,224); }
+.strength__seg.is-weak { background: rgb(230,15,15); }
+.strength__seg.is-med  { background: rgb(251,207,35); }
+.strength__seg.is-strong { background: rgb(0,122,66); }
+
+/* header + layout */
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+
+.section-title {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase;
+  color: var(--color-content-default);
+  margin-bottom: 10px;
+}
+.grid2 { display:grid; grid-template-columns: 1fr 1fr; gap: 14px 20px; }
+.grid3 { display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px 16px; }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; }
+.spec {
+  padding: 10px 12px;
+  background: var(--color-surface-1);
+  border-radius: 8px; border:1px solid var(--color-border-2);
+  display:flex; flex-direction:column; gap:4px;
+}
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:20px; padding:28px;">
+
+  <div class="header">
+    <div class="header__title">Input · Text · Password · Chips · Counter</div>
+    <div class="header__sub">Altura 40 px · raio 8 px · borda <code style="font-family:ui-monospace,monospace; background:var(--color-surface-2); padding:1px 5px; border-radius:3px;">#C9C9C9</code> → focus <code style="font-family:ui-monospace,monospace; background:var(--color-surface-2); padding:1px 5px; border-radius:3px;">#1E6BF1</code>. Label Nunito Sans 700 12/20, placeholder 14/22 #8C8C8C.</div>
+  </div>
+
+  <!-- Estados base -->
+  <div>
+    <div class="section-title">Estados · text input</div>
+    <div class="grid2">
+      <!-- Default -->
+      <div class="inp">
+        <div class="inp__label">E-mail</div>
+        <div class="inp__box"><input class="inp__field" placeholder="voce@empresa.com"></div>
+      </div>
+      <!-- Focus -->
+      <div class="inp">
+        <div class="inp__label">E-mail</div>
+        <div class="inp__box is-focus"><input class="inp__field" value="joana" style="color:rgb(69,69,69);"></div>
+      </div>
+      <!-- Filled -->
+      <div class="inp">
+        <div class="inp__label">E-mail</div>
+        <div class="inp__box is-filled"><input class="inp__field" value="joana@blip.ai"></div>
+      </div>
+      <!-- Disabled -->
+      <div class="inp">
+        <div class="inp__label" style="color:rgb(163,163,163);">E-mail</div>
+        <div class="inp__box is-disabled"><input class="inp__field" placeholder="Indisponível" disabled></div>
+      </div>
+      <!-- Error -->
+      <div class="inp">
+        <div class="inp__label">E-mail</div>
+        <div class="inp__box is-error"><input class="inp__field" value="joana@invalido"></div>
+        <div class="inp__msg is-error"><span class="inp__icon" style="--u:url('../assets/icons/outline/close.svg');"></span>Formato de e-mail inválido</div>
+      </div>
+      <!-- Success -->
+      <div class="inp">
+        <div class="inp__label">E-mail</div>
+        <div class="inp__box is-success"><input class="inp__field" value="joana@blip.ai"></div>
+        <div class="inp__msg is-success"><span class="inp__icon" style="--u:url('../assets/icons/outline/like.svg');"></span>E-mail validado</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Variantes de conteúdo -->
+  <div>
+    <div class="section-title">Variantes de conteúdo</div>
+    <div class="grid2">
+      <!-- Com ícone leading -->
+      <div class="inp">
+        <div class="inp__label">Buscar</div>
+        <div class="inp__box">
+          <span class="inp__icon" style="--u:url('../assets/icons/outline/search-actions.svg');"></span>
+          <input class="inp__field" placeholder="Nome, e-mail ou telefone">
+        </div>
+      </div>
+      <!-- Password -->
+      <div class="inp">
+        <div class="inp__label">Senha</div>
+        <div class="inp__box is-focus">
+          <input class="inp__field" type="password" value="••••••••••">
+          <span class="inp__action" style="--u:url('../assets/icons/outline/eye-closed.svg');"></span>
+        </div>
+        <div class="strength" style="margin-top:6px;">
+          <div class="strength__seg is-strong"></div>
+          <div class="strength__seg is-strong"></div>
+          <div class="strength__seg is-strong"></div>
+          <div class="strength__seg"></div>
+        </div>
+        <div class="inp__msg" style="color:rgb(99,99,99);">Força da senha: forte</div>
+      </div>
+      <!-- Counter -->
+      <div class="inp">
+        <div class="inp__label">Título do template</div>
+        <div class="inp__box">
+          <input class="inp__field" value="Confirmação de agendamento">
+          <span class="inp__counter">27/50</span>
+        </div>
+      </div>
+      <!-- Chips -->
+      <div class="inp">
+        <div class="inp__label">Tags</div>
+        <div class="inp__box" style="height: auto; min-height: 40px; padding: 6px 12px;">
+          <div class="inp__chips">
+            <span class="inp__chip">#onboarding <span class="inp__chip__x"></span></span>
+            <span class="inp__chip">#brasil <span class="inp__chip__x"></span></span>
+            <span class="inp__chip">#v2 <span class="inp__chip__x"></span></span>
+            <input class="inp__field" style="min-width:80px;" placeholder="+ tag">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Text area + select -->
+  <div>
+    <div class="section-title">Text area & Select</div>
+    <div class="grid2">
+      <!-- Textarea -->
+      <div class="inp">
+        <div class="inp__label">Mensagem inicial</div>
+        <div class="inp__box is-filled" style="height: auto; min-height: 96px; padding: 10px 12px; align-items:flex-start;">
+          <textarea class="inp__field" rows="3" style="resize:none; line-height:22px;">Olá! Sou o Blip, assistente virtual da sua empresa. Em que posso te ajudar hoje?</textarea>
+        </div>
+        <div class="inp__msg"><span>Dica: mantenha abaixo de 160 caracteres para WhatsApp.</span><span style="margin-left:auto; color:rgb(140,140,140);">84/160</span></div>
+      </div>
+      <!-- Select -->
+      <div class="inp">
+        <div class="inp__label">Canal de envio</div>
+        <div class="inp__box is-filled">
+          <span class="inp__icon" style="--u:url('../assets/icons/outline/whatsapp.svg'); background:#25D366;"></span>
+          <input class="inp__field" value="WhatsApp Business · +55 11 9999-0000" readonly>
+          <span class="inp__action" style="--u:url('../assets/icons/outline/arrow-down.svg');"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Specs -->
+  <div>
+    <div class="section-title">Specs</div>
+    <div class="specs-row">
+      <div class="spec"><span class="spec__k">Height</span><span class="spec__v">40 px · radius 8</span></div>
+      <div class="spec"><span class="spec__k">Border default</span><span class="spec__v">1px #C9C9C9</span></div>
+      <div class="spec"><span class="spec__k">Border focus</span><span class="spec__v">1px #1E6BF1</span></div>
+      <div class="spec"><span class="spec__k">Label type</span><span class="spec__v">700 · 12/20 · #636363</span></div>
+      <div class="spec"><span class="spec__k">Placeholder</span><span class="spec__v">400 · 14/22 · #8C8C8C</span></div>
+      <div class="spec"><span class="spec__k">Helper msg</span><span class="spec__v">400 · 12/20 · #454545</span></div>
+    </div>
+  </div>
+
+</div>
+</body></html>

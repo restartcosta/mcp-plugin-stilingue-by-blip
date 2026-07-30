@@ -1,0 +1,153 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 10px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 14px; font-family: ui-monospace, monospace; }
+
+.demo { padding: 24px; background: var(--color-surface-1); border-radius: 8px; border: 1px solid var(--color-border-2); }
+
+/* Top nav */
+.nav {
+  display: flex; align-items: center; gap: 20px;
+  height: 64px; padding: 0 20px;
+  background: #fff; border-bottom: 1px solid var(--color-border-2);
+  font-family: 'Nunito Sans', sans-serif;
+  border-radius: 8px 8px 0 0;
+}
+.nav__brand { display:flex; align-items:center; gap: 10px; font-weight: 700; font-size: 16px; color: var(--color-content-default); }
+.nav__brand__logo { width: 32px; height: 32px; border-radius: 8px; background: linear-gradient(135deg, #1E6BF1 0%, #0F3FA4 100%); display:flex;align-items:center;justify-content:center; color: #fff; font-weight: 700; font-size: 14px; }
+.nav__links { display: flex; gap: 4px; margin-left: 20px; }
+.nav__link { padding: 8px 14px; font-size: 14px; font-weight: 700; color: var(--color-content-default); border-radius: 6px; cursor: pointer; }
+.nav__link:hover { background: var(--color-surface-1); }
+.nav__link.is-active { background: rgba(30,107,241,0.10); color: rgb(30,107,241); }
+.nav__right { margin-left: auto; display: flex; align-items: center; gap: 8px; }
+.nav__search { flex: 1; max-width: 320px; margin-left: auto; margin-right: 8px; }
+.nav__search input { width: 100%; height: 36px; padding: 0 14px 0 36px; border: 1px solid var(--color-border-3); border-radius: 8px; font-family: inherit; font-size: 13px; background: var(--color-surface-1) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23636363' stroke-width='2'><circle cx='11' cy='11' r='8'/><line x1='21' y1='21' x2='16.65' y2='16.65'/></svg>") no-repeat 12px center / 14px; }
+.nav__icon-btn { width: 36px; height: 36px; border-radius: 8px; display:inline-flex;align-items:center;justify-content:center; color: var(--color-content-default); cursor: pointer; position: relative; }
+.nav__icon-btn:hover { background: var(--color-surface-1); }
+.nav__icon-btn svg { width: 18px; height: 18px; }
+.nav__icon-btn__dot { position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; border-radius: 50%; background: rgb(230,15,15); border: 2px solid #fff; }
+.nav__avatar { width: 36px; height: 36px; border-radius: 50%; background: rgb(178,223,253); color: rgb(18,90,213); display:inline-flex; align-items:center; justify-content:center; font-weight: 700; font-size: 13px; cursor: pointer; }
+
+/* Mobile nav */
+.nav-mobile {
+  display: flex; align-items: center; gap: 12px;
+  height: 56px; padding: 0 16px;
+  background: #fff; border-bottom: 1px solid var(--color-border-2);
+  font-family: 'Nunito Sans', sans-serif;
+  border-radius: 8px 8px 0 0;
+}
+.nav-mobile__burger { width: 40px; height: 40px; display:inline-flex; align-items:center; justify-content:center; color: var(--color-content-default); border-radius: 8px; cursor: pointer; }
+.nav-mobile__burger:hover { background: var(--color-surface-1); }
+.nav-mobile__title { font-weight: 700; font-size: 16px; flex: 1; }
+
+/* Bottom nav (mobile) */
+.bottom-nav {
+  display: flex; align-items: stretch; justify-content: space-around;
+  height: 64px;
+  background: #fff; border-top: 1px solid var(--color-border-2);
+  font-family: 'Nunito Sans', sans-serif;
+  border-radius: 0 0 8px 8px;
+  margin-top: 200px;
+}
+.bottom-nav__item { flex: 1; display:flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; color: var(--color-content-ghost); cursor: pointer; }
+.bottom-nav__item.is-active { color: rgb(30,107,241); }
+.bottom-nav__item svg { width: 20px; height: 20px; }
+.bottom-nav__item span { font-size: 11px; font-weight: 700; }
+
+.mock-content { background: var(--color-surface-1); height: 120px; display:flex; align-items:center; justify-content:center; color: var(--color-content-ghost); font-family: 'Nunito Sans'; font-size: 13px; }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+  <div class="header">
+    <div class="header__title">Nav Bar · Barra de navegação</div>
+    <div class="header__sub">Top nav (desktop, h64) · Mobile header (h56) · Bottom tabs (mobile, h64).</div>
+  </div>
+
+  <div>
+    <div class="section-title">Top nav · desktop</div>
+    <div class="section-sub">Brand + links · search · notificações · user menu</div>
+    <div class="demo" style="padding: 0; border: none; background: transparent;">
+      <nav class="nav">
+        <div class="nav__brand">
+          <span class="nav__brand__logo">B</span>
+          <span>Blip Desk</span>
+        </div>
+        <div class="nav__links">
+          <span class="nav__link is-active">Conversas</span>
+          <span class="nav__link">Contatos</span>
+          <span class="nav__link">Chatbots</span>
+          <span class="nav__link">Relatórios</span>
+        </div>
+        <div class="nav__search">
+          <input placeholder="Buscar…">
+        </div>
+        <div class="nav__right">
+          <span class="nav__icon-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          </span>
+          <span class="nav__icon-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg>
+            <span class="nav__icon-btn__dot"></span>
+          </span>
+          <span class="nav__icon-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+          </span>
+          <span class="nav__avatar">AH</span>
+        </div>
+      </nav>
+      <div class="mock-content">Conteúdo da página</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-title">Mobile · header (h56) + bottom tabs (h64)</div>
+    <div class="section-sub">Burger + título · tabs fixas na base com label + ícone · ativo em primary</div>
+    <div class="demo" style="max-width: 420px; margin: 0 auto; padding: 0; border: none; background: transparent;">
+      <nav class="nav-mobile">
+        <span class="nav-mobile__burger">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </span>
+        <span class="nav-mobile__title">Conversas</span>
+        <span class="nav__icon-btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </span>
+      </nav>
+      <div style="height: 260px; background: var(--color-surface-1); display:flex; align-items:center; justify-content:center; color: var(--color-content-ghost); font-family: 'Nunito Sans'; font-size: 13px;">Área de conteúdo</div>
+      <nav class="bottom-nav" style="margin-top: 0;">
+        <span class="bottom-nav__item is-active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          <span>Conversas</span>
+        </span>
+        <span class="bottom-nav__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          <span>Contatos</span>
+        </span>
+        <span class="bottom-nav__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          <span>Campanhas</span>
+        </span>
+        <span class="bottom-nav__item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6"/></svg>
+          <span>Mais</span>
+        </span>
+      </nav>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Top nav</span><span class="spec__v">h64 · pad 0 20 · gap 20</span></div>
+    <div class="spec"><span class="spec__k">Mobile hd</span><span class="spec__v">h56 · pad 0 16</span></div>
+    <div class="spec"><span class="spec__k">Bottom tab</span><span class="spec__v">h64 · 4 items máx</span></div>
+    <div class="spec"><span class="spec__k">Link</span><span class="spec__v">pad 8 14 · 14/700 · radius 6</span></div>
+    <div class="spec"><span class="spec__k">Active</span><span class="spec__v">primary @ 10% (desk) · solid (tab)</span></div>
+    <div class="spec"><span class="spec__k">Icon btn</span><span class="spec__v">36 × 36 · dot 8 · border 2 branco</span></div>
+  </div>
+</div>
+</body></html>

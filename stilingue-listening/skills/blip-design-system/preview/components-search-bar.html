@@ -1,0 +1,185 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 10px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 14px; font-family: ui-monospace, monospace; }
+
+.demo { padding: 24px; background: var(--color-surface-1); border-radius: 8px; border: 1px solid var(--color-border-2); }
+
+.sb {
+  display: flex; align-items: center; gap: 10px;
+  height: 40px; padding: 0 14px;
+  background: #fff;
+  border: 1px solid var(--color-border-3); border-radius: 8px;
+  font-family: 'Nunito Sans', sans-serif;
+  transition: all .15s;
+  max-width: 520px;
+}
+.sb:focus-within { border-color: rgb(30,107,241); box-shadow: 0 0 0 3px rgba(30,107,241,0.12); }
+.sb__ico { color: var(--color-content-ghost); flex-shrink: 0; }
+.sb input {
+  flex: 1; border: none; outline: none; background: transparent;
+  font-family: inherit; font-size: 14px; color: var(--color-content-default);
+}
+.sb input::placeholder { color: var(--color-content-ghost); }
+.sb__clear { width: 20px; height: 20px; border-radius: 50%; background: rgb(229,229,229); color: rgb(99,99,99); display:inline-flex; align-items:center; justify-content:center; cursor: pointer; flex-shrink: 0; }
+.sb__kb { font-family: ui-monospace, monospace; font-size: 11px; color: var(--color-content-ghost); padding: 2px 6px; background: var(--color-surface-1); border-radius: 4px; border: 1px solid var(--color-border-2); }
+
+/* Com filtros */
+.sb-full { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.filter-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  height: 32px; padding: 0 10px;
+  background: #fff; border: 1px solid var(--color-border-3); border-radius: 16px;
+  font-family: 'Nunito Sans', sans-serif; font-size: 12px; font-weight: 700;
+  color: var(--color-content-default); cursor: pointer;
+}
+.filter-chip--active { background: rgba(30,107,241,0.08); border-color: rgb(30,107,241); color: rgb(30,107,241); }
+.filter-chip__x { opacity: .6; }
+
+/* Large hero search */
+.sb-hero {
+  display: flex; align-items: center; gap: 12px;
+  height: 56px; padding: 0 20px;
+  background: #fff;
+  border: 1px solid var(--color-border-3); border-radius: 28px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  max-width: 640px;
+}
+.sb-hero:focus-within { border-color: rgb(30,107,241); box-shadow: 0 4px 16px rgba(30,107,241,0.18); }
+.sb-hero input { flex: 1; border: none; outline: none; font-family: 'Nunito Sans', sans-serif; font-size: 16px; color: var(--color-content-default); }
+.sb-hero input::placeholder { color: var(--color-content-ghost); }
+.sb-hero__btn { height: 40px; padding: 0 20px; border: none; background: rgb(30,107,241); color: #fff; border-radius: 20px; font-family: 'Nunito Sans'; font-weight: 700; font-size: 14px; cursor: pointer; }
+
+/* Results preview (com dropdown abaixo) */
+.sb-results-wrap { position: relative; max-width: 520px; }
+.sb-results {
+  position: absolute; top: calc(100% + 6px); left: 0; right: 0;
+  background: #fff;
+  border-radius: 8px; border: 1px solid var(--color-border-2);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  padding: 8px;
+  z-index: 5;
+}
+.sb-res-head { padding: 8px 10px; font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--color-content-ghost); letter-spacing: .06em; }
+.sb-res-item { display:flex; align-items:center; gap: 10px; padding: 10px; border-radius: 6px; cursor: pointer; font-family: 'Nunito Sans'; }
+.sb-res-item:hover { background: var(--color-surface-1); }
+.sb-res-item__ico { width: 32px; height: 32px; border-radius: 6px; background: var(--color-surface-1); display:flex; align-items:center; justify-content:center; color: rgb(30,107,241); flex-shrink: 0; }
+.sb-res-item__t { flex: 1; font-size: 14px; font-weight: 700; color: var(--color-content-default); }
+.sb-res-item__t mark { background: rgba(30,107,241,0.15); color: rgb(30,107,241); padding: 0 2px; border-radius: 2px; }
+.sb-res-item__s { font-size: 12px; color: var(--color-content-ghost); }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+  <div class="header">
+    <div class="header__title">Search Bar</div>
+    <div class="header__sub">Default (inline) · Hero (destaque em topo de página) · com filtros · com resultados ao vivo.</div>
+  </div>
+
+  <div>
+    <div class="section-title">Default · estado focus com atalho ⌘K</div>
+    <div class="section-sub">h40 · radius 8 · ícone lupa 20 px · clear button aparece ao digitar</div>
+    <div class="demo" style="display:flex; flex-direction:column; gap:16px;">
+      <label class="sb">
+        <svg class="sb__ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input placeholder="Buscar conversas, contatos, templates…">
+        <span class="sb__kb">⌘ K</span>
+      </label>
+      <label class="sb" style="border-color: rgb(30,107,241); box-shadow: 0 0 0 3px rgba(30,107,241,0.12);">
+        <svg class="sb__ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input value="maria silva">
+        <span class="sb__clear">
+          <svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="3"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+        </span>
+      </label>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-title">Com filtros · chips à direita</div>
+    <div class="section-sub">Filtros ativos em primary fill @ 8% · chip com botão de remover</div>
+    <div class="demo">
+      <div class="sb-full">
+        <label class="sb" style="flex: 1;">
+          <svg class="sb__ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input placeholder="Buscar por protocolo, nome do cliente ou telefone">
+        </label>
+        <span class="filter-chip filter-chip--active">
+          Canal: WhatsApp
+          <span class="filter-chip__x"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+        </span>
+        <span class="filter-chip filter-chip--active">
+          Últimos 7 dias
+          <span class="filter-chip__x"><svg viewBox="0 0 24 24" width="12" height="12" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></span>
+        </span>
+        <span class="filter-chip">+ Filtro</span>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-title">Com resultados ao vivo · highlight da consulta</div>
+    <div class="section-sub">Agrupa por tipo · destaca termo buscado em primary · navegação por ↑↓ Enter</div>
+    <div class="demo" style="min-height: 360px;">
+      <div class="sb-results-wrap">
+        <label class="sb" style="border-color: rgb(30,107,241); box-shadow: 0 0 0 3px rgba(30,107,241,0.12); max-width:none;">
+          <svg class="sb__ico" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input value="maria">
+        </label>
+        <div class="sb-results">
+          <div class="sb-res-head">Contatos</div>
+          <div class="sb-res-item">
+            <span class="sb-res-item__ico"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            <div>
+              <div class="sb-res-item__t"><mark>Maria</mark> Silva</div>
+              <div class="sb-res-item__s">+55 11 98234-5678</div>
+            </div>
+          </div>
+          <div class="sb-res-item">
+            <span class="sb-res-item__ico" style="background:rgb(253,233,155);color:rgb(117,85,16);"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></span>
+            <div>
+              <div class="sb-res-item__t"><mark>Maria</mark>na Costa</div>
+              <div class="sb-res-item__s">+55 21 99812-3344</div>
+            </div>
+          </div>
+          <div class="sb-res-head">Conversas</div>
+          <div class="sb-res-item">
+            <span class="sb-res-item__ico"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+            <div>
+              <div class="sb-res-item__t">Conversa #8432 com <mark>Maria</mark> Silva</div>
+              <div class="sb-res-item__s">Iniciada hoje às 14:22 · Atendimento Vendas</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-title">Hero · page-level search</div>
+    <div class="section-sub">h56 · pill radius 28 · ideal para páginas de discovery</div>
+    <div class="demo">
+      <label class="sb-hero">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="rgb(99,99,99)" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input placeholder="O que você quer encontrar na base de conhecimento?">
+        <button class="sb-hero__btn">Pesquisar</button>
+      </label>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Default</span><span class="spec__v">h40 · radius 8 · pad 0 14</span></div>
+    <div class="spec"><span class="spec__k">Hero</span><span class="spec__v">h56 · radius 28 · pad 0 20</span></div>
+    <div class="spec"><span class="spec__k">Focus</span><span class="spec__v">border #1E6BF1 · ring 3 px @ 12%</span></div>
+    <div class="spec"><span class="spec__k">Texto</span><span class="spec__v">14/400 · placeholder ghost</span></div>
+    <div class="spec"><span class="spec__k">Clear</span><span class="spec__v">20 × 20 · bg #E5E5E5</span></div>
+    <div class="spec"><span class="spec__k">Shortcut</span><span class="spec__v">⌘K para abrir</span></div>
+  </div>
+</div>
+</body></html>

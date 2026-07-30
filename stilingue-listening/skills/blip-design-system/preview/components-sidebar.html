@@ -1,0 +1,143 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 10px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 14px; font-family: ui-monospace, monospace; }
+
+.demo { padding: 24px; background: var(--color-surface-1); border-radius: 8px; border: 1px solid var(--color-border-2); display:flex; gap: 20px; }
+
+.sb {
+  width: 248px; flex-shrink: 0;
+  background: #fff; border-radius: 10px; border: 1px solid var(--color-border-2);
+  padding: 16px 12px; display:flex; flex-direction: column; gap: 4px;
+  font-family: 'Nunito Sans', sans-serif;
+  height: 540px;
+}
+.sb__brand { display:flex; align-items:center; gap:10px; padding: 6px 8px 18px; border-bottom: 1px solid var(--color-border-2); margin-bottom: 8px; }
+.sb__brand__logo { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, #1E6BF1 0%, #0F3FA4 100%); display:flex;align-items:center;justify-content:center; color: #fff; font-weight: 700; font-size: 14px; }
+.sb__brand__name { font-weight: 700; font-size: 14px; color: var(--color-content-default); }
+.sb__head { padding: 10px 8px 4px; font-size: 10px; font-weight: 700; text-transform: uppercase; color: var(--color-content-ghost); letter-spacing: .06em; }
+
+.nav-item { display:flex; align-items:center; gap: 12px; padding: 10px 10px; border-radius: 6px; font-size: 13px; font-weight: 700; color: var(--color-content-default); cursor: pointer; }
+.nav-item:hover { background: var(--color-surface-1); }
+.nav-item.is-active { background: rgba(30,107,241,0.10); color: rgb(30,107,241); }
+.nav-item svg { width: 18px; height: 18px; color: var(--color-content-ghost); flex-shrink: 0; }
+.nav-item.is-active svg { color: rgb(30,107,241); }
+.nav-item__count { margin-left: auto; background: rgb(229,229,229); color: rgb(99,99,99); font-size: 11px; padding: 0 6px; height: 18px; min-width: 20px; display:inline-flex; align-items:center; justify-content:center; border-radius: 10px; }
+.nav-item.is-active .nav-item__count { background: rgb(30,107,241); color: #fff; }
+
+/* Collapsed sidebar */
+.sb-mini { width: 64px; padding: 16px 8px; align-items: center; }
+.sb-mini .nav-item { padding: 10px; justify-content: center; width: 44px; }
+.sb-mini .sb__brand { border-bottom: 1px solid var(--color-border-2); margin-bottom: 8px; padding: 0 0 14px; justify-content: center; }
+
+/* Dark variant */
+.sb-dark { background: rgb(32,44,68); border-color: rgb(32,44,68); color: #fff; }
+.sb-dark .sb__brand { border-bottom-color: rgba(255,255,255,0.1); }
+.sb-dark .sb__brand__name { color: #fff; }
+.sb-dark .sb__head { color: rgba(255,255,255,0.5); }
+.sb-dark .nav-item { color: rgba(255,255,255,0.85); }
+.sb-dark .nav-item svg { color: rgba(255,255,255,0.65); }
+.sb-dark .nav-item:hover { background: rgba(255,255,255,0.06); }
+.sb-dark .nav-item.is-active { background: rgb(30,107,241); color: #fff; }
+.sb-dark .nav-item.is-active svg { color: #fff; }
+
+.main-mock { flex: 1; background: var(--color-surface-0); border-radius: 10px; padding: 40px; border: 1px solid var(--color-border-2); display:flex; align-items: flex-start; color: var(--color-content-ghost); font-family: 'Nunito Sans'; font-size: 13px; }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+  <div class="header">
+    <div class="header__title">Sidebar · Navegação principal</div>
+    <div class="header__sub">Width 248 px expandido · 64 px collapsed · item 40 px · radius 6 · active em primary @ 10%.</div>
+  </div>
+
+  <div>
+    <div class="section-title">Expandida (default) · light · com seções e badges</div>
+    <div class="section-sub">Agrupa por contexto · conta de mensagens não lidas no item ativo</div>
+    <div class="demo">
+      <aside class="sb">
+        <div class="sb__brand">
+          <span class="sb__brand__logo">B</span>
+          <span class="sb__brand__name">Blip Desk</span>
+        </div>
+        <div class="sb__head">Atendimento</div>
+        <div class="nav-item is-active">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Conversas<span class="nav-item__count">24</span>
+        </div>
+        <div class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+          Contatos
+        </div>
+        <div class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+          Campanhas
+        </div>
+        <div class="sb__head" style="margin-top:8px;">Configuração</div>
+        <div class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Chatbots<span class="nav-item__count">3</span>
+        </div>
+        <div class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+          Relatórios
+        </div>
+        <div class="nav-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"/></svg>
+          Configurações
+        </div>
+        <div style="margin-top: auto; padding-top: 16px; border-top: 1px solid var(--color-border-2);">
+          <div class="nav-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+            Ajuda
+          </div>
+        </div>
+      </aside>
+      <div class="main-mock">Área de conteúdo principal →</div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-title">Collapsed (64 px) · dark</div>
+    <div class="section-sub">Só ícones, rótulo via tooltip · ideal para layouts com muito conteúdo</div>
+    <div class="demo">
+      <aside class="sb sb-mini sb-dark">
+        <div class="sb__brand"><span class="sb__brand__logo">B</span></div>
+        <div class="nav-item is-active" title="Conversas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>
+        <div class="nav-item" title="Contatos"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg></div>
+        <div class="nav-item" title="Campanhas"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
+        <div class="nav-item" title="Chatbots"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></div>
+        <div class="nav-item" title="Relatórios"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+        <div class="nav-item" title="Configurações"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24"/></svg></div>
+      </aside>
+      <aside class="sb sb-dark">
+        <div class="sb__brand">
+          <span class="sb__brand__logo">B</span>
+          <span class="sb__brand__name">Blip Desk</span>
+        </div>
+        <div class="sb__head">Atendimento</div>
+        <div class="nav-item is-active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Conversas<span class="nav-item__count">24</span></div>
+        <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>Contatos</div>
+        <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>Chatbots</div>
+        <div class="nav-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>Relatórios</div>
+      </aside>
+      <div class="main-mock">Dark mode ideal para operações 24/7</div>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Width</span><span class="spec__v">248 expanded · 64 collapsed</span></div>
+    <div class="spec"><span class="spec__k">Item</span><span class="spec__v">h40 · radius 6 · pad 10</span></div>
+    <div class="spec"><span class="spec__k">Active</span><span class="spec__v">primary @ 10% (light) · solid (dark)</span></div>
+    <div class="spec"><span class="spec__k">Icon</span><span class="spec__v">18 × 18 outline</span></div>
+    <div class="spec"><span class="spec__k">Section head</span><span class="spec__v">10/700 uppercase · ghost</span></div>
+    <div class="spec"><span class="spec__k">Badge</span><span class="spec__v">h18 · radius 10 · 11/700</span></div>
+  </div>
+</div>
+</body></html>

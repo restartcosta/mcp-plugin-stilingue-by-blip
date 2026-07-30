@@ -1,0 +1,194 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 8px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 12px; font-family: ui-monospace, monospace; }
+
+.demo-bg { padding: 20px; background: var(--color-surface-1); border-radius: 8px; border: 1px solid var(--color-border-2); display:flex; align-items:center; justify-content: center; flex-wrap: wrap; gap: 16px; }
+
+.pg { display: inline-flex; align-items: center; gap: 4px; font-family: 'Nunito Sans', sans-serif; }
+.pg__btn {
+  width: 32px; height: 32px;
+  display:inline-flex; align-items:center; justify-content:center;
+  background: transparent;
+  color: var(--color-content-default);
+  font-size: 13px; font-weight: 700; line-height: 20px;
+  border-radius: 6px; cursor: pointer;
+  border: 1px solid transparent;
+}
+.pg__btn:hover { background: var(--color-surface-2); }
+.pg__btn.is-active { background: rgb(30,107,241); color: #fff; }
+.pg__btn.is-active:hover { background: rgb(30,107,241); }
+.pg__btn:disabled { color: rgb(190,190,190); cursor: not-allowed; background: transparent; }
+.pg__btn svg { width: 14px; height: 14px; }
+
+/* Full pagination with text */
+.pg-full {
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 13px;
+  color: var(--color-content-ghost);
+  width: 100%;
+  max-width: 720px;
+}
+.pg-range { display: flex; align-items: center; gap: 12px; }
+.pg-range__sel {
+  height: 32px; padding: 0 10px;
+  border-radius: 6px; border: 1px solid var(--color-border-3);
+  background: #fff; font-family: inherit; font-size: 13px;
+  color: var(--color-content-default);
+  cursor: pointer;
+}
+
+/* Simple */
+.pg-simple {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 13px;
+  color: var(--color-content-default);
+}
+.pg-simple__btn {
+  height: 32px; padding: 0 12px;
+  border: 1px solid var(--color-border-3);
+  background: #fff;
+  border-radius: 6px;
+  font-family: inherit; font-size: 13px; font-weight: 700;
+  color: var(--color-content-default);
+  cursor: pointer;
+  display:inline-flex; align-items:center; gap: 4px;
+}
+.pg-simple__btn:hover { background: var(--color-surface-1); }
+.pg-simple__btn:disabled { opacity: .4; cursor: not-allowed; }
+
+/* Dots (para carrossel/onboarding) */
+.pg-dots { display: inline-flex; gap: 8px; padding: 8px; }
+.pg-dots__d { width: 8px; height: 8px; border-radius: 50%; background: rgb(204,204,204); cursor: pointer; transition: all .2s; }
+.pg-dots__d.is-active { width: 24px; border-radius: 4px; background: rgb(30,107,241); }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+
+  <div class="header">
+    <div class="header__title">Pagination</div>
+    <div class="header__sub">4 variantes — Numerada (listas paginadas), Full (com seletor de itens/página), Simples (prev/next), Dots (carrossel).</div>
+  </div>
+
+  <!-- Numbered -->
+  <div>
+    <div class="section-title">Numbered · padrão para tabelas</div>
+    <div class="section-sub">Botões 32×32 · ativo em primary · prev/next + ellipsis colapsada</div>
+    <div class="demo-bg">
+      <nav class="pg">
+        <button class="pg__btn" disabled>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="pg__btn is-active">1</button>
+        <button class="pg__btn">2</button>
+        <button class="pg__btn">3</button>
+        <button class="pg__btn">4</button>
+        <button class="pg__btn">5</button>
+        <button class="pg__btn" disabled>…</button>
+        <button class="pg__btn">12</button>
+        <button class="pg__btn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Middle page -->
+  <div>
+    <div class="section-title">Numbered · página central</div>
+    <div class="section-sub">Ambos os lados colapsados · boundary de 1 página no início/fim</div>
+    <div class="demo-bg">
+      <nav class="pg">
+        <button class="pg__btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <button class="pg__btn">1</button>
+        <button class="pg__btn" disabled>…</button>
+        <button class="pg__btn">5</button>
+        <button class="pg__btn">6</button>
+        <button class="pg__btn is-active">7</button>
+        <button class="pg__btn">8</button>
+        <button class="pg__btn">9</button>
+        <button class="pg__btn" disabled>…</button>
+        <button class="pg__btn">24</button>
+        <button class="pg__btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </nav>
+    </div>
+  </div>
+
+  <!-- Full -->
+  <div>
+    <div class="section-title">Full · com info de range + items/página</div>
+    <div class="section-sub">Padrão em tabelas de gestão · mostra quantidade total e permite ajustar page size</div>
+    <div class="demo-bg" style="justify-content:stretch;">
+      <div class="pg-full">
+        <div class="pg-range">
+          <span>Mostrando</span>
+          <select class="pg-range__sel">
+            <option>10</option><option selected>25</option><option>50</option><option>100</option>
+          </select>
+          <span>de 247 resultados</span>
+        </div>
+        <nav class="pg">
+          <button class="pg__btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <button class="pg__btn">1</button>
+          <button class="pg__btn is-active">2</button>
+          <button class="pg__btn">3</button>
+          <button class="pg__btn" disabled>…</button>
+          <button class="pg__btn">10</button>
+          <button class="pg__btn"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <!-- Simple -->
+  <div>
+    <div class="section-title">Simples · prev / next</div>
+    <div class="section-sub">Para feeds infinitos ou poucos resultados</div>
+    <div class="demo-bg">
+      <span class="pg-simple">
+        <button class="pg-simple__btn" disabled>
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+          Anterior
+        </button>
+        <span>Página <strong style="color:var(--color-content-default)">1</strong> de <strong style="color:var(--color-content-default)">12</strong></span>
+        <button class="pg-simple__btn">
+          Próxima
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+      </span>
+    </div>
+  </div>
+
+  <!-- Dots -->
+  <div>
+    <div class="section-title">Dots · carrossel / onboarding</div>
+    <div class="section-sub">Ativo em pill primary, inativos em neutral</div>
+    <div class="demo-bg">
+      <nav class="pg-dots">
+        <span class="pg-dots__d is-active"></span>
+        <span class="pg-dots__d"></span>
+        <span class="pg-dots__d"></span>
+        <span class="pg-dots__d"></span>
+      </nav>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Button size</span><span class="spec__v">32 × 32 · radius 6</span></div>
+    <div class="spec"><span class="spec__k">Active bg</span><span class="spec__v">#1E6BF1 · white text</span></div>
+    <div class="spec"><span class="spec__k">Hover inativo</span><span class="spec__v">surface-2</span></div>
+    <div class="spec"><span class="spec__k">Disabled</span><span class="spec__v">color-default-disable</span></div>
+    <div class="spec"><span class="spec__k">Dots</span><span class="spec__v">8 px · ativo 24×8</span></div>
+    <div class="spec"><span class="spec__k">Collapse rule</span><span class="spec__v">siblings=2 · boundaries=1</span></div>
+  </div>
+</div>
+</body></html>

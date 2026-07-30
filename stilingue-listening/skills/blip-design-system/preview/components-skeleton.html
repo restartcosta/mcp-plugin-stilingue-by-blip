@@ -1,0 +1,173 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 10px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 12px; font-family: ui-monospace, monospace; }
+.demo { padding: 20px; background: var(--color-surface-1); border-radius: 8px; border: 1px solid var(--color-border-2); }
+.grid { display:grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+/* Skeleton primitives */
+@keyframes sh { 0% { background-position: -400px 0; } 100% { background-position: 400px 0; } }
+.sk {
+  display: inline-block;
+  background: linear-gradient(90deg, rgb(229,229,229) 0%, rgb(242,242,242) 50%, rgb(229,229,229) 100%);
+  background-size: 400px 100%;
+  animation: sh 1.2s linear infinite;
+  border-radius: 4px;
+}
+.sk--circle { border-radius: 50%; }
+.sk--block { display: block; }
+
+/* Building blocks card skeleton */
+.sk-card { background: #fff; border-radius: 10px; border: 1px solid var(--color-border-2); padding: 20px; }
+.sk-card__hd { display:flex; align-items: center; gap: 12px; margin-bottom: 16px; }
+.sk-card__body { display:flex; flex-direction: column; gap: 8px; }
+
+/* List skeleton */
+.sk-list { background: #fff; border-radius: 8px; border: 1px solid var(--color-border-2); overflow: hidden; }
+.sk-list__item { display:flex; align-items:center; gap: 12px; padding: 14px 16px; border-bottom: 1px solid var(--color-border-2); }
+.sk-list__item:last-child { border-bottom: none; }
+.sk-list__body { flex: 1; display:flex; flex-direction: column; gap: 6px; }
+
+/* Table skeleton */
+.sk-table { background: #fff; border-radius: 8px; border: 1px solid var(--color-border-2); overflow: hidden; }
+.sk-table__row { display:grid; grid-template-columns: 2fr 1.5fr 1fr 0.8fr; gap: 16px; padding: 14px 16px; align-items: center; border-bottom: 1px solid var(--color-border-2); }
+.sk-table__row:last-child { border-bottom: none; }
+.sk-table__row--hd { background: var(--color-surface-1); }
+
+/* Stats skeleton */
+.sk-stat { background: #fff; border-radius: 10px; border: 1px solid var(--color-border-2); padding: 20px; display:flex;flex-direction:column; gap: 10px; }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+  <div class="header">
+    <div class="header__title">Skeleton · Loading states</div>
+    <div class="header__sub">Placeholders animados que preservam o layout final. Shimmer 1.2 s · radius 4 · neutral-2 → neutral-1 → neutral-2.</div>
+  </div>
+
+  <div>
+    <div class="section-title">Primitivas</div>
+    <div class="section-sub">Base pra compor qualquer skeleton · text, circle, rect</div>
+    <div class="demo" style="display:flex; gap: 40px; align-items: center; flex-wrap: wrap;">
+      <div style="display:flex; flex-direction: column; gap: 8px; width: 220px;">
+        <span class="sk sk--block" style="height: 12px; width: 60%;"></span>
+        <span class="sk sk--block" style="height: 12px;"></span>
+        <span class="sk sk--block" style="height: 12px; width: 80%;"></span>
+        <div style="font-size:10px; color: var(--color-content-ghost); font-family: ui-monospace; margin-top: 4px;">sk · text (3 linhas)</div>
+      </div>
+      <div style="display:flex; flex-direction: column; align-items: center; gap: 8px;">
+        <span class="sk sk--circle" style="width: 48px; height: 48px;"></span>
+        <div style="font-size:10px; color: var(--color-content-ghost); font-family: ui-monospace;">sk · circle 48</div>
+      </div>
+      <div style="display:flex; flex-direction: column; gap: 8px;">
+        <span class="sk" style="height: 32px; width: 120px; border-radius: 8px;"></span>
+        <div style="font-size:10px; color: var(--color-content-ghost); font-family: ui-monospace;">sk · button 32 × 120</div>
+      </div>
+      <div style="display:flex; flex-direction: column; gap: 8px;">
+        <span class="sk" style="height: 160px; width: 240px; border-radius: 8px;"></span>
+        <div style="font-size:10px; color: var(--color-content-ghost); font-family: ui-monospace;">sk · image 160 × 240</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <div>
+      <div class="section-title">Card skeleton</div>
+      <div class="section-sub">Avatar + title + 3 linhas de texto · igual ao layout final</div>
+      <div class="demo">
+        <div class="sk-card">
+          <div class="sk-card__hd">
+            <span class="sk sk--circle" style="width: 40px; height: 40px;"></span>
+            <div style="flex:1; display:flex; flex-direction: column; gap: 6px;">
+              <span class="sk sk--block" style="height: 14px; width: 55%;"></span>
+              <span class="sk sk--block" style="height: 11px; width: 35%;"></span>
+            </div>
+          </div>
+          <div class="sk-card__body">
+            <span class="sk" style="height: 12px; width: 100%;"></span>
+            <span class="sk" style="height: 12px; width: 95%;"></span>
+            <span class="sk" style="height: 12px; width: 70%;"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="section-title">List skeleton</div>
+      <div class="section-sub">3–5 itens típico durante fetch inicial</div>
+      <div class="demo">
+        <div class="sk-list">
+          <div class="sk-list__item"><span class="sk sk--circle" style="width:40px;height:40px;"></span><div class="sk-list__body"><span class="sk" style="height:12px;width:50%;"></span><span class="sk" style="height:10px;width:75%;"></span></div><span class="sk" style="width:32px;height:10px;"></span></div>
+          <div class="sk-list__item"><span class="sk sk--circle" style="width:40px;height:40px;"></span><div class="sk-list__body"><span class="sk" style="height:12px;width:40%;"></span><span class="sk" style="height:10px;width:85%;"></span></div><span class="sk" style="width:32px;height:10px;"></span></div>
+          <div class="sk-list__item"><span class="sk sk--circle" style="width:40px;height:40px;"></span><div class="sk-list__body"><span class="sk" style="height:12px;width:60%;"></span><span class="sk" style="height:10px;width:65%;"></span></div><span class="sk" style="width:32px;height:10px;"></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-title">Table skeleton</div>
+    <div class="section-sub">Header + 4 linhas · grid 2fr 1.5fr 1fr 0.8fr igual à tabela final</div>
+    <div class="demo">
+      <div class="sk-table">
+        <div class="sk-table__row sk-table__row--hd">
+          <span class="sk" style="height:10px;width:40%;"></span>
+          <span class="sk" style="height:10px;width:50%;"></span>
+          <span class="sk" style="height:10px;width:60%;"></span>
+          <span class="sk" style="height:10px;width:50%;"></span>
+        </div>
+        <div class="sk-table__row">
+          <div style="display:flex;gap:10px;align-items:center;"><span class="sk sk--circle" style="width:32px;height:32px;"></span><span class="sk" style="height:11px;width:60%;"></span></div>
+          <span class="sk" style="height:11px;width:80%;"></span>
+          <span class="sk" style="height:20px;width:70px;border-radius:10px;"></span>
+          <span class="sk" style="height:11px;width:50%;"></span>
+        </div>
+        <div class="sk-table__row">
+          <div style="display:flex;gap:10px;align-items:center;"><span class="sk sk--circle" style="width:32px;height:32px;"></span><span class="sk" style="height:11px;width:55%;"></span></div>
+          <span class="sk" style="height:11px;width:90%;"></span>
+          <span class="sk" style="height:20px;width:60px;border-radius:10px;"></span>
+          <span class="sk" style="height:11px;width:40%;"></span>
+        </div>
+        <div class="sk-table__row">
+          <div style="display:flex;gap:10px;align-items:center;"><span class="sk sk--circle" style="width:32px;height:32px;"></span><span class="sk" style="height:11px;width:70%;"></span></div>
+          <span class="sk" style="height:11px;width:60%;"></span>
+          <span class="sk" style="height:20px;width:80px;border-radius:10px;"></span>
+          <span class="sk" style="height:11px;width:55%;"></span>
+        </div>
+        <div class="sk-table__row">
+          <div style="display:flex;gap:10px;align-items:center;"><span class="sk sk--circle" style="width:32px;height:32px;"></span><span class="sk" style="height:11px;width:50%;"></span></div>
+          <span class="sk" style="height:11px;width:75%;"></span>
+          <span class="sk" style="height:20px;width:65px;border-radius:10px;"></span>
+          <span class="sk" style="height:11px;width:45%;"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div>
+    <div class="section-title">Stats skeleton</div>
+    <div class="section-sub">Grid de métricas carregando · typ. KPI dashboards</div>
+    <div class="demo" style="display:grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+      <div class="sk-stat"><span class="sk" style="height:10px;width:60%;"></span><span class="sk" style="height:28px;width:50%;"></span><span class="sk" style="height:10px;width:40%;"></span></div>
+      <div class="sk-stat"><span class="sk" style="height:10px;width:55%;"></span><span class="sk" style="height:28px;width:60%;"></span><span class="sk" style="height:10px;width:45%;"></span></div>
+      <div class="sk-stat"><span class="sk" style="height:10px;width:65%;"></span><span class="sk" style="height:28px;width:45%;"></span><span class="sk" style="height:10px;width:50%;"></span></div>
+      <div class="sk-stat"><span class="sk" style="height:10px;width:50%;"></span><span class="sk" style="height:28px;width:55%;"></span><span class="sk" style="height:10px;width:38%;"></span></div>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Shimmer</span><span class="spec__v">1.2 s · linear infinite</span></div>
+    <div class="spec"><span class="spec__k">Gradient</span><span class="spec__v">neutral-2 → neutral-1 → neutral-2</span></div>
+    <div class="spec"><span class="spec__k">Radius</span><span class="spec__v">4 default · 50% circle</span></div>
+    <div class="spec"><span class="spec__k">Altura texto</span><span class="spec__v">10-14 conforme size do texto</span></div>
+    <div class="spec"><span class="spec__k">Largura</span><span class="spec__v">varie 30–95% pra realismo</span></div>
+    <div class="spec"><span class="spec__k">Quando usar</span><span class="spec__v">load inicial &gt; 300 ms · NUNCA para &lt; 200ms</span></div>
+  </div>
+</div>
+</body></html>

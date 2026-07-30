@@ -1,0 +1,140 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="_card.css"><style>
+.header { display:flex; flex-direction:column; gap:4px; padding-bottom:14px; border-bottom:1px solid var(--color-border-2); }
+.header__title { font-size:13px; font-weight:700; letter-spacing:0.02em; text-transform:uppercase; color:var(--color-content-default); }
+.header__sub { font-size:11px; color:var(--color-content-ghost); line-height:1.5; }
+.section-title { font-size: 10px; font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; color: var(--color-content-default); margin-bottom: 8px; }
+.section-sub { font-size: 10px; color: var(--color-content-ghost); margin-bottom: 12px; font-family: ui-monospace, monospace; }
+
+/* Accordion — spec: 658×88 per row, pad 24, gap 16, icon 32 · avatar 40 · title 16/24 #202C44 */
+.acc { background: var(--color-surface-0); border: 1px solid var(--color-border-2); border-radius: 8px; overflow: hidden; max-width: 658px; }
+.acc__row { border-bottom: 1px solid var(--color-border-2); }
+.acc__row:last-child { border-bottom: none; }
+.acc__head {
+  height: 88px;
+  display: flex; align-items: center;
+  gap: 16px;
+  padding: 24px;
+  cursor: pointer;
+  font-family: 'Nunito Sans', sans-serif;
+}
+.acc__head:hover { background: var(--color-surface-1); }
+.acc__icon { width: 32px; height: 32px; flex-shrink: 0; color: rgb(30,107,241); display:flex; align-items:center;justify-content:center; }
+.acc__avatar { width: 40px; height: 40px; border-radius: 50%; background: rgb(178,223,253); color: rgb(18,90,213); display:flex;align-items:center;justify-content:center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+.acc__title { flex: 1; font-weight: 700; font-size: 16px; line-height: 24px; color: rgb(32,44,68); }
+.acc__chev { width: 32px; height: 32px; flex-shrink: 0; color: rgb(30,107,241); transition: transform .2s; }
+.acc__row[open] .acc__chev { transform: rotate(180deg); }
+.acc__body {
+  padding: 0 24px 24px 88px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px; line-height: 22px;
+  color: rgb(69,69,69);
+  display: none;
+}
+.acc__row[open] .acc__body { display: block; }
+
+.states-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.state-card { padding: 20px; background: var(--color-surface-1); border-radius: 8px; border: 1px solid var(--color-border-2); }
+.state-card__label { font-size: 10px; font-family: ui-monospace, monospace; color: var(--color-content-ghost); text-transform: uppercase; margin-bottom: 12px; letter-spacing: .05em; }
+.mini-acc {
+  background: #fff; border: 1px solid var(--color-border-2); border-radius: 8px;
+  height: 64px; display:flex; align-items:center; gap: 12px; padding: 16px;
+  font-family: 'Nunito Sans', sans-serif;
+}
+.mini-acc__icon { width: 20px; height: 20px; flex-shrink:0; color: rgb(30,107,241); }
+.mini-acc__title { flex: 1; font-size: 13px; font-weight: 700; color: rgb(32,44,68); }
+.mini-acc__chev { width: 20px; height: 20px; color: rgb(30,107,241); flex-shrink: 0; }
+.state-card--hover .mini-acc { background: rgb(240,246,255); border-color: rgb(30,107,241); }
+.state-card--open .mini-acc__chev { transform: rotate(180deg); }
+
+.specs-row { display:grid; grid-template-columns: repeat(3, 1fr); gap:10px; font-size: 10px; margin-top: 10px; }
+.spec { padding: 10px 12px; background: var(--color-surface-1); border-radius: 8px; border:1px solid var(--color-border-2); display:flex; flex-direction:column; gap:4px; }
+.spec__k { font-family: ui-monospace, monospace; color: var(--color-content-ghost); font-size:9px; text-transform: uppercase; letter-spacing:0.05em; }
+.spec__v { font-family: ui-monospace, monospace; font-size:11px; color: var(--color-content-default); }
+</style></head>
+<body>
+<div class="card" style="gap:22px; padding:28px;">
+
+  <div class="header">
+    <div class="header__title">Accordion</div>
+    <div class="header__sub">Agrupa seções de conteúdo extenso. 658×88 por linha · pad 24 · gap 16 · ícone 32 · avatar 40 · Nunito 700 16/24.</div>
+  </div>
+
+  <!-- Main -->
+  <div>
+    <div class="section-title">Accordion múltiplo · expansão vertical</div>
+    <div class="section-sub">Só uma linha aberta por vez (pattern recomendado) · chevron rotaciona 180° quando aberto</div>
+    <div class="acc">
+      <details class="acc__row" open>
+        <summary class="acc__head">
+          <span class="acc__icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
+          <span class="acc__avatar">AH</span>
+          <span class="acc__title">Configurações do chatbot</span>
+          <span class="acc__chev"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </summary>
+        <div class="acc__body">
+          Controle o comportamento do seu bot: tempo de espera antes de escalar para humano, mensagens de fallback, horários de atendimento e canais ativos. As alterações são aplicadas imediatamente a todas as conversas em andamento.
+        </div>
+      </details>
+      <details class="acc__row">
+        <summary class="acc__head">
+          <span class="acc__icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span>
+          <span class="acc__avatar" style="background:rgb(253,233,155);color:rgb(117,85,16);">MS</span>
+          <span class="acc__title">Templates de mensagem</span>
+          <span class="acc__chev"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </summary>
+        <div class="acc__body">Templates pré-aprovados pelo WhatsApp para envio ativo.</div>
+      </details>
+      <details class="acc__row">
+        <summary class="acc__head">
+          <span class="acc__icon"><svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></span>
+          <span class="acc__avatar" style="background:rgb(214,243,225);color:rgb(0,122,66);">IN</span>
+          <span class="acc__title">Integrações ativas</span>
+          <span class="acc__chev"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </summary>
+        <div class="acc__body">CRM, helpdesk, e-commerce — gerencie webhooks e tokens de acesso.</div>
+      </details>
+    </div>
+  </div>
+
+  <!-- States -->
+  <div>
+    <div class="section-title">Estados · close / hover / open</div>
+    <div class="section-sub">Hover troca background para surface-1 (chatblue-extra-light) · Open rotaciona o chevron</div>
+    <div class="states-grid">
+      <div class="state-card">
+        <div class="state-card__label">close</div>
+        <div class="mini-acc">
+          <span class="mini-acc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
+          <span class="mini-acc__title">Título do accordion</span>
+          <span class="mini-acc__chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </div>
+      </div>
+      <div class="state-card state-card--hover">
+        <div class="state-card__label">hover</div>
+        <div class="mini-acc">
+          <span class="mini-acc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
+          <span class="mini-acc__title">Título do accordion</span>
+          <span class="mini-acc__chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </div>
+      </div>
+      <div class="state-card state-card--open">
+        <div class="state-card__label">open</div>
+        <div class="mini-acc">
+          <span class="mini-acc__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
+          <span class="mini-acc__title">Título do accordion</span>
+          <span class="mini-acc__chev" style="transform:rotate(180deg)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="6 9 12 15 18 9"/></svg></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="specs-row">
+    <div class="spec"><span class="spec__k">Row size</span><span class="spec__v">658 × 88</span></div>
+    <div class="spec"><span class="spec__k">Padding</span><span class="spec__v">24 · gap 16</span></div>
+    <div class="spec"><span class="spec__k">Title</span><span class="spec__v">700 · 16/24 · #202C44</span></div>
+    <div class="spec"><span class="spec__k">Icon / Avatar</span><span class="spec__v">32 px / 40 px</span></div>
+    <div class="spec"><span class="spec__k">Hover</span><span class="spec__v">surface-1</span></div>
+    <div class="spec"><span class="spec__k">Max chars</span><span class="spec__v">título 25 · desc 95</span></div>
+  </div>
+</div>
+</body></html>
