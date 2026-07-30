@@ -18,6 +18,8 @@ A Stilingue é a plataforma de social listening e SAC 2.0 da Blip. Ela monitora 
 - **Conector MCP remoto** — servidor hospedado pela Stilingue que expõe as ferramentas `radar`, `warroom_query` e `setup` (todas somente leitura: o plugin não publica, não responde e não altera nada nos seus painéis).
 - **Skill `perguntar-a-stilingue`** — ensina o Claude a escolher a fonte certa (Radar vs Warroom), usar a terminologia correta, não confundir as convenções de sentimento das duas APIs e seguir os playbooks de análise (panorama de marca, comparação com concorrente, trending). Inclui referências detalhadas de todos os parâmetros, filtros e os 22 `paths` do Warroom.
 - **Skill `setup-conexao`** — guia o usuário na primeira conexão e na resolução de erros de autenticação.
+- **Skill `blip-design-system`** — identidade visual oficial da Blip (cores, tipografia Nunito Sans, componentes, ilustrações, UI kit do Blip Desk) para qualquer artefato visual que o Claude gerar a partir dos dados da Stilingue.
+- **Skill `one-page-report`** — monta relatórios executivos de uma página em HTML autocontido (pronto pra PDF/impressão/e-mail), a partir de dados do Radar, Warroom ou Smartcare. Pergunta se deve usar o tema Stilingue by Blip ou um tema personalizado com a cara da marca do cliente.
 
 ## Como conectar
 
@@ -65,4 +67,4 @@ Tokens podem ser revogados a qualquer momento pela Stilingue, e o acesso respeit
 
 ## Licença
 
-MIT <!-- TODO: confirmar a licença com o jurídico e incluir o arquivo LICENSE — o repositório precisa ser público para submissão ao diretório de plugins -->
+MIT
