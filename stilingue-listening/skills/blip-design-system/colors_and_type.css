@@ -1,0 +1,344 @@
+/* =============================================================
+   Blip Design System — Colors & Type
+   Source of truth: github.com/takenet/blip-ds (MIT)
+   Extracted from src/globals/_colors.scss, theme/theme-light.scss,
+   theme/theme-dark.scss, color-legacy.scss, _fonts.scss.
+   ============================================================= */
+
+/* ---------- Fonts — Brand: Nunito Sans (variable) ---------- */
+@font-face {
+  font-family: 'Nunito Sans';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('fonts/NunitoSans-VariableFont_YTLC_opsz_wdth_wght.ttf') format('truetype-variations');
+}
+@font-face {
+  font-family: 'Nunito Sans';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('fonts/NunitoSans-Italic-VariableFont_YTLC_opsz_wdth_wght.ttf') format('truetype-variations');
+}
+
+:root {
+  /* ---------- Type ---------- */
+  --bds-font-family: 'Nunito Sans', 'Carbona', 'Tahoma', 'Helvetica', 'Arial', sans-serif;
+
+  --bds-fw-regular: 400;
+  --bds-fw-semibold: 600;
+  --bds-fw-bold: 700;
+  --bds-fw-extra-bold: 800;
+
+  /* sizes (design tokens) */
+  --bds-fs-10: 0.625rem;   /* 10 */
+  --bds-fs-12: 0.75rem;    /* 12 */
+  --bds-fs-14: 0.875rem;   /* 14 body default */
+  --bds-fs-16: 1rem;       /* 16 */
+  --bds-fs-20: 1.25rem;    /* 20 */
+  --bds-fs-24: 1.5rem;     /* 24 */
+  --bds-fs-32: 2rem;       /* 32 */
+  --bds-fs-40: 2.5rem;     /* 40 display */
+
+  /* line-heights */
+  --bds-lh-none: 100%;
+  --bds-lh-small: 105%;
+  --bds-lh-simple: 100%;
+  --bds-lh-plus: 150%;
+  --bds-lh-double: 200%;
+
+  /* ---------- Brand / semantic colors (LIGHT theme is default) ---------- */
+  --color-brand: rgb(0, 150, 250);
+  --color-primary: rgb(30, 107, 241);
+  --color-secondary: rgb(41, 41, 41);
+
+  --color-surface-0: rgb(255, 255, 255);
+  --color-surface-1: rgb(246, 246, 246);
+  --color-surface-2: rgb(237, 237, 237);
+  --color-surface-3: rgb(227, 227, 227);
+  --color-surface-4: rgb(20, 20, 20);
+
+  --color-surface-positive: rgb(1, 114, 62);
+  --color-surface-negative: rgb(138, 0, 0);
+  --color-surface-primary:  rgb(30, 107, 241);
+
+  --color-content-default: rgb(40, 40, 40);
+  --color-content-disable: rgb(89, 89, 89);
+  --color-content-ghost:   rgb(140, 140, 140);
+  --color-content-bright:  rgb(255, 255, 255);
+  --color-content-din:     rgb(0, 0, 0);
+
+  --color-border-1: rgba(0, 0, 0, 0.20);
+  --color-border-2: rgba(0, 0, 0, 0.16);
+  --color-border-3: rgba(0, 0, 0, 0.06);
+
+  --color-positive: rgb(0, 122, 66);
+  --color-negative: rgb(168, 11, 11);
+
+  --color-info:    rgb(128, 227, 235);
+  --color-system:  rgb(178, 223, 253);
+  --color-focus:   rgb(194, 38, 251);
+  --color-success: rgb(132, 235, 188);
+  --color-warning: rgb(253, 233, 155);
+  --color-error:   rgb(250, 190, 190);
+  --color-delete:  rgb(230, 15, 15);
+
+  --color-hover:   rgba(0, 0, 0, 0.08);
+  --color-pressed: rgba(0, 0, 0, 0.16);
+
+  --color-shadow-0: rgba(0, 0, 0, 0.04);
+  --color-shadow-1: rgba(0, 0, 0, 0.16);
+
+  /* ---------- Extended palette ---------- */
+  --color-extended-blue:          rgb(25, 104, 240);
+  --color-extended-blue-bright:   rgb(178, 223, 253);
+  --color-extended-ocean:         rgb(0, 211, 228);
+  --color-extended-ocean-bright:  rgb(128, 227, 235);
+  --color-extended-green:         rgb(53, 222, 144);
+  --color-extended-green-bright:  rgb(132, 235, 188);
+  --color-extended-yellow:        rgb(251, 207, 35);
+  --color-extended-yellow-bright: rgb(253, 233, 155);
+  --color-extended-orange:        rgb(240, 99, 5);
+  --color-extended-orange-bright: rgb(252, 170, 115);
+  --color-extended-red:           rgb(230, 15, 15);
+  --color-extended-red-bright:    rgb(249, 159, 159);
+  --color-extended-pink:          rgb(251, 75, 193);
+  --color-extended-pink-bright:   rgb(253, 155, 220);
+  --color-extended-gray:          rgb(102, 102, 102);
+  --color-extended-gray-bright:   rgb(199, 199, 199);
+
+  /* ---------- Legacy / Primary palette (blues, greens, pinks, etc) ---------- */
+  --color-primary-light:  #b3d4ff;
+  --color-primary-main:   #3f7de8;
+  --color-primary-dark:   #125ad5;
+  --color-primary-night:  #0747a6;
+
+  --color-purples-pixie:  #cc99ff;
+  --color-purples-bell:   #c226fb;
+  --color-purples-witch:  #9933cc;
+  --color-purples-acai:   #4f0e87;
+
+  --color-greens-mint:      #90e6bc;
+  --color-greens-true:      #21cc79;
+  --color-greens-aligator:  #008767;
+  --color-greens-forest:    #0a6045;
+
+  --color-pinks-yogurt:     #fdacc5;
+  --color-pinks-watermelon: #fb5a8b;
+  --color-pinks-barbie:     #aa398d;
+  --color-pinks-blush:      #821a67;
+
+  --color-oranges-sunset:  #ffb186;
+  --color-oranges-carrot:  #ff6e1d;
+  --color-oranges-doritos: #c64026;
+  --color-oranges-clay:    #8e3925;
+
+  --color-yellows-corn:    #fff6a8;
+  --color-yellows-sun:     #ffec03;
+  --color-yellows-guarana: #b2b229;
+  --color-yellows-moss:    #757010;
+
+  --color-reds-flower:    #ffa5a5;
+  --color-reds-delete:    #ff4c4c;
+  --color-reds-lipstick:  #a01c2c;
+  --color-reds-dragon:    #6a2026;
+
+  --color-browns-sand:    #ffd29e;
+  --color-browns-cheetos: #f6a721;
+  --color-browns-sphinx:  #d78935;
+  --color-browns-wood:    #845d37;
+
+  /* Neutral scale — "Elephant/Cloud/Silver/..." */
+  --color-neutral-eclipse:  #0a0f1a;
+  --color-neutral-onix:     #1a2437;
+  --color-neutral-suit:     #212a3c;
+  --color-neutral-ico:      #192438;
+  --color-neutral-city:     #202c44;
+  --color-neutral-skate:    #233049;
+  --color-neutral-desk:     #3a4a65;
+  --color-neutral-rooftop:  #505f79;
+  --color-neutral-elephant: #6e7b91;
+  --color-neutral-cloud:    #8ca0b3;
+  --color-neutral-silver:   #b9cbd3;
+  --color-neutral-wave:     #d2dfe6;
+  --color-neutral-box:      #e7edf4;
+  --color-neutral-whisper:  #f3f6fa;
+  --color-neutral-breeze:   #f8fbfb;
+  --color-neutral-snow:     #ffffff;
+
+  /* Gray scale (legacy) */
+  --color-grays-moon:       #d1d3d4;
+  --color-grays-elevator:   #a7a9ac;
+  --color-grays-street:     #6d6f71;
+  --color-grays-blackwidow: #000000;
+
+  /* Signature gradients */
+  --gradient-rose:     linear-gradient(213.89deg, #ff4c4c 7.75%,  #821a67 135.08%);
+  --gradient-phoenix:  linear-gradient(213.98deg, #f6a721 7.74%,  #fb5a8b 111.22%);
+  --gradient-cactus:   linear-gradient(215.84deg, #bed42b 24.15%, #167491 143.37%);
+  --gradient-tree:     linear-gradient(213.19deg, #21cc79 26.38%, #167491 113.59%);
+  --gradient-ocean:    linear-gradient(206.67deg, #4786f1 25.46%, #4f0e87 187.10%);
+  --gradient-smurf:    linear-gradient(213.61deg, #00c6d7 26.39%, #4786f1 100%);
+  --gradient-grape:    linear-gradient(214.56deg, #c226fb 0%,     #0052cc 174.21%);
+  --gradient-fabulous: linear-gradient(212.75deg, #fb5a8b 37.10%, #9933cc 171.27%);
+  --gradient-street:   linear-gradient(213.69deg, #6e7b91 25.43%, #233049 147.21%);
+  --gradient-universe: linear-gradient(213.69deg, #202c44 25.43%, #000000 147.21%);
+
+  /* ---------- Shadows & Elevation ---------- */
+  --shadow-drop:  0 2px 8px  rgba(0,0,0,0.16);
+  --shadow-box:   0 4px 10px rgba(0,0,0,0.16);
+  --shadow-toast: 0 8px 12px rgba(0,0,0,0.16), 0 0 4px rgba(0,0,0,0.16);
+  --shadow-1: 0 2px 8px  -2px rgba(0,0,0,0.16);
+  --shadow-2: 0 6px 16px -4px rgba(0,0,0,0.16);
+  --shadow-3: 0 8px 4px  -4px rgba(0,0,0,0.04), 0 12px 12px -4px rgba(0,0,0,0.16);
+
+  /* ---------- Spacing (8px grid; derived from component paddings) ---------- */
+  --bds-space-0: 0;
+  --bds-space-half: 2px;
+  --bds-space-1: 4px;
+  --bds-space-2: 8px;
+  --bds-space-3: 12px;
+  --bds-space-4: 16px;
+  --bds-space-5: 20px;
+  --bds-space-6: 24px;
+  --bds-space-7: 32px;
+  --bds-space-8: 40px;
+  --bds-space-9: 56px;
+  --bds-space-10: 64px;
+
+  /* ---------- Radii (components: inputs & cards 8, buttons 8, "position" corners 10) ---------- */
+  --bds-radius-none: 0;
+  --bds-radius-xs:   4px;   /* focus rings, tiny chips */
+  --bds-radius-sm:   8px;   /* buttons, inputs, cards */
+  --bds-radius-md:  10px;   /* button-group outer corners */
+  --bds-radius-lg:  16px;
+  --bds-radius-pill: 999px; /* avatar, chip circles */
+
+  /* ---------- Z-Index ---------- */
+  --z-footer:       10000;
+  --z-local-side:   20000;
+  --z-subheader:    30000;
+  --z-header:       40000;
+  --z-full-side:    50000;
+  --z-page:         60000;
+  --z-dropdown:     70000;
+  --z-modal-ovl:    80000;
+  --z-modal:        90000;
+  --z-loading:     100000;
+  --z-toast:       110000;
+}
+
+/* ---------- Dark theme ---------- */
+[data-theme='dark'] {
+  --color-primary: rgb(73, 139, 255);
+  --color-secondary: rgb(255, 255, 255);
+  --color-surface-0: rgb(66, 66, 66);
+  --color-surface-1: rgb(57, 57, 57);
+  --color-surface-2: rgb(31, 31, 31);
+  --color-surface-3: rgb(20, 20, 20);
+  --color-surface-4: rgb(10, 10, 10);
+  --color-surface-positive: rgb(1, 86, 47);
+  --color-surface-negative: rgb(87, 0, 0);
+  --color-surface-primary: rgb(12, 80, 197);
+  --color-content-default: rgb(255, 255, 255);
+  --color-content-disable: rgb(148, 148, 148);
+  --color-content-ghost:   rgb(102, 102, 102);
+  --color-content-bright:  rgb(255, 255, 255);
+  --color-content-din:     rgb(0, 0, 0);
+  --color-border-1: rgba(255, 255, 255, 0.20);
+  --color-border-2: rgba(255, 255, 255, 0.16);
+  --color-border-3: rgba(255, 255, 255, 0.06);
+  --color-positive: rgb(107, 255, 188);
+  --color-negative: rgb(255, 184, 184);
+  --color-info:    rgb(0, 79, 86);
+  --color-system:  rgb(0, 60, 100);
+  --color-focus:   rgb(194, 38, 251);
+  --color-success: rgb(53, 94, 75);
+  --color-warning: rgb(96, 89, 59);
+  --color-error:   rgb(123, 61, 61);
+  --color-delete:  rgb(182, 12, 12);
+  --color-hover:   rgba(255,255,255,0.16);
+  --color-pressed: rgba(255,255,255,0.08);
+}
+
+/* =============================================================
+   Semantic element defaults (equivalent of bds-typo)
+   Body text defaults to fs-14, plus line-height; titles use simple.
+   ============================================================= */
+html, body {
+  font-family: var(--bds-font-family);
+  color: var(--color-content-default);
+  background-color: var(--color-surface-0);
+  font-size: var(--bds-fs-14);
+  line-height: var(--bds-lh-plus);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, .bds-h1 {
+  font-family: var(--bds-font-family);
+  font-size: var(--bds-fs-40);
+  font-weight: var(--bds-fw-bold);
+  line-height: var(--bds-lh-simple);
+  margin: 0 0 20px 0;
+  color: var(--color-content-default);
+}
+h2, .bds-h2 {
+  font-size: var(--bds-fs-32);
+  font-weight: var(--bds-fw-bold);
+  line-height: var(--bds-lh-simple);
+  margin: 0 0 22px 0;
+}
+h3, .bds-h3 {
+  font-size: var(--bds-fs-24);
+  font-weight: var(--bds-fw-bold);
+  line-height: var(--bds-lh-simple);
+  margin: 0 0 22px 0;
+}
+h4, .bds-h4 {
+  font-size: var(--bds-fs-20);
+  font-weight: var(--bds-fw-semibold);
+  line-height: var(--bds-lh-simple);
+  margin: 0 0 22px 0;
+}
+h5, .bds-h5 {
+  font-size: var(--bds-fs-16);
+  font-weight: var(--bds-fw-bold);
+  line-height: var(--bds-lh-plus);
+  margin: 0 0 16px 0;
+}
+p, .bds-p {
+  font-size: var(--bds-fs-14);
+  font-weight: var(--bds-fw-regular);
+  line-height: var(--bds-lh-plus);
+  margin: 0 0 16px 0;
+}
+small, .bds-caption {
+  font-size: var(--bds-fs-12);
+  line-height: var(--bds-lh-plus);
+  color: var(--color-content-disable);
+}
+
+/* Specific utility text tokens used across components */
+.bds-typo--label {
+  font-size: var(--bds-fs-12);
+  font-weight: var(--bds-fw-semibold);
+  color: var(--color-content-disable);
+}
+.bds-typo--input {
+  font-size: var(--bds-fs-14);
+  line-height: 22px;
+  font-weight: var(--bds-fw-regular);
+  color: var(--color-content-default);
+}
+.bds-typo--button {
+  font-size: var(--bds-fs-14);
+  font-weight: var(--bds-fw-bold);
+  line-height: var(--bds-lh-simple);
+}
+
+/* Mono — Blip doesn't ship a mono; map to the standard UI stack for code. */
+code, kbd, samp, pre {
+  font-family: ui-monospace, 'JetBrains Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+  font-size: 0.92em;
+}
