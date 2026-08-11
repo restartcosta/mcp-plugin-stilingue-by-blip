@@ -3,7 +3,7 @@
 
 A tool `setup` consulta a **configuração** de um painel Warroom — não os dados coletados (isso é `warroom_query`), mas a estrutura do painel: o que está sendo coletado, como está sendo classificado, e os limites de uso. **Sempre chame isso de "configuração do painel" ou "setup" na resposta ao usuário, nunca use nomes técnicos de campo da API.**
 
-Para avaliar a saúde operacional do painel, use a skill `diagnostico-de-setup`. Para avaliar a qualidade da estrutura, `auditoria-de-taxonomia`.
+Para trabalhar em cima da configuração — visualizar como está, qualificar o que a operação precisa, propor evolução ou setup inicial —, use a skill `setup-master`. Ela cobre em três modos combináveis: leitura estrutural do painel (Modo A), discovery da operação (Modo B) e recomendação com widget de proposta (Modo C).
 
 ## Descobrindo `account_id`/`universe_id`: nunca peça ao usuário
 
@@ -86,6 +86,5 @@ Sem parâmetros obrigatórios — usa a sessão de login para descobrir contas e
 | --- | --- |
 | "Como esse painel está configurado?" / "Quais grupos, temas e tags existem?" / "Quais canais são monitorados?" | `setup` |
 | "O que estão falando da minha marca?" / "Qual o sentimento essa semana?" / qualquer busca de posts ou estatísticas | `warroom_query` |
-| "Meu painel está funcionando?" / "Por que o volume caiu?" | `setup`, via skill `diagnostico-de-setup` |
-| "Minha estrutura está bem montada?" / "Como melhorar meu painel?" | `setup`, via skill `auditoria-de-taxonomia` |
+| "Meu painel está funcionando?" / "Por que o volume caiu?" / "Minha estrutura está bem montada?" / "Como melhorar meu painel?" / "Quero criar um painel novo" / "Não sei se esse painel me serve" | `setup`, via skill `setup-master` |
 | Usuário não informou `account_id`/`universe_id`, ou tem mais de um painel | `list_panels` primeiro |
