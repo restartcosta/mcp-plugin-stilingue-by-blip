@@ -1,5 +1,5 @@
 ---
-name: setup-conexao
+name: acesso-stilingue
 description: Guiar o usuário na primeira conexão com a Stilingue — login, autenticação OAuth, apikey de painel e resolução de erros de conexão. Use esta skill quando o usuário acabou de instalar o plugin, quando alguma ferramenta da Stilingue retornar erro 401/403/token expirado, quando o usuário perguntar "como conecto a Stilingue", "como faço login", "onde pego minha apikey", ou quando as ferramentas radar/warroom_query/setup não aparecerem disponíveis.
 ---
 
