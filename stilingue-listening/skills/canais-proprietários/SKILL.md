@@ -1,5 +1,5 @@
 ---
-name: canais-proprios
+name: canais-proprietários
 description: |
   Analisa os canais proprietários de uma marca no Stilingue Warroom — as páginas da própria marca, não menções espontâneas — e produz panorama por rede: publicações, interações, comentários, posts em destaque e o que o público falou.
   Use SEMPRE que o usuário pedir panorama, relatório, análise ou "big numbers" das páginas próprias, dos canais proprietários, dos perfis da marca ou das publicações da marca. Dispare também com "minhas páginas", "nossos perfis", "o que a gente postou", "desempenho dos posts", "quebra por canal", "quebra por rede", "posts em destaque", "o que falaram nos comentários" — mesmo sem citar "Stilingue" e sem nomear o painel. Use ainda para comparar publicações da marca entre si ou medir taxa de engajamento de página própria.
